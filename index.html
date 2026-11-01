@@ -25,6 +25,26 @@
 .learnflag{display:inline-flex;font-size:11px;font-weight:800;color:#6d8273;border:1px solid #dce4dd;background:#ffffffa6;border-radius:100px;padding:3px 9px}
 @media(max-width:700px){.boardhead{padding:16px 15px}.boardhead h2,.learnsection h2{font-size:18px}.boardblank{margin:0 15px 16px;min-height:85px}.learncards{gap:9px}.learncard{padding:15px 12px;gap:9px;flex-direction:column;min-height:155px}.learncard h3{font-size:15px}.learncard p{font-size:11px}.learnicon{width:39px;height:39px;flex-basis:39px}}
 
+
+/* Public-safe, source-reviewed board feed. Details remain off the public repository. */
+.boardcontent{display:grid;gap:10px;padding:0 22px 18px}
+.boardcontent .boardblank{margin:0;min-height:88px}
+.noticeitem{border:1px solid #e1e8df;border-radius:13px;padding:14px 16px;background:#fff}
+.noticehead{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.noticekind{display:inline-flex;border-radius:99px;font-size:11px;font-weight:900;padding:4px 9px;background:#ebf2e9;color:#285c47}
+.noticeitem[data-priority="critical"] .noticekind{background:#fff0ea;color:#a13c2d}
+.noticeitem[data-priority="action"] .noticekind{background:#fff4de;color:#88601f}
+.noticeitem[data-priority="schedule"] .noticekind{background:#e9efff;color:#445b99}
+.noticeverified{font-size:10px;color:#788b7e;font-weight:700}
+.noticeitem h3{font-size:16px;font-weight:900;margin:9px 0 6px;line-height:1.55;color:#1c4537}
+.noticeitem p{font-size:13px;line-height:1.7;color:#4b6557;margin:0}
+.noticeaction{margin-top:10px!important;padding-top:10px;border-top:1px solid #edf0ec;font-weight:800!important;color:#245e48!important}
+.boardfooter{padding:0 22px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.boardfooter[hidden]{display:none}
+.boardfooter small{font-size:11px;color:#7b8e7e}
+.boardfooter button{border:1px solid #cadacf;border-radius:10px;background:#f6faf5;color:#245c47;font-weight:850;font-size:12px;min-height:39px;padding:7px 12px;cursor:pointer}
+.boardfooter button:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+@media(max-width:700px){.boardcontent{padding:0 14px 15px;gap:8px}.noticeitem{padding:13px 14px}.boardfooter{padding:0 14px 15px}.noticeitem h3{font-size:15px}}
 </style></head><body>
 <a class="skip" href="#staffing">出勤予定へ</a>
 <header class="topbar"><div class="topinner"><a class="brand" href="#staffing"><span class="mark">✳</span><span><strong>ASOBooN</strong><small>STAFF HOME</small></span></a><nav class="topnav"><a href="#staffing">出勤予定</a><a href="#events">予定</a><a href="#operating">営業日</a></nav></div></header>
@@ -37,11 +57,10 @@
 <p class="info">11月1日時点の予定　・　<a href="https://docs.google.com/spreadsheets/d/1exeiFi27B6ImRHsRy_F8zNBr5Exh7I0i/edit" target="_blank" rel="noopener noreferrer">最新シフトを開く ↗</a></p>
 </div></section>
 <section class="card boardcard" id="board" aria-labelledby="boardtitle">
-<div class="boardhead"><h2 id="boardtitle">アソブーン掲示板</h2><span class="boardstatus">準備中</span></div>
-<div class="boardblank" aria-label="掲示板は現在準備中です">
-<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4h8l1 4 3 3v2H4v-2l3-3z"/><path d="M12 13v8"/></svg>
-<span>お知らせはまだありません</span>
-</div></section>
+<div class="boardhead"><h2 id="boardtitle">アソブーン掲示板</h2><span class="boardstatus" id="boardstatus" aria-live="polite">読み込み中</span></div>
+<div id="boardcontent" class="boardcontent" aria-live="polite"><div class="boardblank" role="status">お知らせを確認しています…</div></div>
+<div class="boardfooter" id="boardfooter" hidden><small id="boardupdated"></small><button type="button" id="boardtoggle" aria-expanded="false">すべて見る（全件）</button></div>
+</section>
 <section class="card" id="events" aria-labelledby="eventstitle"><div class="calhead"><h2 id="eventstitle">予定カレンダー</h2><div class="mode" role="group" aria-label="カレンダーの表示切り替え"><button type="button" id="agenda" aria-pressed="true">一覧</button><button type="button" id="monthmode" aria-pressed="false">月</button></div></div><div class="calendararea"><iframe id="googlecalendar" class="google-frame" title="ASOBooNの予定カレンダー" loading="lazy" referrerpolicy="no-referrer"></iframe><p class="fallback">予定が表示されない場合は <a href="https://calendar.google.com/calendar/u/0/r" target="_blank" rel="noopener noreferrer">Googleカレンダーで開く ↗</a></p></div></section>
 <section class="card" id="operating" aria-labelledby="operatingtitle"><div class="calhead"><h2 id="operatingtitle">営業日カレンダー</h2><a href="https://docs.google.com/spreadsheets/d/18nFumRqPjsoiH3cEHYxHfxtYvxACLkj_hPHjDaB3pOY/edit" target="_blank" rel="noopener noreferrer">原本 ↗</a></div><div class="calendararea"><div class="monthbar"><button type="button" class="monthbutton" id="prevmonth" aria-label="前の月">‹</button><strong id="monthtitle"></strong><button type="button" class="monthbutton" id="nextmonth" aria-label="次の月">›</button></div><div class="daylegend"><span><i class="dot k4"></i>平日</span><span><i class="dot k3"></i>特定日</span><span><i class="dot k1"></i>土日祝</span><span><i class="dot k2"></i>休館</span><span><i class="dot k0"></i>未入力</span></div><div class="calendargrid" id="operatinggrid" role="group" aria-label="営業日を選択"></div><div class="selectedday" id="selectedoperating" aria-live="polite"></div></div></section>
 <div class="actionwrap"><a class="actionlink" href="https://docs.google.com/forms/d/e/1FAIpQLSewoLk8Pcr8KC1hmIs2enEcnG1HOHOnhgCp7WF_VD5g6tWBPA/viewform?usp=dialog" target="_blank" rel="noopener noreferrer">✎　シフト希望を入力する　↗</a></div>
@@ -75,5 +94,73 @@ let mode=window.matchMedia('(max-width:650px)').matches?'AGENDA':'MONTH';functio
 const labels={'0':'区分未入力','1':'土日祝営業','2':'休館','3':'平日特定日','4':'平日営業'};let activeMonth=TODAY().slice(0,7);if(!(activeMonth in operating))activeMonth='2026-11';let chosenOperating=activeMonth+'-01';function adjacentMonth(iso,n){const [y,m]=iso.split('-').map(Number);const d=new Date(Date.UTC(y,m-1+n,1));return d.getUTCFullYear()+'-'+pad(d.getUTCMonth()+1)}
 function renderOperating(){const [y,m]=activeMonth.split('-').map(Number),codes=operating[activeMonth];$('monthtitle').textContent=y+'年'+m+'月';$('prevmonth').disabled=!(adjacentMonth(activeMonth,-1) in operating);$('nextmonth').disabled=!(adjacentMonth(activeMonth,1) in operating);const grid=$('operatinggrid');grid.replaceChildren();for(const w of week){const s=document.createElement('span');s.className='weekday';s.textContent=w;grid.append(s);}const first=new Date(Date.UTC(y,m-1,1)).getUTCDay();for(let i=0;i<first;i++){const el=document.createElement('div');el.className='dummy';grid.append(el);}for(let d=1;d<=codes.length;d++){const iso=activeMonth+'-'+pad(d),kind=codes[d-1];const btn=document.createElement('button');btn.className='day'+(iso===TODAY()?' today':'');btn.dataset.kind=kind;btn.type='button';btn.setAttribute('aria-label',displayDate(iso)+' '+labels[kind]);btn.setAttribute('aria-pressed',String(iso===chosenOperating));const b=document.createElement('strong');b.textContent=d;const span=document.createElement('span');span.textContent=kind==='0'?'未入力':kind==='1'?'土日祝':kind==='2'?'休館':kind==='3'?'特定日':'平日';btn.append(b,span);btn.onclick=()=>{chosenOperating=iso;renderOperating()};grid.append(btn);}const kind=codes[Number(chosenOperating.slice(-2))-1]||'0';$('selectedoperating').replaceChildren();const b=document.createElement('strong');b.textContent=displayDate(chosenOperating);const s=document.createElement('span');s.textContent=labels[kind];$('selectedoperating').append(b,s);}
 $('prevmonth').onclick=()=>{activeMonth=adjacentMonth(activeMonth,-1);chosenOperating=activeMonth+'-01';renderOperating()};$('nextmonth').onclick=()=>{activeMonth=adjacentMonth(activeMonth,1);chosenOperating=activeMonth+'-01';renderOperating()};
+
+/* Editorially approved public-safe notices only. No private Slack, Gmail or LINE text is fetched by this page. */
+let boardExpanded=false;let activeNotices=[];
+const BOARD_TYPES={
+ critical:{label:'🚨 最優先',rank:0},
+ action:{label:'✅ 要対応',rank:1},
+ schedule:{label:'📅 近日予定',rank:2},
+ info:{label:'📢 お知らせ',rank:3}
+};
+function validBulletin(n,today){
+ return n && n.status==='published' && n.scope==='public-safe' &&
+ typeof n.id==='string' && /^[A-Za-z0-9_-]{6,70}$/.test(n.id) &&
+ !!BOARD_TYPES[n.priority] && typeof n.title==='string' && n.title.length>0 && n.title.length<=65 &&
+ typeof n.summary==='string' && n.summary.length>0 && n.summary.length<=240 &&
+ typeof n.action==='string' && n.action.length<=140 &&
+ /^\\d{4}-\\d{2}-\\d{2}$/.test(n.startsOn||'') &&
+ /^\\d{4}-\\d{2}-\\d{2}$/.test(n.expiresOn||'') &&
+ /^\\d{4}-\\d{2}-\\d{2}$/.test(n.verifiedOn||'') &&
+ n.startsOn<=today && today<=n.expiresOn;
+}
+function createBulletinNode(n){
+ const card=document.createElement('article');card.className='noticeitem';card.dataset.priority=n.priority;
+ const head=document.createElement('div');head.className='noticehead';
+ const tag=document.createElement('span');tag.className='noticekind';tag.textContent=BOARD_TYPES[n.priority].label;
+ const confirmed=document.createElement('span');confirmed.className='noticeverified';confirmed.textContent='確認済 '+n.verifiedOn.slice(5).replace('-','/');
+ head.append(tag,confirmed);
+ const title=document.createElement('h3');title.textContent=n.title;
+ const summary=document.createElement('p');summary.textContent=n.summary;
+ card.append(head,title,summary);
+ if(n.action){const act=document.createElement('p');act.className='noticeaction';act.textContent='すること：'+n.action;card.append(act)}
+ return card;
+}
+function renderBulletin(){
+ const el=$('boardcontent');el.replaceChildren();
+ const shown=boardExpanded?activeNotices:activeNotices.slice(0,3);
+ if(shown.length===0){const blank=document.createElement('div');blank.className='boardblank';blank.textContent='現在、掲示中のお知らせはありません';el.append(blank);}
+ else for(const n of shown)el.append(createBulletinNode(n));
+ const toggle=$('boardtoggle');toggle.textContent=boardExpanded?'3件だけ見る':'すべて見る（'+activeNotices.length+'件）';
+ toggle.setAttribute('aria-expanded',String(boardExpanded));
+}
+async function loadBulletin(){
+ try {
+  const url='./noticeboard.json?b='+Math.floor(Date.now()/300000);
+  const response=await fetch(url,{cache:'no-store'});
+  if(!response.ok)throw new Error('board fetch '+response.status);
+  const feed=await response.json();
+  if(feed?.version!==1 || !Array.isArray(feed.notices) || feed.notices.length>40)throw new Error('Invalid board');
+  const ids=new Set();const today=TODAY();
+  activeNotices=feed.notices.filter(n=>{
+   if(!validBulletin(n,today)||ids.has(n.id))return false;
+   ids.add(n.id);return true;
+  }).sort((a,b)=>BOARD_TYPES[a.priority].rank-BOARD_TYPES[b.priority].rank||
+   (a.expiresOn||'').localeCompare(b.expiresOn||'')||(b.startsOn||'').localeCompare(a.startsOn||''));
+  $('boardstatus').textContent=activeNotices.length+'件';
+  $('boardupdated').textContent=/^\\d{4}-\\d{2}-\\d{2}$/.test(feed.updatedAt||'')?'掲示板更新：'+feed.updatedAt.replaceAll('-','/'):'公開済みのお知らせのみ表示';
+  $('boardfooter').hidden=activeNotices.length<=3 && !(feed.updatedAt);
+  $('boardtoggle').hidden=activeNotices.length<=3;
+  renderBulletin();
+ }catch(e){
+  $('boardstatus').textContent='取得エラー';
+  $('boardcontent').replaceChildren();
+  const note=document.createElement('div');note.className='boardblank';note.textContent='掲示板を読み込めません。LINEや現場からの連絡も確認してください。';
+  $('boardcontent').append(note);$('boardfooter').hidden=true;
+ }
+}
+$('boardtoggle').addEventListener('click',()=>{boardExpanded=!boardExpanded;renderBulletin()});
+loadBulletin();
+
 renderRoster();updateCalendar();renderOperating();
 </script></body></html>
