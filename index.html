@@ -45,6 +45,7 @@
 .boardfooter button{border:1px solid #cadacf;border-radius:10px;background:#f6faf5;color:#245c47;font-weight:850;font-size:12px;min-height:39px;padding:7px 12px;cursor:pointer}
 .boardfooter button:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
 @media(max-width:700px){.boardcontent{padding:0 14px 15px;gap:8px}.noticeitem{padding:13px 14px}.boardfooter{padding:0 14px 15px}.noticeitem h3{font-size:15px}}
+.noticedue{font-size:11px;font-weight:900;color:#8a5722;background:#fff6e7;border-radius:7px;padding:4px 7px}
 </style></head><body>
 <a class="skip" href="#staffing">出勤予定へ</a>
 <header class="topbar"><div class="topinner"><a class="brand" href="#staffing"><span class="mark">✳</span><span><strong>ASOBooN</strong><small>STAFF HOME</small></span></a><nav class="topnav"><a href="#staffing">出勤予定</a><a href="#events">予定</a><a href="#operating">営業日</a></nav></div></header>
@@ -120,6 +121,7 @@ function createBulletinNode(n){
  const tag=document.createElement('span');tag.className='noticekind';tag.textContent=BOARD_TYPES[n.priority].label;
  const confirmed=document.createElement('span');confirmed.className='noticeverified';confirmed.textContent='確認済 '+n.verifiedOn.slice(5).replace('-','/');
  head.append(tag,confirmed);
+ if(n.deadlineOn && /^\d{4}-\d{2}-\d{2}$/.test(n.deadlineOn)){const due=document.createElement('span');due.className='noticedue';due.textContent='期限：'+n.deadlineOn.slice(5).replace('-','/');head.append(due)}
  const title=document.createElement('h3');title.textContent=n.title;
  const summary=document.createElement('p');summary.textContent=n.summary;
  card.append(head,title,summary);
