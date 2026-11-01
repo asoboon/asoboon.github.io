@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "updatedAt": "2026-11-01",
+  "notices": [
+    {
+      "id": "2026-11-01-staff-home",
+      "status": "published",
+      "scope": "public-safe",
+      "priority": "info",
+      "title": "スタッフホームを公開しました",
+      "summary": "出勤予定・予定カレンダー・営業日カレンダー・シフト希望入力を、ひとつのページにまとめました。",
+      "action": "このページをブックマークして活用してください。",
+      "startsOn": "2026-11-01",
+      "expiresOn": "2026-11-15",
+      "verifiedOn": "2026-11-01"
+    }
+  ]
+}
