@@ -109,9 +109,9 @@ function validBulletin(n,today){
  !!BOARD_TYPES[n.priority] && typeof n.title==='string' && n.title.length>0 && n.title.length<=65 &&
  typeof n.summary==='string' && n.summary.length>0 && n.summary.length<=240 &&
  typeof n.action==='string' && n.action.length<=140 &&
- /^\\d{4}-\\d{2}-\\d{2}$/.test(n.startsOn||'') &&
- /^\\d{4}-\\d{2}-\\d{2}$/.test(n.expiresOn||'') &&
- /^\\d{4}-\\d{2}-\\d{2}$/.test(n.verifiedOn||'') &&
+ /^\d{4}-\d{2}-\d{2}$/.test(n.startsOn||'') &&
+ /^\d{4}-\d{2}-\d{2}$/.test(n.expiresOn||'') &&
+ /^\d{4}-\d{2}-\d{2}$/.test(n.verifiedOn||'') &&
  n.startsOn<=today && today<=n.expiresOn;
 }
 function createBulletinNode(n){
@@ -148,7 +148,7 @@ async function loadBulletin(){
   }).sort((a,b)=>BOARD_TYPES[a.priority].rank-BOARD_TYPES[b.priority].rank||
    (a.expiresOn||'').localeCompare(b.expiresOn||'')||(b.startsOn||'').localeCompare(a.startsOn||''));
   $('boardstatus').textContent=activeNotices.length+'件';
-  $('boardupdated').textContent=/^\\d{4}-\\d{2}-\\d{2}$/.test(feed.updatedAt||'')?'掲示板更新：'+feed.updatedAt.replaceAll('-','/'):'公開済みのお知らせのみ表示';
+  $('boardupdated').textContent=/^\d{4}-\d{2}-\d{2}$/.test(feed.updatedAt||'')?'掲示板更新：'+feed.updatedAt.replaceAll('-','/'):'公開済みのお知らせのみ表示';
   $('boardfooter').hidden=activeNotices.length<=3 && !(feed.updatedAt);
   $('boardtoggle').hidden=activeNotices.length<=3;
   renderBulletin();
