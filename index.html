@@ -60,6 +60,14 @@
 #rosterLockButton{background:#5f6c64}
 #rosterLockButton[hidden],#rosterAccessForm[hidden]{display:none}
 .rosterhelp{font-size:12px;margin:9px 0 0;color:#42644c;line-height:1.55}
+.live-shift-guide{padding:16px;margin-top:14px;border:1px solid #d1e5d7;background:#f5faf6;border-radius:13px}
+.live-shift-guide strong{display:block;font-size:16px;margin-bottom:6px}
+.live-shift-guide p{font-size:13px;line-height:1.6;margin:0 0 10px}
+.live-shift-guide a{display:inline-flex;font-weight:800;font-size:13px;margin-bottom:8px;color:#1a6548}
+.live-shift-guide span{display:block;font-size:11px;color:#557467}
+.live-shift-frame{width:100%;margin:12px auto 6px;border:1px solid #d4ddda;border-radius:10px;overflow:hidden;background:white}
+.live-shift-frame iframe{display:block;border:0;width:100%;height:min(76vh,740px);min-height:480px;background:white}
+#stafflist{display:none!important}
 </style></head><body>
 <a class="skip" href="#staffing">出勤人数へ</a>
 <header class="topbar"><div class="topinner"><a class="brand" href="#staffing"><span class="mark">✳</span><span><strong>ASOBooN</strong><small>STAFF HOME</small></span></a><nav class="topnav"><a href="#staffing">出勤人数</a><a href="#events">予定</a><a href="#operating">営業日</a></nav></div></header>
@@ -68,15 +76,9 @@
 <div class="stafftop"><h1 id="stafftitle">出勤予定（人数・氏名・勤務時間）</h1><span class="chip" id="staffchip">11月のシフト</span></div>
 <div class="datebar"><button type="button" class="navbutton" id="prevdate" aria-label="前日">‹</button><label class="dateinput"><span>日付</span><input id="date" type="date" aria-label="出勤予定の日付を選択"></label><button type="button" class="navbutton" id="nextdate" aria-label="翌日">›</button><button type="button" class="todaybtn" id="today">今日</button></div>
 <div class="dateheading" id="staffday" aria-live="polite"></div>
-<div class="metrics" id="metrics"></div><div class="rosteraccess" aria-label="スタッフ専用出勤予定">
-<form id="rosterAccessForm" class="rosterform">
-<label for="rosterCode">スタッフ用アクセスコード</label>
-<div class="rosterformrow"><input id="rosterCode" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" inputmode="text" placeholder="共有されたコードを入力" required><button id="rosterUnlockButton" type="submit">氏名・勤務時間を見る</button></div>
-<label class="rosterremember"><input type="checkbox" id="rosterRemember" checked>この端末で次回から自動表示（共用端末ではチェックを外す）</label>
-</form>
-<div class="rostercontrols"><button type="button" id="rosterLockButton" hidden>個人別の表示を閉じる</button><button type="button" id="rosterForgetButton" hidden>この端末の記憶を解除</button></div>個人別の表示を閉じる</button>
-<p class="rosterhelp" role="status" id="rosterAccessStatus">最初に1回だけコードを入力。自分専用の端末なら次回から自動表示できます。</p>
-</div><div class="stafflist" id="stafflist" aria-live="polite"></div>
+<div class="metrics" id="metrics"></div><div class="live-shift-guide"><strong>スタッフの氏名・勤務時間</strong><p>最新の年間シフト原本を下に表示しています。コード入力は不要です。Google Driveの共有設定に従って表示されます。</p><a href="https://docs.google.com/spreadsheets/d/1exeiFi27B6ImRHsRy_F8zNBr5Exh7I0i/edit" target="_blank" rel="noopener noreferrer">全画面で勤務表を開く ↗</a><span id="staffRosterRefresh">最新の原本を表示中</span></div>
+<div class="live-shift-frame"><iframe id="staffRosterEmbed" title="最新の年間シフト2026年11月・氏名と勤務時間" data-base-url="https://docs.google.com/spreadsheets/d/1exeiFi27B6ImRHsRy_F8zNBr5Exh7I0i/preview?gid=1240905298" src="https://docs.google.com/spreadsheets/d/1exeiFi27B6ImRHsRy_F8zNBr5Exh7I0i/preview?gid=1240905298" loading="lazy" referrerpolicy="no-referrer" allowfullscreen></iframe></div>
+<div class="stafflist" id="stafflist" aria-live="polite"></div>
 <p class="info" id="staffUpdated">最新のシフト集計を読み込み中です。個人別の勤務予定はシフト原本を確認してください。</p>
 </div></section>
 <section class="card boardcard" id="board" aria-labelledby="boardtitle">
@@ -251,71 +253,11 @@ async function refreshStaffCounts(){
 }
 refreshStaffCounts();setInterval(refreshStaffCounts,300000);
 
-async function fetchProtectedRoster(){
- if(!activeAccessCode)return;
- const status=$('rosterAccessStatus'),unlock=$('rosterUnlockButton');unlock.disabled=true;
- try{
-  const response=await fetch('https://asoboon-staff-roster-api.vercel.app/api/roster',{method:'POST',mode:'cors',cache:'no-store',headers:{'Content-Type':'application/json'},body:JSON.stringify({code:activeAccessCode})});
-  if(response.status===403)throw Error('invalid-code');
-  if(!response.ok)throw Error('network');
-  const data=await response.json();
-  if(data.version!==1||!data.dates||!data.counts||!/^20\d\d-\d\d-\d\dT/.test(data.fetchedAt))throw Error('format');
-  privateRoster=data;privateFetchAt=data.fetchedAt;
-  liveStaffCounts=data.counts;liveStaffSynced=data.fetchedAt;
-  if($('rosterRemember').checked){
-    if(!rememberRosterCode(activeAccessCode))status.textContent='この端末でコードを記憶できませんでした。';
-  }else forgetRosterCode();
-  $('rosterCode').value='';$('rosterAccessForm').hidden=true;$('rosterLockButton').hidden=false;
-  $('rosterForgetButton').hidden=!savedRosterCode();
-  const ts=new Date(data.fetchedAt);
-  const when=new Intl.DateTimeFormat('ja-JP',{timeZone:'Asia/Tokyo',month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}).format(ts);
-  status.textContent='最新の出勤者を取得：'+when+'（原本を直接確認／5分ごとに再取得）。席を離れるときは表示を閉じてください。';
-  $('staffUpdated').textContent='出勤予定：'+when+'に原本から取得（名前・勤務時間も同じデータ）。';
-  renderRoster();
- }catch(e){
-  if(e.message==='invalid-code'){
-    privateRoster=null;activeAccessCode='';forgetRosterCode();$('rosterAccessForm').hidden=false;$('rosterLockButton').hidden=true;$('rosterForgetButton').hidden=true;renderRoster();
-    status.textContent='アクセスコードが違います。もう一度入力してください。';
-  }else{
-    status.textContent='最新シフトを取得できませんでした。前回表示がある場合は時刻を確認し、必要なら原本で確認してください。';
-  }
- }finally{unlock.disabled=false;}
+function refreshEmbeddedRoster(){
+ const frame=$('staffRosterEmbed');
+ if(!frame||document.visibilityState!=='visible'||document.activeElement===frame)return;
+ frame.src=frame.dataset.baseUrl+'&updated='+Date.now();
+ $('staffRosterRefresh').textContent='勤務表の表示を更新しました（5分ごと）';
 }
-$('rosterAccessForm').addEventListener('submit',event=>{
- event.preventDefault();const code=$('rosterCode').value.trim();if(!code)return;
- rosterAutoPaused=false;activeAccessCode=code;$('rosterAccessStatus').textContent='確認しています…';fetchProtectedRoster();
-});
-$('rosterLockButton').addEventListener('click',()=>{
- rosterAutoPaused=true;activeAccessCode='';privateRoster=null;privateFetchAt='';$('rosterCode').value='';
- $('rosterAccessForm').hidden=false;$('rosterLockButton').hidden=true;
- $('rosterForgetButton').hidden=!savedRosterCode();
- $('rosterAccessStatus').textContent='個人別の出勤予定を閉じました。記憶済みなら次回アクセス時に自動表示されます。';
- renderRoster();
-});
-setInterval(()=>{if(activeAccessCode&&document.visibilityState==='visible')fetchProtectedRoster();},300000);
-$('rosterForgetButton').addEventListener('click',()=>{
- forgetRosterCode();rosterAutoPaused=true;activeAccessCode='';privateRoster=null;privateFetchAt='';
- $('rosterCode').value='';$('rosterAccessForm').hidden=false;$('rosterLockButton').hidden=true;$('rosterForgetButton').hidden=true;
- $('rosterAccessStatus').textContent='この端末の記憶を解除しました。';
- renderRoster();
-});
-function tryRememberedRoster(){
- if(rosterAutoPaused||activeAccessCode||document.visibilityState!=='visible')return;
- const saved=savedRosterCode();
- if(!saved)return;
- activeAccessCode=saved;$('rosterRemember').checked=true;
- $('rosterAccessStatus').textContent='この端末の記憶から最新の出勤予定を取得しています…';
- fetchProtectedRoster();
-}
-document.addEventListener('visibilitychange',()=>{
- if(document.visibilityState==='hidden'&&activeAccessCode){
-  activeAccessCode='';privateRoster=null;privateFetchAt='';
-  $('rosterCode').value='';$('rosterAccessForm').hidden=false;$('rosterLockButton').hidden=true;
-  $('rosterForgetButton').hidden=!savedRosterCode();
-  $('rosterAccessStatus').textContent='画面を離れたため個人別表示を閉じました。';
-  renderRoster();
- }else if(document.visibilityState==='visible')tryRememberedRoster();
-});
-tryRememberedRoster();
-
+setInterval(refreshEmbeddedRoster,300000);
 </script></body></html>
