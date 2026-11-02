@@ -77,7 +77,7 @@
 <div class="datebar"><button type="button" class="navbutton" id="prevdate" aria-label="前日">‹</button><label class="dateinput"><span>日付</span><input id="date" type="date" aria-label="出勤予定の日付を選択"></label><button type="button" class="navbutton" id="nextdate" aria-label="翌日">›</button><button type="button" class="todaybtn" id="today">今日</button></div>
 <div class="dateheading" id="staffday" aria-live="polite"></div>
 <div class="metrics" id="metrics"></div><div class="live-shift-guide"><strong>スタッフの氏名・勤務時間</strong><p>最新の年間シフト原本を下に表示しています。コード入力は不要です。Google Driveの共有設定に従って表示されます。</p><a href="https://docs.google.com/spreadsheets/d/1exeiFi27B6ImRHsRy_F8zNBr5Exh7I0i/edit" target="_blank" rel="noopener noreferrer">全画面で勤務表を開く ↗</a><span id="staffRosterRefresh">最新の原本を表示中</span></div>
-<div class="live-shift-frame"><iframe id="staffRosterEmbed" title="最新の年間シフト2026年11月・氏名と勤務時間" data-base-url="https://docs.google.com/spreadsheets/d/1exeiFi27B6ImRHsRy_F8zNBr5Exh7I0i/preview?gid=1240905298" src="https://docs.google.com/spreadsheets/d/1exeiFi27B6ImRHsRy_F8zNBr5Exh7I0i/preview?gid=1240905298" loading="lazy" referrerpolicy="no-referrer" allowfullscreen></iframe></div>
+<div class="live-shift-frame"><iframe id="staffRosterEmbed" title="最新の年間シフト2026年11月・氏名と勤務時間" data-base-url="https://docs.google.com/spreadsheets/d/1exeiFi27B6ImRHsRy_F8zNBr5Exh7I0i/preview?gid=1240905298" src="https://docs.google.com/spreadsheets/d/1exeiFi27B6ImRHsRy_F8zNBr5Exh7I0i/preview?gid=1240905298" loading="eager" referrerpolicy="no-referrer" allowfullscreen></iframe></div>
 <div class="stafflist" id="stafflist" aria-live="polite"></div>
 <p class="info" id="staffUpdated">最新のシフト集計を読み込み中です。個人別の勤務予定はシフト原本を確認してください。</p>
 </div></section>
@@ -107,57 +107,30 @@ function dateParts(iso){const [y,m,d]=iso.split('-').map(Number);return {y,m,d,d
 function displayDate(iso){const {y,m,d,dow}=dateParts(iso);return `${y}年${m}月${d}日（${week[dow]}）`;}
 function advanceDate(iso,days){const {y,m,d}=dateParts(iso);return new Date(Date.UTC(y,m-1,d+days)).toISOString().slice(0,10);}
 function shiftLabel(code){if(code==='A')return '1日勤務（A）';const m=/^(\d{1,2})(?:\.(\d))?-(\d{1,2})(?:\.(\d))?$/.exec(code);if(!m)return code;const num=(a,b)=>Number(a)*60+(b==='5'?30:0);if(![undefined,'0','5'].includes(m[2])||![undefined,'0','5'].includes(m[4]))return code;let a=num(m[1],m[2]),b=num(m[3],m[4]);if(a>=b||b>1440)return code;const f=n=>pad(Math.floor(n/60))+':'+pad(n%60);return f(a)+'〜'+f(b);}
-let liveStaffCounts={};let liveStaffSynced='';let privateRoster=null;let activeAccessCode='';let privateFetchAt='';
-const ROSTER_REMEMBER_KEY='asoboon-staff-roster-remember-v1';
-const ROSTER_REMEMBER_MS=30*24*60*60*1000;
-let rosterAutoPaused=false;
-function savedRosterCode(){
- try{
-  const raw=localStorage.getItem(ROSTER_REMEMBER_KEY);
-  if(!raw)return '';
-  const entry=JSON.parse(raw);
-  if(!entry || typeof entry.code!=='string' || !Number.isFinite(entry.expiresAt) || entry.expiresAt<=Date.now()){
-   localStorage.removeItem(ROSTER_REMEMBER_KEY);return '';
-  }
-  return entry.code;
- }catch(e){return '';}
-}
-function rememberRosterCode(code){
- try{localStorage.setItem(ROSTER_REMEMBER_KEY,JSON.stringify({code,expiresAt:Date.now()+ROSTER_REMEMBER_MS}));return true;}
- catch(e){return false;}
-}
-function forgetRosterCode(){
- try{localStorage.removeItem(ROSTER_REMEMBER_KEY);}catch(e){}
-}
+let liveStaffCounts={};let liveStaffSynced='';
+try{localStorage.removeItem('asoboon-staff-roster-remember-v1')}catch(e){}
 let selectedDate=TODAY();if(!roster[selectedDate])selectedDate='2026-11-01';
 function setDate(iso){if(!/^2026-11-\d{2}$/.test(iso)||!roster[iso])return;selectedDate=iso;renderRoster();}
 function renderRoster(){
-const d=selectedDate;
-$('date').value=d;
-$('staffday').textContent=displayDate(d);
-$('staffchip').textContent=liveStaffSynced?'最新集計（予定）':'取得中';
-$('prevdate').disabled=d==='2026-11-01';
-$('nextdate').disabled=d==='2026-11-30';
-$('metrics').replaceChildren();
-const countData=liveStaffCounts;
-if(countData[d])for(const [label,n] of [['9:30側',countData[d][0]],['18:30側',countData[d][1]]]){
- const div=document.createElement('div');div.className='metric';
- const t=document.createElement('span');t.textContent=label;
- const v=document.createElement('strong');v.textContent=n+'名';
- div.append(t,v);$('metrics').append(div);
+ const d=selectedDate;
+ $('date').value=d;$('staffday').textContent=displayDate(d);
+ $('staffchip').textContent=liveStaffSynced?'最新集計（予定）':'取得中';
+ $('prevdate').disabled=d==='2026-11-01';
+ $('nextdate').disabled=d==='2026-11-30';
+ const metrics=$('metrics');metrics.replaceChildren();
+ const count=liveStaffCounts[d];
+ if(count)for(const [label,n] of [['9:30側',count[0]],['18:30側',count[1]]]){
+  const div=document.createElement('div');div.className='metric';
+  const t=document.createElement('span');t.textContent=label;
+  const v=document.createElement('strong');v.textContent=n+'名';
+  div.append(t,v);metrics.append(div);
+ }
+ $('stafflist').replaceChildren();
 }
-const list=$('stafflist');list.replaceChildren();
-const p=document.createElement('div');p.className='empty';
-p.textContent=privateRoster?'出勤者の勤務記載はありません。':liveStaffSynced?'氏名・勤務時間はアクセスコードで表示できます。':'最新人数を読み込んでいます…';
-list.append(p);
-if(privateRoster&&privateRoster.dates&&Array.isArray(privateRoster.dates[d])){
-  list.replaceChildren();
-  const people=privateRoster.dates[d];
-  if(!people.length){const x=document.createElement('p');x.className='empty';x.textContent='この日の出勤記載はありません。';list.append(x);}
-  for(const person of people){const div=document.createElement('div');div.className='person';const name=document.createElement('strong');name.textContent=person.name;const time=document.createElement('time');time.textContent=person.time;div.append(name,time);list.append(div);}
-}
-}
-$('date').addEventListener('change',e=>setDate(e.target.value));$('prevdate').addEventListener('click',()=>setDate(advanceDate(selectedDate,-1)));$('nextdate').addEventListener('click',()=>setDate(advanceDate(selectedDate,1)));$('today').addEventListener('click',()=>setDate(roster[TODAY()]?TODAY():'2026-11-01'));
+$('date').addEventListener('change',e=>setDate(e.target.value));
+$('prevdate').addEventListener('click',()=>setDate(advanceDate(selectedDate,-1)));
+$('nextdate').addEventListener('click',()=>setDate(advanceDate(selectedDate,1)));
+$('today').addEventListener('click',()=>setDate(roster[TODAY()]?TODAY():'2026-11-01'));
 const sourceCalendars=['asoboon425@gmail.com','70ed8c1d7744801a1afb7e278c7d1b71932aad5fbf638f63f49307b6d3ca626a@group.calendar.google.com'];
 let mode=window.matchMedia('(max-width:650px)').matches?'AGENDA':'MONTH';function updateCalendar(){const q=new URLSearchParams({ctz:'Asia/Tokyo',mode,wkst:'2',showTitle:'0',showPrint:'0',showTz:'0',showTabs:'0',showCalendars:'0',bgcolor:'#ffffff'});sourceCalendars.forEach(src=>q.append('src',src));$('googlecalendar').src='https://calendar.google.com/calendar/embed?'+q;$('agenda').setAttribute('aria-pressed',String(mode==='AGENDA'));$('monthmode').setAttribute('aria-pressed',String(mode==='MONTH'));}$('agenda').onclick=()=>{mode='AGENDA';updateCalendar()};$('monthmode').onclick=()=>{mode='MONTH';updateCalendar()};
 const labels={'0':'区分未入力','1':'土日祝営業','2':'休館','3':'平日特定日','4':'平日営業'};let activeMonth=TODAY().slice(0,7);if(!(activeMonth in operating))activeMonth='2026-11';let chosenOperating=activeMonth+'-01';function adjacentMonth(iso,n){const [y,m]=iso.split('-').map(Number);const d=new Date(Date.UTC(y,m-1+n,1));return d.getUTCFullYear()+'-'+pad(d.getUTCMonth()+1)}
@@ -240,8 +213,6 @@ async function refreshStaffCounts(){
   const data=await response.json();
   if(data.version!==1||!data.counts||typeof data.fetchedAt!=='string'||Object.keys(data.counts).length<28)throw Error('bad counts');
   for(const pair of Object.values(data.counts)){if(!Array.isArray(pair)||pair.length!==2||pair.some(n=>!Number.isInteger(n)||n<0||n>30))throw Error('bad day');}
-  // Do not overwrite more recently fetched named-roster counts with an older public snapshot.
-  if(privateRoster&&privateRoster.sourceHash&&privateRoster.sourceHash!==data.sourceHash)return;
   liveStaffCounts=data.counts;liveStaffSynced=data.fetchedAt;
   const t=new Date(data.fetchedAt);
   $('staffUpdated').textContent='原本を確認（取得時刻 '+new Intl.DateTimeFormat('ja-JP',{timeZone:'Asia/Tokyo',month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}).format(t)+'）。人数は予定値です。';
