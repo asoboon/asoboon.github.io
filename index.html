@@ -124,7 +124,12 @@ function parseMonthSheet(payload,monthKey){
  if(rows.length<7)throw Error('データ行が不足');
  const dates={},counts={};
  for(let col=2;col<Math.min(rows[0]?.c?.length||0,33);col++){
-  const day=Number(cellValue(rows[0],col));
+  const rawDay=cellValue(rows[0],col);
+  let day=Number(rawDay);
+  if(!Number.isInteger(day)){
+   const m=/^Date\((\d{4}),(\d{1,2}),(\d{1,2})\)$/.exec(String(rawDay));
+   day=m&&Number(m[1])===year&&Number(m[2])===monthNumber-1?Number(m[3]):NaN;
+  }
   if(!Number.isInteger(day)||day<1||day>31||new Date(Date.UTC(year,monthNumber-1,day)).getUTCMonth()!==monthNumber-1)continue;
   const date=monthKey+'-'+pad(day),first=Number(cellValue(rows[2],col)),last=Number(cellValue(rows[3],col));
   if(!Number.isInteger(first)||!Number.isInteger(last)||first<0||last<0||first>30||last>30)throw Error('配置人数が取得できません');
