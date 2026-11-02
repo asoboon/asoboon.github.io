@@ -47,15 +47,15 @@
 @media(max-width:700px){.boardcontent{padding:0 14px 15px;gap:8px}.noticeitem{padding:13px 14px}.boardfooter{padding:0 14px 15px}.noticeitem h3{font-size:15px}}
 .noticedue{font-size:11px;font-weight:900;color:#8a5722;background:#fff6e7;border-radius:7px;padding:4px 7px}
 </style></head><body>
-<a class="skip" href="#staffing">出勤予定へ</a>
-<header class="topbar"><div class="topinner"><a class="brand" href="#staffing"><span class="mark">✳</span><span><strong>ASOBooN</strong><small>STAFF HOME</small></span></a><nav class="topnav"><a href="#staffing">出勤予定</a><a href="#events">予定</a><a href="#operating">営業日</a></nav></div></header>
+<a class="skip" href="#staffing">出勤人数へ</a>
+<header class="topbar"><div class="topinner"><a class="brand" href="#staffing"><span class="mark">✳</span><span><strong>ASOBooN</strong><small>STAFF HOME</small></span></a><nav class="topnav"><a href="#staffing">出勤人数</a><a href="#events">予定</a><a href="#operating">営業日</a></nav></div></header>
 <main>
 <section class="card staffcard" id="staffing" aria-labelledby="stafftitle"><div class="pad">
-<div class="stafftop"><h1 id="stafftitle">出勤予定</h1><span class="chip" id="staffchip">11月のシフト</span></div>
+<div class="stafftop"><h1 id="stafftitle">出勤人数の目安</h1><span class="chip" id="staffchip">11月のシフト</span></div>
 <div class="datebar"><button type="button" class="navbutton" id="prevdate" aria-label="前日">‹</button><label class="dateinput"><span>日付</span><input id="date" type="date" aria-label="出勤予定の日付を選択"></label><button type="button" class="navbutton" id="nextdate" aria-label="翌日">›</button><button type="button" class="todaybtn" id="today">今日</button></div>
 <div class="dateheading" id="staffday" aria-live="polite"></div>
 <div class="metrics" id="metrics"></div><div class="stafflist" id="stafflist" aria-live="polite"></div>
-<p class="info">11月1日時点の予定　・　<a href="https://docs.google.com/spreadsheets/d/1exeiFi27B6ImRHsRy_F8zNBr5Exh7I0i/edit" target="_blank" rel="noopener noreferrer">最新シフトを開く ↗</a></p>
+<p class="info">11月1日時点の配置人数を掲載した固定データです。自動更新ではありません。個人別の勤務情報・変更は管理者にご確認ください。</p>
 </div></section>
 <section class="card boardcard" id="board" aria-labelledby="boardtitle">
 <div class="boardhead"><h2 id="boardtitle">アソブーン掲示板</h2><span class="boardstatus" id="boardstatus" aria-live="polite">読み込み中</span></div>
@@ -73,8 +73,7 @@
 </div></section>
 <p class="footer">ASOBooN STAFF HOME</p></main>
 <script>
-const roster={"2026-11-01":[["池上","A"],["百","A"],["長﨑","A"],["中山","14-18.5"],["木村","9.5-14"],["宮川","9.5-14"],["小野寺","14-18.5"],["西沢","A"],["吉田","A"]],"2026-11-02":[["池上","A"],["百","A"],["長﨑","A"],["中山","9.5-14"],["田中","13-18"],["宮内","9.5-14"],["今野","14-18"],["吉田","A"]],"2026-11-03":[["池上","A"],["百","A"],["中山","9.5-14"],["大平","13-18.5"],["宮川","9.5-14"],["田中","14-18.5"],["福島","9.5-14"],["宮部","9.5-14"]],"2026-11-04":[["吉田","A"]],"2026-11-05":[["池上","A"],["百","A"],["長﨑","A"],["中山","13-18"],["中摩","9.5-14"],["大平","13-18"],["今野","A"]],"2026-11-06":[["池上","A"],["百","A"],["長﨑","A"],["大平","13-18"],["宮川","9.5-14"],["小野寺","14-18"],["福島","9.5-14"],["吉田","A"]],"2026-11-07":[["池上","A"],["百","A"],["長﨑","A"],["木村","A"],["今野","A"],["西沢","A"]],"2026-11-08":[["池上","A"],["百","A"],["長﨑","A"],["中山","14-18.5"],["木村","9.5-14"],["小野寺","14-18"],["福島","9.5-14"],["西沢","A"],["吉田","A"]],"2026-11-09":[["池上","A"],["百","A"],["長﨑","A"],["中山","9.5-14"],["大平","13-18"],["田中","13-18"],["今野","14-18"],["吉田","A"]],"2026-11-10":[],"2026-11-11":[["池上","A"],["百","A"],["大平","9.5-14"],["宮川","9.5-14"],["小野寺","14-18"],["田中","14-18"],["宮部","9.5-14"],["吉田","A"]],"2026-11-12":[["池上","A"],["中山","9.5-14"],["大平","13-18"],["宮川","9.5-14"],["小野寺","14-18"],["福島","9.5-14"],["今野","A"]],"2026-11-13":[["池上","A"],["百","A"],["長﨑","A"],["大平","9.5-14"],["小野寺","14-18"],["田中","14-18"],["吉田","A"]],"2026-11-14":[["池上","A"],["百","A"],["長﨑","A"],["木村","A"],["西沢","A"],["小田","13-18.5"]],"2026-11-15":[["池上","A"],["百","A"],["中山","9.5-14"],["大平","13-18.5"],["宮川","9.5-14"],["田中","14-18.5"],["福島","9.5-14"],["西沢","A"],["吉田","A"]],"2026-11-16":[["池上","A"],["百","A"],["長﨑","A"],["中山","9.5-14"],["大平","13-18"],["小野寺","14-18"],["宮内","9.5-14"],["今野","14-18"],["吉田","A"]],"2026-11-17":[],"2026-11-18":[["吉田","A"]],"2026-11-19":[["百","A"],["中摩","9.5-14"],["大平","13-18"],["宮川","9.5-14"],["小野寺","14-18"],["田中","14-18"],["宮部","9.5-14"],["今野","A"]],"2026-11-20":[["百","A"],["長﨑","A"],["大平","13-18"],["宮川","9.5-14"],["小野寺","14-18"],["田中","14-18"],["福島","9.5-14"],["吉田","A"]],"2026-11-21":[["池上","A"],["百","A"],["長﨑","A"],["中摩","9.5-14"],["大平","13-18"],["木村","A"],["宮川","9.5-14"],["今野","A"],["西沢","14-18.5"]],"2026-11-22":[["池上","A"],["百","A"],["長﨑","A"],["中山","9.5-14"],["木村","A"],["西沢","A"],["村井","9.5-14"]],"2026-11-23":[["池上","A"],["百","A"],["長﨑","A"],["中山","9.5-14"],["小野寺","14-18.5"],["田中","14-18.5"],["福島","9.5-14"],["宮部","9.5-14"],["今野","14-18.5"],["望月","9.5-14"]],"2026-11-24":[["池上","A"],["百","A"],["長﨑","A"],["中山","9.5-14"],["田中","14-18"]],"2026-11-25":[["吉田","A"]],"2026-11-26":[["池上","A"],["百","A"],["長﨑","A"],["中摩","14-18"],["大平","13-18"],["宮川","9.5-14"],["福島","9.5-14"],["今野","A"]],"2026-11-27":[["池上","A"],["長﨑","A"],["中山","9.5-14"],["大平","13-18"],["小野寺","14-18"],["田中","14-18"],["福島","9.5-14"],["吉田","A"]],"2026-11-28":[["池上","A"],["長﨑","A"],["中摩","9.5-14"],["木村","A"],["今野","A"],["西沢","A"],["喜多尾","14-18.5"],["弓野","A"]],"2026-11-29":[["池上","A"],["百","A"],["長﨑","A"],["中山","14-18.5"],["木村","A"],["宮川","9.5-14"],["西沢","A"],["吉田","A"]],"2026-11-30":[["池上","A"],["長﨑","A"],["中山","9.5-14"],["大平","13-18"],["小野寺","14-18"],["福島","9.5-14"],["宮内","9.5-14"],["今野","14-18"]]};
-const operating={"2026-04":"000110200011020001102000110200","2026-05":"0110200011020001102000110200011","2026-06":"020001102000110200011020001102","2026-07":"0001102000110200011020001102000","2026-08":"1102000110200011020001132333114","2026-09":"244411414441142444111112411324","2026-10":"3411324441113244113244411324441","2026-11":"141244113244411322441113244114","2026-12":"2444112244411424441133333113112","2027-01":"2113233311124441142444114244411","2027-02":"4244411324141132444114124411","2027-03":"4244411324441132444111233311323","2027-04":"001100000110000011000001100000","2027-05":"1100000110000011000001100000110","2027-06":"000011000001100000110000011000","2027-07":"0011000001100000110000011000001","2027-08":"1000001100000110000011000001100","2027-09":"000110000011000001100000110000","2027-10":"0110000011000001100000110000011","2027-11":"000001100000110000011000001100","2027-12":"0001100000110000011000001100000","2028-01":"1100000110000011000001100000110","2028-02":"00001100000110000011000001100","2028-03":"0001100000110000011000001100000"};
+const roster=Object.fromEntries(Array.from({length:30},(_,i)=>['2026-11-'+String(i+1).padStart(2,'0'),[]]));
 const $=id=>document.getElementById(id);
 const TODAY=()=>new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
 const pad=n=>String(n).padStart(2,'0');
@@ -85,10 +84,26 @@ function advanceDate(iso,days){const {y,m,d}=dateParts(iso);return new Date(Date
 function shiftLabel(code){if(code==='A')return '1日勤務（A）';const m=/^(\d{1,2})(?:\.(\d))?-(\d{1,2})(?:\.(\d))?$/.exec(code);if(!m)return code;const num=(a,b)=>Number(a)*60+(b==='5'?30:0);if(![undefined,'0','5'].includes(m[2])||![undefined,'0','5'].includes(m[4]))return code;let a=num(m[1],m[2]),b=num(m[3],m[4]);if(a>=b||b>1440)return code;const f=n=>pad(Math.floor(n/60))+':'+pad(n%60);return f(a)+'〜'+f(b);}
 let selectedDate=TODAY();if(!roster[selectedDate])selectedDate='2026-11-01';
 function setDate(iso){if(!/^2026-11-\d{2}$/.test(iso)||!roster[iso])return;selectedDate=iso;renderRoster();}
-function renderRoster(){const d=selectedDate;const people=roster[d]||[];$('date').value=d;$('staffday').textContent=displayDate(d);$('staffchip').textContent=people.length+'名（予定）';$('prevdate').disabled=d==='2026-11-01';$('nextdate').disabled=d==='2026-11-30';$('metrics').innerHTML='';const counts={morning:0,evening:0};const morningThreshold=14*60;for(const [name,code] of people){if(code==='A'){counts.morning++;counts.evening++;continue;}let m=/^(\d{1,2})(?:\.(\d))?-(\d{1,2})(?:\.(\d))?$/.exec(code);if(!m)continue;let s=+m[1]*60+(m[2]==='5'?30:0),e=+m[3]*60+(m[4]==='5'?30:0);if(s<=10*60 && e>=12*60)counts.morning++;if(s<=16*60 && e>=18*60)counts.evening++;} // Display original workbook counts separately only if used.
+function renderRoster(){
+const d=selectedDate;
+$('date').value=d;
+$('staffday').textContent=displayDate(d);
+$('staffchip').textContent='人数目安（固定データ）';
+$('prevdate').disabled=d==='2026-11-01';
+$('nextdate').disabled=d==='2026-11-30';
+$('metrics').replaceChildren();
 const countData={"2026-11-01":[6,6],"2026-11-02":[5,5],"2026-11-03":[6,4],"2026-11-04":[0,0],"2026-11-05":[5,6],"2026-11-06":[5,5],"2026-11-07":[6,6],"2026-11-08":[6,6],"2026-11-09":[4,6],"2026-11-10":[0,0],"2026-11-11":[5,4],"2026-11-12":[5,4],"2026-11-13":[4,5],"2026-11-14":[5,6],"2026-11-15":[6,5],"2026-11-16":[5,6],"2026-11-17":[0,0],"2026-11-18":[0,0],"2026-11-19":[5,5],"2026-11-20":[4,5],"2026-11-21":[7,7],"2026-11-22":[7,5],"2026-11-23":[7,6],"2026-11-24":[4,4],"2026-11-25":[0,0],"2026-11-26":[6,6],"2026-11-27":[4,5],"2026-11-28":[7,7],"2026-11-29":[6,6],"2026-11-30":[5,5]};
-if(countData[d])for(const [label,n] of [['9:30側',countData[d][0]],['18:30側',countData[d][1]]]){const div=document.createElement('div');div.className='metric';const t=document.createElement('span');t.textContent=label;const v=document.createElement('strong');v.textContent=n+'名';div.append(t,v);$('metrics').append(div);}
-const list=$('stafflist');list.replaceChildren();if(!people.length){const p=document.createElement('div');p.className='empty';p.textContent='出勤予定の記載はありません。';list.append(p);return;}for(const [name,code] of people){const item=document.createElement('div');item.className='person';const n=document.createElement('strong');n.textContent=name;const time=document.createElement('time');time.textContent=shiftLabel(code);item.append(n,time);list.append(item);}}
+if(countData[d])for(const [label,n] of [['9:30側',countData[d][0]],['18:30側',countData[d][1]]]){
+ const div=document.createElement('div');div.className='metric';
+ const t=document.createElement('span');t.textContent=label;
+ const v=document.createElement('strong');v.textContent=n+'名';
+ div.append(t,v);$('metrics').append(div);
+}
+const list=$('stafflist');list.replaceChildren();
+const p=document.createElement('div');p.className='empty';
+p.textContent='個人別の出勤予定と勤務時間は公開ページには表示していません。最新の勤務予定は管理者にご確認ください。';
+list.append(p);
+}
 $('date').addEventListener('change',e=>setDate(e.target.value));$('prevdate').addEventListener('click',()=>setDate(advanceDate(selectedDate,-1)));$('nextdate').addEventListener('click',()=>setDate(advanceDate(selectedDate,1)));$('today').addEventListener('click',()=>setDate(roster[TODAY()]?TODAY():'2026-11-01'));
 const sourceCalendars=['asoboon425@gmail.com','70ed8c1d7744801a1afb7e278c7d1b71932aad5fbf638f63f49307b6d3ca626a@group.calendar.google.com'];
 let mode=window.matchMedia('(max-width:650px)').matches?'AGENDA':'MONTH';function updateCalendar(){const q=new URLSearchParams({ctz:'Asia/Tokyo',mode,wkst:'2',showTitle:'0',showPrint:'0',showTz:'0',showTabs:'0',showCalendars:'0',bgcolor:'#ffffff'});sourceCalendars.forEach(src=>q.append('src',src));$('googlecalendar').src='https://calendar.google.com/calendar/embed?'+q;$('agenda').setAttribute('aria-pressed',String(mode==='AGENDA'));$('monthmode').setAttribute('aria-pressed',String(mode==='MONTH'));}$('agenda').onclick=()=>{mode='AGENDA';updateCalendar()};$('monthmode').onclick=()=>{mode='MONTH';updateCalendar()};
