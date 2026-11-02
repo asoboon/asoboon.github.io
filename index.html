@@ -55,7 +55,7 @@
 <div class="datebar"><button type="button" class="navbutton" id="prevdate" aria-label="前日">‹</button><label class="dateinput"><span>日付</span><input id="date" type="date" aria-label="出勤予定の日付を選択"></label><button type="button" class="navbutton" id="nextdate" aria-label="翌日">›</button><button type="button" class="todaybtn" id="today">今日</button></div>
 <div class="dateheading" id="staffday" aria-live="polite"></div>
 <div class="metrics" id="metrics"></div><div class="stafflist" id="stafflist" aria-live="polite"></div>
-<p class="info">11月1日時点のシフト集計から、時間帯別の出勤予定人数を表示しています。自動更新ではないため、変更があれば管理者にご確認ください。個人名と勤務時間は公開していません。</p>
+<p class="info" id="staffUpdated">最新のシフト集計を読み込み中です。個人別の勤務予定はシフト原本を確認してください。</p>
 </div></section>
 <section class="card boardcard" id="board" aria-labelledby="boardtitle">
 <div class="boardhead"><h2 id="boardtitle">アソブーン掲示板</h2><span class="boardstatus" id="boardstatus" aria-live="polite">読み込み中</span></div>
@@ -83,17 +83,18 @@ function dateParts(iso){const [y,m,d]=iso.split('-').map(Number);return {y,m,d,d
 function displayDate(iso){const {y,m,d,dow}=dateParts(iso);return `${y}年${m}月${d}日（${week[dow]}）`;}
 function advanceDate(iso,days){const {y,m,d}=dateParts(iso);return new Date(Date.UTC(y,m-1,d+days)).toISOString().slice(0,10);}
 function shiftLabel(code){if(code==='A')return '1日勤務（A）';const m=/^(\d{1,2})(?:\.(\d))?-(\d{1,2})(?:\.(\d))?$/.exec(code);if(!m)return code;const num=(a,b)=>Number(a)*60+(b==='5'?30:0);if(![undefined,'0','5'].includes(m[2])||![undefined,'0','5'].includes(m[4]))return code;let a=num(m[1],m[2]),b=num(m[3],m[4]);if(a>=b||b>1440)return code;const f=n=>pad(Math.floor(n/60))+':'+pad(n%60);return f(a)+'〜'+f(b);}
+let liveStaffCounts={};let liveStaffSynced='';
 let selectedDate=TODAY();if(!roster[selectedDate])selectedDate='2026-11-01';
 function setDate(iso){if(!/^2026-11-\d{2}$/.test(iso)||!roster[iso])return;selectedDate=iso;renderRoster();}
 function renderRoster(){
 const d=selectedDate;
 $('date').value=d;
 $('staffday').textContent=displayDate(d);
-$('staffchip').textContent='時間帯別の配置予定';
+$('staffchip').textContent=liveStaffSynced?'最新集計（予定）':'取得中';
 $('prevdate').disabled=d==='2026-11-01';
 $('nextdate').disabled=d==='2026-11-30';
 $('metrics').replaceChildren();
-const countData={"2026-11-01":[6,6],"2026-11-02":[5,5],"2026-11-03":[6,4],"2026-11-04":[0,0],"2026-11-05":[5,6],"2026-11-06":[5,5],"2026-11-07":[6,6],"2026-11-08":[6,6],"2026-11-09":[4,6],"2026-11-10":[0,0],"2026-11-11":[5,4],"2026-11-12":[5,4],"2026-11-13":[4,5],"2026-11-14":[5,6],"2026-11-15":[6,5],"2026-11-16":[5,6],"2026-11-17":[0,0],"2026-11-18":[0,0],"2026-11-19":[5,5],"2026-11-20":[4,5],"2026-11-21":[7,7],"2026-11-22":[7,5],"2026-11-23":[7,6],"2026-11-24":[4,4],"2026-11-25":[0,0],"2026-11-26":[6,6],"2026-11-27":[4,5],"2026-11-28":[7,7],"2026-11-29":[6,6],"2026-11-30":[5,5]};
+const countData=liveStaffCounts;
 if(countData[d])for(const [label,n] of [['9:30側',countData[d][0]],['18:30側',countData[d][1]]]){
  const div=document.createElement('div');div.className='metric';
  const t=document.createElement('span');t.textContent=label;
@@ -102,7 +103,7 @@ if(countData[d])for(const [label,n] of [['9:30側',countData[d][0]],['18:30側',
 }
 const list=$('stafflist');list.replaceChildren();
 const p=document.createElement('div');p.className='empty';
-p.textContent='上の人数は予定集計です。最新の変更と個人別の勤務情報は管理者にご確認ください。';
+p.textContent=liveStaffSynced?'名前・勤務時間はシフト原本で確認してください。':'最新人数を読み込んでいます…';
 list.append(p);
 }
 $('date').addEventListener('change',e=>setDate(e.target.value));$('prevdate').addEventListener('click',()=>setDate(advanceDate(selectedDate,-1)));$('nextdate').addEventListener('click',()=>setDate(advanceDate(selectedDate,1)));$('today').addEventListener('click',()=>setDate(roster[TODAY()]?TODAY():'2026-11-01'));
@@ -181,4 +182,21 @@ $('boardtoggle').addEventListener('click',()=>{boardExpanded=!boardExpanded;rend
 loadBulletin();
 
 renderRoster();updateCalendar();renderOperating();
+async function refreshStaffCounts(){
+ try{
+  const response=await fetch('./staffing-counts.json?t='+Date.now(),{cache:'no-store'});
+  if(!response.ok)throw Error('fetch failed');
+  const data=await response.json();
+  if(data.version!==1||!data.counts||typeof data.updatedAt!=='string'||Object.keys(data.counts).length<28)throw Error('bad counts');
+  for(const pair of Object.values(data.counts)){if(!Array.isArray(pair)||pair.length!==2||pair.some(n=>!Number.isInteger(n)||n<0||n>30))throw Error('bad day');}
+  liveStaffCounts=data.counts;liveStaffSynced=data.updatedAt;
+  const t=new Date(data.updatedAt);
+  $('staffUpdated').textContent='シフト原本の取得データ（最終同期 '+new Intl.DateTimeFormat('ja-JP',{timeZone:'Asia/Tokyo',month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}).format(t)+'）。人数は予定値です。';
+  renderRoster();
+ }catch(e){
+  $('staffUpdated').textContent='最新の出勤人数を取得できません。管理者にご確認ください。';
+  liveStaffSynced='';liveStaffCounts={};renderRoster();
+ }
+}
+refreshStaffCounts();setInterval(refreshStaffCounts,300000);
 </script></body></html>
