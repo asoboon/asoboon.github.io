@@ -51,11 +51,11 @@
 <header class="topbar"><div class="topinner"><a class="brand" href="#staffing"><span class="mark">✳</span><span><strong>ASOBooN</strong><small>STAFF HOME</small></span></a><nav class="topnav"><a href="#staffing">出勤人数</a><a href="#events">予定</a><a href="#operating">営業日</a></nav></div></header>
 <main>
 <section class="card staffcard" id="staffing" aria-labelledby="stafftitle"><div class="pad">
-<div class="stafftop"><h1 id="stafftitle">出勤人数の目安</h1><span class="chip" id="staffchip">11月のシフト</span></div>
+<div class="stafftop"><h1 id="stafftitle">出勤人数（予定）</h1><span class="chip" id="staffchip">11月のシフト</span></div>
 <div class="datebar"><button type="button" class="navbutton" id="prevdate" aria-label="前日">‹</button><label class="dateinput"><span>日付</span><input id="date" type="date" aria-label="出勤予定の日付を選択"></label><button type="button" class="navbutton" id="nextdate" aria-label="翌日">›</button><button type="button" class="todaybtn" id="today">今日</button></div>
 <div class="dateheading" id="staffday" aria-live="polite"></div>
 <div class="metrics" id="metrics"></div><div class="stafflist" id="stafflist" aria-live="polite"></div>
-<p class="info">11月1日時点の配置人数を掲載した固定データです。自動更新ではありません。個人別の勤務情報・変更は管理者にご確認ください。</p>
+<p class="info">11月1日時点のシフト集計から、時間帯別の出勤予定人数を表示しています。自動更新ではないため、変更があれば管理者にご確認ください。個人名と勤務時間は公開していません。</p>
 </div></section>
 <section class="card boardcard" id="board" aria-labelledby="boardtitle">
 <div class="boardhead"><h2 id="boardtitle">アソブーン掲示板</h2><span class="boardstatus" id="boardstatus" aria-live="polite">読み込み中</span></div>
@@ -88,7 +88,7 @@ function renderRoster(){
 const d=selectedDate;
 $('date').value=d;
 $('staffday').textContent=displayDate(d);
-$('staffchip').textContent='人数目安（固定データ）';
+$('staffchip').textContent='時間帯別の配置予定';
 $('prevdate').disabled=d==='2026-11-01';
 $('nextdate').disabled=d==='2026-11-30';
 $('metrics').replaceChildren();
@@ -101,7 +101,7 @@ if(countData[d])for(const [label,n] of [['9:30側',countData[d][0]],['18:30側',
 }
 const list=$('stafflist');list.replaceChildren();
 const p=document.createElement('div');p.className='empty';
-p.textContent='個人別の出勤予定と勤務時間は公開ページには表示していません。最新の勤務予定は管理者にご確認ください。';
+p.textContent='上の人数は予定集計です。最新の変更と個人別の勤務情報は管理者にご確認ください。';
 list.append(p);
 }
 $('date').addEventListener('change',e=>setDate(e.target.value));$('prevdate').addEventListener('click',()=>setDate(advanceDate(selectedDate,-1)));$('nextdate').addEventListener('click',()=>setDate(advanceDate(selectedDate,1)));$('today').addEventListener('click',()=>setDate(roster[TODAY()]?TODAY():'2026-11-01'));
