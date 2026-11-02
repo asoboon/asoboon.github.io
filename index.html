@@ -60,14 +60,14 @@
 #rosterLockButton{background:#5f6c64}
 #rosterLockButton[hidden],#rosterAccessForm[hidden]{display:none}
 .rosterhelp{font-size:12px;margin:9px 0 0;color:#42644c;line-height:1.55}
-.live-shift-guide{padding:16px;margin-top:14px;border:1px solid #d1e5d7;background:#f5faf6;border-radius:13px}
-.live-shift-guide strong{display:block;font-size:16px;margin-bottom:6px}
-.live-shift-guide p{font-size:13px;line-height:1.6;margin:0 0 10px}
-.live-shift-guide a{display:inline-flex;font-weight:800;font-size:13px;margin-bottom:8px;color:#1a6548}
-.live-shift-guide span{display:block;font-size:11px;color:#557467}
-.live-shift-frame{width:100%;margin:12px auto 6px;border:1px solid #d4ddda;border-radius:10px;overflow:hidden;background:white}
-.live-shift-frame iframe{display:block;border:0;width:100%;height:min(76vh,740px);min-height:480px;background:white}
-#stafflist{display:none!important}
+.rosterhead{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:17px 0 11px}
+.rosterhead strong{font-size:17px}.rosterhead small{font-size:12px;color:#54675a}
+.stafflist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.stafflist .person{min-height:64px}.stafflist .person time{overflow-wrap:anywhere}
+.stafflist .empty{grid-column:1/-1}
+.roster-source{font-size:12px;color:#63776b;margin-top:12px}
+.roster-source a{font-weight:800;color:#24694c}
+@media(max-width:560px){.stafflist{grid-template-columns:1fr}}
 </style></head><body>
 <a class="skip" href="#staffing">出勤人数へ</a>
 <header class="topbar"><div class="topinner"><a class="brand" href="#staffing"><span class="mark">✳</span><span><strong>ASOBooN</strong><small>STAFF HOME</small></span></a><nav class="topnav"><a href="#staffing">出勤人数</a><a href="#events">予定</a><a href="#operating">営業日</a></nav></div></header>
@@ -76,9 +76,9 @@
 <div class="stafftop"><h1 id="stafftitle">出勤予定（人数・氏名・勤務時間）</h1><span class="chip" id="staffchip">11月のシフト</span></div>
 <div class="datebar"><button type="button" class="navbutton" id="prevdate" aria-label="前日">‹</button><label class="dateinput"><span>日付</span><input id="date" type="date" aria-label="出勤予定の日付を選択"></label><button type="button" class="navbutton" id="nextdate" aria-label="翌日">›</button><button type="button" class="todaybtn" id="today">今日</button></div>
 <div class="dateheading" id="staffday" aria-live="polite"></div>
-<div class="metrics" id="metrics"></div><div class="live-shift-guide"><strong>スタッフの氏名・勤務時間</strong><p>最新の年間シフト原本を下に表示しています。コード入力は不要です。Google Driveの共有設定に従って表示されます。</p><a href="https://docs.google.com/spreadsheets/d/1exeiFi27B6ImRHsRy_F8zNBr5Exh7I0i/edit" target="_blank" rel="noopener noreferrer">全画面で勤務表を開く ↗</a><span id="staffRosterRefresh">最新の原本を表示中</span></div>
-<div class="live-shift-frame"><iframe id="staffRosterEmbed" title="最新の年間シフト・氏名と勤務時間" data-base-url="https://docs.google.com/spreadsheets/d/1exeiFi27B6ImRHsRy_F8zNBr5Exh7I0i/preview" src="https://docs.google.com/spreadsheets/d/1exeiFi27B6ImRHsRy_F8zNBr5Exh7I0i/preview" loading="eager" referrerpolicy="no-referrer" allowfullscreen></iframe></div>
-<div class="stafflist" id="stafflist" aria-live="polite"></div>
+<div class="metrics" id="metrics"></div><div class="rosterhead"><strong>選んだ日の勤務予定者</strong><small id="roster-status" role="status">最新シフトを取得中…</small></div>
+<div id="stafflist" class="stafflist" aria-live="polite"><div class="empty">読み込み中…</div></div>
+<p class="roster-source"><a href="https://docs.google.com/spreadsheets/d/1exeiFi27B6ImRHsRy_F8zNBr5Exh7I0i/edit" rel="noopener noreferrer" target="_blank">シフト原本を開く ↗</a>　変更は原本と現場の最新指示を優先</p>
 <p class="info" id="staffUpdated">最新のシフト集計を読み込み中です。個人別の勤務予定はシフト原本を確認してください。</p>
 </div></section>
 <section class="card boardcard" id="board" aria-labelledby="boardtitle">
@@ -107,30 +107,80 @@ function dateParts(iso){const [y,m,d]=iso.split('-').map(Number);return {y,m,d,d
 function displayDate(iso){const {y,m,d,dow}=dateParts(iso);return `${y}年${m}月${d}日（${week[dow]}）`;}
 function advanceDate(iso,days){const {y,m,d}=dateParts(iso);return new Date(Date.UTC(y,m-1,d+days)).toISOString().slice(0,10);}
 function shiftLabel(code){if(code==='A')return '1日勤務（A）';const m=/^(\d{1,2})(?:\.(\d))?-(\d{1,2})(?:\.(\d))?$/.exec(code);if(!m)return code;const num=(a,b)=>Number(a)*60+(b==='5'?30:0);if(![undefined,'0','5'].includes(m[2])||![undefined,'0','5'].includes(m[4]))return code;let a=num(m[1],m[2]),b=num(m[3],m[4]);if(a>=b||b>1440)return code;const f=n=>pad(Math.floor(n/60))+':'+pad(n%60);return f(a)+'〜'+f(b);}
-let liveStaffCounts={};let liveStaffSynced='';
-try{localStorage.removeItem('asoboon-staff-roster-remember-v1')}catch(e){}
-let selectedDate=TODAY();if(!roster[selectedDate])selectedDate='2026-11-01';
-function setDate(iso){if(!/^2026-11-\d{2}$/.test(iso)||!roster[iso])return;selectedDate=iso;renderRoster();}
-function renderRoster(){
- const d=selectedDate;
- $('date').value=d;$('staffday').textContent=displayDate(d);
- $('staffchip').textContent=liveStaffSynced?'最新集計（予定）':'取得中';
- $('prevdate').disabled=d==='2026-11-01';
- $('nextdate').disabled=d==='2026-11-30';
- const metrics=$('metrics');metrics.replaceChildren();
- const count=liveStaffCounts[d];
- if(count)for(const [label,n] of [['9:30側',count[0]],['18:30側',count[1]]]){
-  const div=document.createElement('div');div.className='metric';
-  const t=document.createElement('span');t.textContent=label;
-  const v=document.createElement('strong');v.textContent=n+'名';
-  div.append(t,v);metrics.append(div);
- }
- $('stafflist').replaceChildren();
+let shiftCounts={},dailyRoster={},rosterUpdated={},rosterError='',rosterBusy=false,rosterFetchSeq=0,rosterScript=null,rosterTimeout=null;
+const sheetBase='https://docs.google.com/spreadsheets/d/1exeiFi27B6ImRHsRy_F8zNBr5Exh7I0i/gviz/tq';
+const offCodes=new Set(['','休','有給','公休','欠','欠勤','振休','OFF','-','×','休み']);
+let selectedDate=TODAY();
+function cellValue(row,col){const c=row?.c?.[col];return c?.v??null}
+function parseShift(v){
+ if(v==null)return null;
+ const code=String(v).trim();if(offCodes.has(code))return null;
+ if(code==='A')return '終日勤務（A・時間未確認）';
+ const pretty=shiftLabel(code);return pretty===code?code+'（時刻要確認）':pretty;
 }
-$('date').addEventListener('change',e=>setDate(e.target.value));
-$('prevdate').addEventListener('click',()=>setDate(advanceDate(selectedDate,-1)));
-$('nextdate').addEventListener('click',()=>setDate(advanceDate(selectedDate,1)));
-$('today').addEventListener('click',()=>setDate(roster[TODAY()]?TODAY():'2026-11-01'));
+function parseMonthSheet(payload,monthKey){
+ if(payload?.status!=='ok'||!Array.isArray(payload.table?.rows))throw Error('シート形式が変わりました');
+ const rows=payload.table.rows,monthNumber=Number(monthKey.slice(5)),year=Number(monthKey.slice(0,4));
+ if(rows.length<7)throw Error('データ行が不足');
+ const dates={},counts={};
+ for(let col=2;col<Math.min(rows[0]?.c?.length||0,33);col++){
+  const day=Number(cellValue(rows[0],col));
+  if(!Number.isInteger(day)||day<1||day>31||new Date(Date.UTC(year,monthNumber-1,day)).getUTCMonth()!==monthNumber-1)continue;
+  const date=monthKey+'-'+pad(day),first=Number(cellValue(rows[2],col)),last=Number(cellValue(rows[3],col));
+  if(!Number.isInteger(first)||!Number.isInteger(last)||first<0||last<0||first>30||last>30)throw Error('配置人数が取得できません');
+  counts[date]=[first,last];dates[date]=[];
+  for(const row of rows.slice(4)){
+   const person=cellValue(row,0);
+   if(typeof person!=='string'||!person.trim()||person.length>24||/メモ|備考|集計|合計|配置人数|【/.test(person))continue;
+   const shift=parseShift(cellValue(row,col));
+   if(shift)dates[date].push({name:person.trim(),time:shift});
+  }
+  if(dates[date].length>30)throw Error('件数異常');
+ }
+ if(Object.keys(dates).length<28)throw Error('日付が不足');
+ return {dates,counts};
+}
+function updateStaffDate(date){
+ if(!/^20\d\d-\d\d-\d\d$/.test(date)||Number.isNaN(Date.parse(date+'T00:00:00Z')))return;
+ const oldMonth=selectedDate.slice(0,7);selectedDate=date;renderRoster();
+ if(oldMonth!==date.slice(0,7)||!rosterUpdated[date.slice(0,7)])loadDailyRoster();
+}
+function renderRoster(){
+ const date=selectedDate,month=date.slice(0,7);
+ $('date').value=date;$('staffday').textContent=displayDate(date);
+ $('staffchip').textContent=rosterBusy?'読込中':rosterUpdated[month]?'シフト原本の予定':'取得待ち';
+ $('prevdate').disabled=false;$('nextdate').disabled=false;
+ const metric=$('metrics');metric.replaceChildren();
+ const numbers=shiftCounts[date];
+ if(numbers){for(const [name,number] of [['9:30側',numbers[0]],['18:30側',numbers[1]]]){
+  const div=document.createElement('div');div.className='metric';
+  const label=document.createElement('span');label.textContent=name;
+  const bold=document.createElement('strong');bold.textContent=number+'名';
+  div.append(label,bold);metric.append(div);
+ }}
+ const list=$('stafflist');list.replaceChildren();
+ const people=dailyRoster[date];
+ if(Array.isArray(people)&&people.length){
+  for(const p of people){
+   const div=document.createElement('div');div.className='person';
+   const name=document.createElement('strong');name.textContent=p.name;
+   const time=document.createElement('time');time.textContent=p.time;
+   div.append(name,time);list.append(div);
+  }
+ }else{
+  const empty=document.createElement('div');empty.className='empty';
+  empty.textContent=Array.isArray(people)?'この日の出勤予定者は登録されていません。':rosterError?'取得できません。原本を確認してください。':'勤務予定を読み込み中…';
+  list.append(empty);
+ }
+ const updated=rosterUpdated[month];
+ const formatted=updated?new Intl.DateTimeFormat('ja-JP',{timeZone:'Asia/Tokyo',month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}).format(new Date(updated)):'';
+ $('roster-status').textContent=rosterError?'更新失敗・再確認が必要':updated?'最終取得 '+formatted+'（5分間隔）':'最新シフトを取得中…';
+ $('staffUpdated').textContent=rosterError?'シフトの最新値を確認できません。原本をご確認ください。':updated?'原本から '+formatted+' に取得。人数は配置予定値（実出勤数ではありません）。':'シフトを取得しています…';
+}
+$('date').addEventListener('change',e=>updateStaffDate(e.target.value));
+$('prevdate').addEventListener('click',()=>updateStaffDate(advanceDate(selectedDate,-1)));
+$('nextdate').addEventListener('click',()=>updateStaffDate(advanceDate(selectedDate,1)));
+$('today').addEventListener('click',()=>updateStaffDate(TODAY()));
 const sourceCalendars=['asoboon425@gmail.com','70ed8c1d7744801a1afb7e278c7d1b71932aad5fbf638f63f49307b6d3ca626a@group.calendar.google.com'];
 let mode=window.matchMedia('(max-width:650px)').matches?'AGENDA':'MONTH';function updateCalendar(){const q=new URLSearchParams({ctz:'Asia/Tokyo',mode,wkst:'2',showTitle:'0',showPrint:'0',showTz:'0',showTabs:'0',showCalendars:'0',bgcolor:'#ffffff'});sourceCalendars.forEach(src=>q.append('src',src));$('googlecalendar').src='https://calendar.google.com/calendar/embed?'+q;$('agenda').setAttribute('aria-pressed',String(mode==='AGENDA'));$('monthmode').setAttribute('aria-pressed',String(mode==='MONTH'));}$('agenda').onclick=()=>{mode='AGENDA';updateCalendar()};$('monthmode').onclick=()=>{mode='MONTH';updateCalendar()};
 const labels={'0':'区分未入力','1':'土日祝営業','2':'休館','3':'平日特定日','4':'平日営業'};let activeMonth=TODAY().slice(0,7);if(!(activeMonth in operating))activeMonth='2026-11';let chosenOperating=activeMonth+'-01';function adjacentMonth(iso,n){const [y,m]=iso.split('-').map(Number);const d=new Date(Date.UTC(y,m-1+n,1));return d.getUTCFullYear()+'-'+pad(d.getUTCMonth()+1)}
@@ -206,29 +256,32 @@ $('boardtoggle').addEventListener('click',()=>{boardExpanded=!boardExpanded;rend
 loadBulletin();
 
 renderRoster();updateCalendar();renderOperating();
-async function refreshStaffCounts(){
- try{
-  const response=await fetch('https://asoboon-staff-roster-api.vercel.app/api/roster?t='+Date.now(),{cache:'no-store',mode:'cors'});
-  if(!response.ok)throw Error('fetch failed');
-  const data=await response.json();
-  if(data.version!==1||!data.counts||typeof data.fetchedAt!=='string'||Object.keys(data.counts).length<28)throw Error('bad counts');
-  for(const pair of Object.values(data.counts)){if(!Array.isArray(pair)||pair.length!==2||pair.some(n=>!Number.isInteger(n)||n<0||n>30))throw Error('bad day');}
-  liveStaffCounts=data.counts;liveStaffSynced=data.fetchedAt;
-  const t=new Date(data.fetchedAt);
-  $('staffUpdated').textContent='原本を確認（取得時刻 '+new Intl.DateTimeFormat('ja-JP',{timeZone:'Asia/Tokyo',month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}).format(t)+'）。人数は予定値です。';
-  renderRoster();
- }catch(e){
-  $('staffUpdated').textContent='最新の出勤人数を取得できません。管理者にご確認ください。';
-  liveStaffSynced='';liveStaffCounts={};renderRoster();
- }
+function loadDailyRoster(){
+ const month=selectedDate.slice(0,7),[year,number]=month.split('-').map(Number);
+ const sheet=number+'月'+String(year).slice(-2);
+ const seq=++rosterFetchSeq;rosterBusy=true;rosterError='';renderRoster();
+ if(rosterTimeout)clearTimeout(rosterTimeout);
+ if(rosterScript){rosterScript.remove();rosterScript=null}
+ const callback='asoboonRosterCB';
+ window[callback]=data=>{
+  if(seq!==rosterFetchSeq)return;
+  clearTimeout(rosterTimeout);
+  if(rosterScript){rosterScript.remove();rosterScript=null;}
+  try{
+   const out=parseMonthSheet(data,month);
+   Object.assign(dailyRoster,out.dates);Object.assign(shiftCounts,out.counts);
+   rosterUpdated[month]=new Date().toISOString();rosterError='';
+  }catch(e){rosterError='パース失敗';}
+  rosterBusy=false;renderRoster();
+ };
+ const params=new URLSearchParams({sheet,range:'C2:AI45',headers:'0',tqx:'out:json;responseHandler:'+callback,'_':String(Date.now())});
+ const script=document.createElement('script');script.src=sheetBase+'?'+params;script.async=true;
+ script.onerror=()=>{if(seq!==rosterFetchSeq)return;clearTimeout(rosterTimeout);rosterError='通信失敗';rosterBusy=false;renderRoster();};
+ rosterScript=script;
+ rosterTimeout=setTimeout(()=>{if(seq===rosterFetchSeq&&rosterBusy){rosterError='時間切れ';rosterBusy=false;if(rosterScript)rosterScript.remove();renderRoster();}},14000);
+ document.head.append(script);
 }
-refreshStaffCounts();setInterval(refreshStaffCounts,300000);
-
-function refreshEmbeddedRoster(){
- const frame=$('staffRosterEmbed');
- if(!frame||document.visibilityState!=='visible'||document.activeElement===frame)return;
- frame.src=frame.dataset.baseUrl+'&updated='+Date.now();
- $('staffRosterRefresh').textContent='勤務表の表示を更新しました（5分ごと）';
-}
-setInterval(refreshEmbeddedRoster,300000);
+loadDailyRoster();
+setInterval(()=>{if(document.visibilityState==='visible')loadDailyRoster()},300000);
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')loadDailyRoster()});
 </script></body></html>
