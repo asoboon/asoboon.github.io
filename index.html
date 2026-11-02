@@ -206,16 +206,16 @@ loadBulletin();
 renderRoster();updateCalendar();renderOperating();
 async function refreshStaffCounts(){
  try{
-  const response=await fetch('./staffing-counts.json?t='+Date.now(),{cache:'no-store'});
+  const response=await fetch('https://asoboon-staff-roster-api.vercel.app/api/roster?t='+Date.now(),{cache:'no-store',mode:'cors'});
   if(!response.ok)throw Error('fetch failed');
   const data=await response.json();
-  if(data.version!==1||!data.counts||typeof data.updatedAt!=='string'||Object.keys(data.counts).length<28)throw Error('bad counts');
+  if(data.version!==1||!data.counts||typeof data.fetchedAt!=='string'||Object.keys(data.counts).length<28)throw Error('bad counts');
   for(const pair of Object.values(data.counts)){if(!Array.isArray(pair)||pair.length!==2||pair.some(n=>!Number.isInteger(n)||n<0||n>30))throw Error('bad day');}
   // Do not overwrite more recently fetched named-roster counts with an older public snapshot.
   if(privateRoster&&privateRoster.sourceHash&&privateRoster.sourceHash!==data.sourceHash)return;
-  liveStaffCounts=data.counts;liveStaffSynced=data.updatedAt;
-  const t=new Date(data.updatedAt);
-  $('staffUpdated').textContent='シフト原本の取得データ（最終同期 '+new Intl.DateTimeFormat('ja-JP',{timeZone:'Asia/Tokyo',month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}).format(t)+'）。人数は予定値です。';
+  liveStaffCounts=data.counts;liveStaffSynced=data.fetchedAt;
+  const t=new Date(data.fetchedAt);
+  $('staffUpdated').textContent='原本を確認（取得時刻 '+new Intl.DateTimeFormat('ja-JP',{timeZone:'Asia/Tokyo',month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}).format(t)+'）。人数は予定値です。';
   renderRoster();
  }catch(e){
   $('staffUpdated').textContent='最新の出勤人数を取得できません。管理者にご確認ください。';
