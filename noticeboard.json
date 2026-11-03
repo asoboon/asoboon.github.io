@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-02",
+  "updatedAt": "2026-11-03",
   "notices": [
+    {
+      "id": "2026-11-03-announcement-bgm-restored",
+      "status": "published",
+      "scope": "public-safe",
+      "priority": "info",
+      "title": "館内アナウンス・BGM機器は復旧しました",
+      "summary": "館内アナウンス機器とBGM機器は復旧済みです。これまでどおり通常運用に戻します。",
+      "action": "スタッフは従来の運用で使用し、異常があれば現場責任者へ報告してください。",
+      "startsOn": "2026-11-03",
+      "expiresOn": "2026-11-17",
+      "verifiedOn": "2026-11-03"
+    },
     {
       "id": "2026-11-04-purchasing-site-transition",
       "status": "published",
