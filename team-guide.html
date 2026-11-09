@@ -22,6 +22,21 @@ main{max-width:980px;margin:auto;padding:25px 20px 75px}.hero{padding:30px 32px 
 .privacy{padding:17px 21px;border-radius:15px;background:#f0f4f0;color:#5d7365;font-size:12px;line-height:1.75}.privacy strong{color:#2f5b42}.footer{text-align:center;color:#94a399;font-size:11px;margin-top:22px;font-weight:800;letter-spacing:.08em}
 @media(max-width:650px){.top{padding:10px 14px;min-height:61px}.back{font-size:11px}main{padding:15px 12px 40px}.hero{border-radius:17px;padding:23px 18px}.hero p{font-size:12px}.tabs{gap:8px;margin:13px 0}.tab{font-size:13px;min-height:56px}.card{padding:19px 15px;border-radius:17px}.choices,.axis-grid,.pair-points{grid-template-columns:1fr}.choice{min-height:85px;padding:14px 15px}.person-grid{grid-template-columns:1fr;gap:10px}.person{padding:14px}.scenario-grid{grid-template-columns:1fr}.primary{width:100%}.actions .primary{width:auto;flex:1}.question-nav .secondary{min-width:100px}.axis-result{min-height:0}.privacy{padding:15px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+
+/* 自己理解・連携のブラッシュアップ */
+.scene-picker{border:1px solid #cde4d5;border-radius:15px;padding:16px;background:#f0f9f2;margin:15px 0}
+.scene-picker label{display:block;font-size:13px;font-weight:900;margin-bottom:7px;color:#275f48}
+.scene-picker select{display:block;width:100%;min-height:48px;border:1px solid #aacbb8;border-radius:10px;background:#fff;color:#214f3e;padding:9px 12px;font:inherit;font-weight:800}
+.scene-picker p{font-size:11px;color:#607869;margin:8px 0 0}
+.three-roles{margin-top:18px;padding:20px;border:1px solid #cde5d5;background:#eff8f1;border-radius:15px}
+.three-roles h3{font-size:17px;margin:0 0 8px;color:#245b45}
+.three-roles>p{font-size:12px;color:#557262;line-height:1.75;margin:0 0 12px}
+.role-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.role-grid label{display:flex;align-items:flex-start;gap:10px;cursor:pointer;border:1px solid #d7e9dc;background:white;border-radius:11px;padding:13px;font-size:12px;line-height:1.65}
+.role-grid input{flex:0 0 auto;width:20px;height:20px;accent-color:#21694f;margin:1px 0 0}
+.role-grid strong{display:block;color:#235945;font-size:13px}
+.three-roles .role-status{margin:13px 0 0;font-size:12px;font-weight:800;color:#296248}
+@media(max-width:700px){.role-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -38,8 +53,8 @@ main{max-width:980px;margin:auto;padding:25px 20px 75px}.hero{padding:30px 32px 
 <a id="tab-team" class="tab" href="#team" aria-selected="false" aria-controls="panel-team">🤝 相性・連携</a>
 </nav>
 <section id="panel-self" aria-labelledby="self-title">
-<div class="card" id="self-intro"><div class="step">01 / 自分について</div><h2 id="self-title">いつもの仕事で、どっちがしっくりくる？</h2>
-<p class="desc">8つの場面から、考え方・進め方の「今の傾向」を整理します。自分に当てはまらない答えがあっても大丈夫。</p>
+<div class="card" id="self-intro"><div class="step">01 / 自分について</div><h2 id="self-title">いつもの仕事で、どんな進め方がしっくりくる？</h2>
+<p class="desc">8つの場面から、考え方・進め方の「今の傾向」を整理します。「どちらも使う」も選べます。答えは状況で変わって大丈夫。</p>
 <button class="primary" type="button" id="start-quiz">8つの質問を始める <span aria-hidden="true">→</span></button>
 <div class="hint"><strong>使い方：</strong>考えすぎず、今の自分に近い方を選んでね。能力や性格を判定するテストではありません。</div>
 </div>
@@ -65,6 +80,13 @@ main{max-width:980px;margin:auto;padding:25px 20px 75px}.hero{padding:30px 32px 
 <p class="desc">自分と相手、それぞれの仕事の進め方を選ぶと、声のかけ方・役割分担・イベント準備のヒントが出ます。相性に点数は付けません。</p>
 <div class="pair-intro"><strong>🤝 2人で使うのがおすすめ。</strong> 相手の傾向は本人と一緒に確認してね。名前の登録も、相手のタイプを勝手に推測することも不要です。</div>
 <div class="person-grid"><div class="person"><h3>🌱 自分の進め方</h3><p>自己理解の回答があれば自動で反映。ここから変更もできます。</p><div id="own-fields"></div></div><div class="person"><h3>🤝 一緒に働く相手</h3><p>本人が選んだ進め方を聞いて、一緒に入力してください。</p><div id="peer-fields"></div></div></div>
+<div class="scene-picker"><label for="team-scene">いま一緒に考えたい場面</label>
+<select id="team-scene" aria-label="連携の場面を選ぶ">
+<option value="daily">👀 普段の声かけ・引き継ぎ</option>
+<option value="event">🎨 イベント準備・企画</option>
+<option value="crowd">🛡️ 混雑・人手不足・安全</option>
+<option value="conflict">💬 意見が分かれたとき</option>
+</select><p>場面に合わせて、行動・役割・相談の言葉を具体化します。</p></div>
 <div class="actions"><button class="primary" id="show-team" type="button">連携のヒントを見つける →</button><button class="secondary" id="reset-team" type="button">選択をクリア</button></div>
 <p class="muted" id="pair-validation" role="status" aria-live="polite"></p>
 </div>
@@ -78,6 +100,15 @@ main{max-width:980px;margin:auto;padding:25px 20px 75px}.hero{padding:30px 32px 
 <div class="scenario"><strong>💬 意見が分かれたら</strong><p>相手の意図を聞き、必ず守る条件と自由に工夫できる部分を分けて話す。</p></div>
 </div>
 <div class="example"><strong>💡 話し始めのひと言</strong><p id="pair-script"></p></div>
+<section class="three-roles" aria-labelledby="three-roles-title">
+<h3 id="three-roles-title">👥 3人で動くときの「30秒確認」</h3>
+<p>2人で考えた内容を3人で実行するなら、タイプではなく、その日の担当・経験・負荷を見て役割を決めよう。</p>
+<div class="role-grid">
+<label><input type="checkbox" class="role-check"> <span><strong>現場の事実</strong> だれが子どもの動き・混雑・遊具の状況を確認する？</span></label>
+<label><input type="checkbox" class="role-check"> <span><strong>安全と判断</strong> だれが人員・定員・危険箇所を確認し、最終判断する？</span></label>
+<label><input type="checkbox" class="role-check"> <span><strong>伝達と引き継ぎ</strong> だれが保護者・スタッフに伝え、いつ共有する？</span></label>
+</div><p class="role-status" id="role-status" aria-live="polite">3項目を役割とセットで確認してみよう。</p>
+</section>
 <div class="actions"><button class="secondary" type="button" id="edit-pair">選択を見直す ↑</button></div>
 </div>
 </section>
@@ -114,8 +145,7 @@ window.addEventListener('hashchange',syncHash);syncHash();
 function answerStyles(){
  return axes.map((axis,i)=>{
   const a=questions.map((q,j)=>q.axis===i?answers[j]:null).filter(v=>v!==null);
-  const left=a.filter(v=>v===0).length;
-  return left===2?'l':left===0?'r':'m';
+  return a.every(v=>v===0)?'l':a.every(v=>v===1)?'r':'m';
  });
 }
 function textNode(tag,text,cls){
@@ -130,7 +160,7 @@ function renderQuiz(){
   const b=document.createElement('span');if(i<=step)b.className='done';$('quiz-progress').append(b);
  }
  $('quiz-choices').replaceChildren();
- questions[step].choices.forEach((v,i)=>{
+ [...questions[step].choices,'どちらも使う・場面で変わる'].forEach((v,i)=>{
   const b=textNode('button',v,'choice');b.type='button';
   b.setAttribute('aria-label','選択肢'+(i+1)+' '+v);
   b.addEventListener('click',()=>{
@@ -179,6 +209,7 @@ $('use-in-team').addEventListener('click',()=>{
  location.hash='#team';$('pair-result').hidden=true;$('pair-validation').textContent='';
  window.scrollTo({top:0,behavior:'smooth'});
 });
+$('team-scene').addEventListener('change',()=>{$('pair-result').hidden=true;});
 $('reset-team').addEventListener('click',()=>{
  for(const s of document.querySelectorAll('#own-fields select,#peer-fields select'))s.value='';
  $('pair-result').hidden=true;$('pair-validation').textContent='';
@@ -203,7 +234,38 @@ $('show-team').addEventListener('click',()=>{
  diff===3?'「守るべき条件と、子どもやスタッフが大切にしたい体験を両方聞かせて」':
  '「今日は同じ見方が多いね。見落としている点がないか、現場の事実をもう一度確認しよう」';
  $('pair-script').textContent=example;
+ const scene=$('team-scene').value;
+ const sceneGuides={
+  daily:{items:[
+   '見たことと推測を分けて「今こうなっています」と30秒で共有する。',
+   '次に必要な手助けを一つ具体化し、担当と引き継ぐ時刻を決める。',
+   '相手の話しやすい方法を確かめてから、要点を復唱する。'
+  ],script:'「今の状況はこれ。まず何を優先しよう？ 私ができることと、引き継ぎ先を決めよう」'},
+  event:{items:[
+   '子どもが「自分で選べること」を目的に置き、予定を詰めすぎない。',
+   '必要人数・対象年齢・所要時間・材料・安全条件を3人で確かめる。',
+   '準備担当・当日の進行・現場を見守る担当を分け、見守りを欠かさない。'
+  ],script:'「子どもにどんな体験を届けたい？ 安全と人数は守って、実現方法を一緒に考えよう」'},
+  crowd:{items:[
+   '危険箇所・子どもの密集・実配置をまず事実で報告する。',
+   '責任者が見守り人数と受入上限を再確認し、必要なら受付・イベントを縮小する。',
+   '誰が遊び場を見守り、誰が受付・保護者に案内するか明確にする。'
+  ],script:'「いま安全上のリスクはここ。見守りを優先して、受入人数と役割を責任者と確認しよう」'},
+  conflict:{items:[
+   '相手の意図と心配していることを、一つずつ本人に聞く。',
+   '変えられない安全条件と、試せる工夫を分ける。',
+   '最終判断者・期限・決定の理由を共有し、あとで振り返る。'
+  ],script:'「まず実現したかったことを教えて。安全上ここは守ろう。そのうえで別の方法を探してみない？」'}
+ };
+ const guide=sceneGuides[scene]||sceneGuides.daily;
+ document.querySelectorAll('#pair-result .scenario p').forEach((p,i)=>{if(guide.items[i])p.textContent=guide.items[i];});
+ $('pair-script').textContent=guide.script+'　'+(own.every((v,i)=>v===peer[i])?'見落としがないか、現場の事実も確かめよう。':'互いの進め方の違いも一言確認しよう。');
  $('pair-result').scrollIntoView({behavior:'smooth',block:'start'});
 });
+$('edit-pair').addEventListener('click',()=>{ $('pair-result').hidden=true; document.querySelector('#panel-team .person-grid').scrollIntoView({behavior:'smooth',block:'start'}); });
+document.querySelectorAll('.role-check').forEach(check=>check.addEventListener('change',()=>{
+ const total=document.querySelectorAll('.role-check:checked').length;
+ $('role-status').textContent=total===3?'3項目を確認できたね。実際の担当・安全判断は当日の責任者と共有してね。':total+' / 3 項目を確認。安全と子どもの体験を最優先に。';
+}));
 </script>
 </body></html>
