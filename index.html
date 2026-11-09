@@ -69,8 +69,16 @@
 .stafflist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .stafflist .person{min-height:64px}.stafflist .person time{overflow-wrap:anywhere}
 .stafflist .empty{grid-column:1/-1}
-.roster-source{font-size:12px;color:#63776b;margin-top:12px}
-.roster-source a{font-weight:800;color:#24694c}
+.roster-source{margin:16px 0 8px}
+.annual-shift-link{display:flex;align-items:center;gap:13px;min-height:68px;padding:13px 18px;border-radius:14px;background:#21694f;color:#fff;text-decoration:none;box-shadow:0 4px 0 #134b39;transition:background .15s ease,transform .15s ease}
+.annual-shift-link:hover{background:#18543e}
+.annual-shift-link:active{transform:translateY(2px);box-shadow:0 2px 0 #134b39}
+.annual-shift-icon{font-size:24px;line-height:1;flex-shrink:0}
+.annual-shift-copy{display:flex;flex:1;flex-direction:column;gap:1px;min-width:0}
+.annual-shift-copy strong{font-size:18px;line-height:1.35;font-weight:950}
+.annual-shift-copy small{font-size:11px;color:#e0f2e7;font-weight:750}
+.annual-shift-arrow{font-size:20px;font-weight:900}
+.roster-source-note{color:#63776b;font-size:11px;line-height:1.55;margin:11px 2px 0}
 @media(max-width:560px){.stafflist{grid-template-columns:1fr}}
 </style></head><body>
 <a class="skip" href="#staffing">出勤人数へ</a>
@@ -82,7 +90,7 @@
 <div class="dateheading" id="staffday" aria-live="polite"></div>
 <div class="metrics" id="metrics"></div><div class="rosterhead"><strong>選んだ日の勤務予定者</strong><small id="roster-status" role="status">最新シフトを取得中…</small></div>
 <div id="stafflist" class="stafflist" aria-live="polite"><div class="empty">読み込み中…</div></div>
-<p class="roster-source"><a href="https://docs.google.com/spreadsheets/d/1exeiFi27B6ImRHsRy_F8zNBr5Exh7I0i/edit" rel="noopener noreferrer" target="_blank">シフト原本を開く ↗</a>　変更は原本と現場の最新指示を優先</p>
+<div class="roster-source"><a class="annual-shift-link" href="https://docs.google.com/spreadsheets/d/1exeiFi27B6ImRHsRy_F8zNBr5Exh7I0i/edit" rel="noopener noreferrer" target="_blank"><span class="annual-shift-icon" aria-hidden="true">📅</span><span class="annual-shift-copy"><strong>年間シフトを見る</strong><small>最新のシフト表を開く</small></span><span class="annual-shift-arrow" aria-hidden="true">↗</span></a><p class="roster-source-note">変更がある場合は、最新のシフト表と現場の指示を優先してください。</p></div>
 <p class="info" id="staffUpdated">最新のシフト集計を読み込み中です。個人別の勤務予定はシフト原本を確認してください。</p>
 </div></section>
 <section class="card boardcard" id="board" aria-labelledby="boardtitle">
