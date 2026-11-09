@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-03",
+  "updatedAt": "2026-11-09",
   "notices": [
+    {
+      "id": "2026-11-09-annual-roster-update",
+      "status": "published",
+      "scope": "public-safe",
+      "priority": "schedule",
+      "title": "年間シフトを更新しました",
+      "summary": "年間シフトを更新しました。出勤日・勤務時間・変更点について、各自最新のシフト表を確認してください。",
+      "action": "以前確認した内容から変更されている可能性があります。必ず最新版を確認し、不明な点があれば管理者へお知らせください。",
+      "startsOn": "2026-11-09",
+      "expiresOn": "2026-11-30",
+      "verifiedOn": "2026-11-09"
+    },
     {
       "id": "2026-11-03-announcement-bgm-restored",
       "status": "published",
