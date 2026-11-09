@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#164a3d">
+<meta name="robots" content="noindex,nofollow">
+<title>自分と仲間を知る｜ASOBooN STAFF HOME</title>
+<style>
+:root{--ink:#193e34;--sub:#63776e;--forest:#174c3d;--green:#21694f;--mint:#dff3e8;--cream:#fff9ee;--bg:#f5f8f4;--paper:#fff;--stroke:#dce8de;--shadow:0 10px 34px #1c493111;--ring:#a36930}
+*,*::before,*::after{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",Meiryo,sans-serif;line-height:1.6}
+[hidden]{display:none!important}button,select{font:inherit}button{cursor:pointer}a{color:inherit}a:focus-visible,button:focus-visible,select:focus-visible{outline:3px solid #bc8b54;outline-offset:3px}
+header{background:var(--forest);color:#fff}.top{max-width:980px;min-height:68px;margin:auto;padding:12px 21px;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{display:flex;align-items:center;gap:11px;text-decoration:none;font-weight:950;line-height:1.25;letter-spacing:.02em}.brand-mark{display:grid;place-items:center;width:39px;height:39px;border-radius:13px;background:#f5d59b;color:var(--forest);font-weight:950}.brand small{display:block;color:#c3e4d3;font-size:10px;letter-spacing:.09em}.back{color:#ebf7f0;text-decoration:none;font-weight:800;font-size:12px;padding:8px 0}
+main{max-width:980px;margin:auto;padding:25px 20px 75px}.hero{padding:30px 32px 27px;border-radius:23px;background:linear-gradient(115deg,#e2f5e9 0%,#f4f9ec 63%,#fff5e3 100%);border:1px solid #d4e8d9;box-shadow:var(--shadow)}.eyebrow{font-size:11px;color:#33735a;font-weight:950;letter-spacing:.12em}.hero h1{font-size:clamp(27px,4.5vw,43px);line-height:1.28;letter-spacing:-.055em;margin:10px 0 10px}.hero p{color:#527065;font-size:14px;max-width:620px;margin:0}.features{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.feature{background:#ffffffbd;border:1px solid #dbe9db;border-radius:50px;color:#416b54;font-size:11px;font-weight:850;padding:5px 11px}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:19px 0}.tab{display:flex;align-items:center;justify-content:center;gap:8px;text-align:center;background:#fff;color:#50695c;border:1px solid var(--stroke);border-radius:14px;min-height:59px;padding:10px 14px;font-weight:900;font-size:15px;text-decoration:none;box-shadow:0 3px 12px #194d3910}.tab[aria-selected=true]{background:var(--forest);border-color:var(--forest);color:#fff;box-shadow:0 5px 16px #15463223}
+.card{padding:25px 26px;background:var(--paper);border:1px solid var(--stroke);border-radius:20px;box-shadow:var(--shadow);margin-bottom:14px}.step{display:inline-flex;align-items:center;gap:7px;color:#2b7853;font-size:12px;font-weight:900}.card h2{font-size:clamp(20px,3.5vw,27px);line-height:1.35;letter-spacing:-.035em;margin:9px 0}.desc{font-size:13px;color:var(--sub);margin:0 0 18px}.primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;border-radius:12px;padding:12px 22px;border:0;background:var(--forest);color:#fff;font-size:15px;font-weight:950;box-shadow:0 4px 0 #10392c}.primary:hover{background:#20624c}.primary:active{transform:translateY(2px);box-shadow:0 2px 0 #10392c}.primary:disabled{opacity:.45;cursor:not-allowed}.secondary{background:#fff;border:1px solid #c8dcd0;border-radius:11px;padding:10px 15px;min-height:45px;font-weight:800;color:#2d6048}.secondary:hover{background:#eff8f1}
+.hint{background:#f5f9f3;border:1px solid #e0eae1;border-radius:12px;padding:11px 13px;font-size:12px;color:#4e695a;margin-top:17px}.hint strong{color:#235642}.actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:16px}
+.progress{display:flex;gap:4px;margin:0 0 18px}.progress span{height:7px;border-radius:10px;background:#e4eee5;flex:1}.progress .done{background:#4eae7e}.question-meta{font-size:12px;font-weight:900;color:#38805d}.question{font-size:clamp(19px,3vw,25px);font-weight:950;line-height:1.4;margin:8px 0 18px}.choices{display:grid;grid-template-columns:1fr 1fr;gap:11px}.choice{text-align:left;background:#fafdfa;color:#224e3b;border:2px solid #dbe9de;border-radius:15px;padding:18px 16px;min-height:116px;font-weight:850;line-height:1.5}.choice::before{display:block;content:'選ぶ';font-size:10px;color:#688776;font-weight:800;margin-bottom:9px}.choice:hover,.choice:focus-visible{background:#eef7ef;border-color:#69a988}.question-nav{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:15px}.muted{font-size:11px;color:#82958a}
+.result-hero{background:linear-gradient(110deg,#e6f6e7,#fff7e8);border:1px solid #dae9d8;border-radius:16px;padding:19px 19px;margin:15px 0}.result-hero strong{font-size:18px}.result-hero p{margin:6px 0 0;font-size:13px;color:#4c6759}.axis-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.axis-result{border:1px solid #dce9dd;border-radius:14px;padding:16px;background:#f9fcf9;min-height:132px}.axis-result .axis-label{font-weight:800;font-size:11px;color:#6a8874}.axis-result h3{font-size:17px;margin:5px 0}.axis-result p{font-size:12px;color:#61756b;margin:0}.practice{background:#fff9ef;border:1px solid #f2e3c9;border-radius:13px;padding:16px;margin-top:16px}.practice strong{font-size:14px}.practice p{font-size:13px;margin:6px 0 0}
+.pair-intro{background:#f3faf5;border:1px solid #d7eadc;border-radius:13px;padding:15px;font-size:12px;color:#4d6a59;margin:12px 0 19px}.person-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.person{min-width:0;background:#f9fcfa;border:1px solid #dfebe2;border-radius:15px;padding:16px}.person h3{font-size:16px;margin:0 0 4px}.person p{font-size:11px;color:var(--sub);margin:0 0 15px}.field{display:block;margin-bottom:13px}.field span{display:block;color:#466454;font-size:11px;font-weight:900;margin-bottom:5px}.field select{width:100%;min-height:45px;border:1px solid #bdd6c6;border-radius:9px;background:white;padding:10px 7px;color:#204936;font-size:12px;font-weight:750}
+.pair-result{margin-top:15px}.pair-points{display:grid;grid-template-columns:1fr 1fr;gap:11px}.pair-point{border:1px solid #dce9e0;background:#fafcf9;border-radius:13px;padding:15px}.pair-point small{font-size:11px;color:#60806a;font-weight:850}.pair-point h3{font-size:15px;margin:6px 0}.pair-point p{font-size:12px;margin:0;color:#566c60}.scenario-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}.scenario{background:#edf7f1;border-radius:12px;padding:14px;border:1px solid #d7e8db}.scenario strong{font-size:13px}.scenario p{font-size:12px;margin:7px 0 0;color:#526d60}.example{padding:15px;border-radius:13px;background:#fff8ed;border:1px solid #f0e3cd;margin-top:14px}.example strong{font-size:13px}.example p{font-size:13px;color:#5b5947;margin:8px 0 0}
+.privacy{padding:17px 21px;border-radius:15px;background:#f0f4f0;color:#5d7365;font-size:12px;line-height:1.75}.privacy strong{color:#2f5b42}.footer{text-align:center;color:#94a399;font-size:11px;margin-top:22px;font-weight:800;letter-spacing:.08em}
+@media(max-width:650px){.top{padding:10px 14px;min-height:61px}.back{font-size:11px}main{padding:15px 12px 40px}.hero{border-radius:17px;padding:23px 18px}.hero p{font-size:12px}.tabs{gap:8px;margin:13px 0}.tab{font-size:13px;min-height:56px}.card{padding:19px 15px;border-radius:17px}.choices,.axis-grid,.pair-points{grid-template-columns:1fr}.choice{min-height:85px;padding:14px 15px}.person-grid{grid-template-columns:1fr;gap:10px}.person{padding:14px}.scenario-grid{grid-template-columns:1fr}.primary{width:100%}.actions .primary{width:auto;flex:1}.question-nav .secondary{min-width:100px}.axis-result{min-height:0}.privacy{padding:15px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header><div class="top"><a class="brand" href="./#learning"><span class="brand-mark">✳</span><span>ASOBooN<small>STAFF HOME / SELF & TEAM</small></span></a><a class="back" href="./#learning">← スタッフホームへ戻る</a></div></header>
+<main>
+<section class="hero" aria-labelledby="hero-title">
+<div class="eyebrow">ASOBooN / PLAY LEADER GUIDE</div>
+<h1 id="hero-title">自分の得意を知って、<br>連携をもっと心地よく。</h1>
+<p>自分の働き方の傾向を整理し、仲間との相談やイベント準備に役立てるための小さなガイド。正解も、相性の順位もありません。</p>
+<div class="features"><span class="feature">⏱ 約3分</span><span class="feature">🔒 回答は保存・送信しません</span><span class="feature">🌱 自分の言葉で選べる</span></div>
+</section>
+<nav class="tabs" aria-label="ガイドの切り替え">
+<a id="tab-self" class="tab" href="#self" aria-selected="true" aria-controls="panel-self">🌱 自分について</a>
+<a id="tab-team" class="tab" href="#team" aria-selected="false" aria-controls="panel-team">🤝 相性・連携</a>
+</nav>
+<section id="panel-self" aria-labelledby="self-title">
+<div class="card" id="self-intro"><div class="step">01 / 自分について</div><h2 id="self-title">いつもの仕事で、どっちがしっくりくる？</h2>
+<p class="desc">8つの場面から、考え方・進め方の「今の傾向」を整理します。自分に当てはまらない答えがあっても大丈夫。</p>
+<button class="primary" type="button" id="start-quiz">8つの質問を始める <span aria-hidden="true">→</span></button>
+<div class="hint"><strong>使い方：</strong>考えすぎず、今の自分に近い方を選んでね。能力や性格を判定するテストではありません。</div>
+</div>
+<div class="card" id="quiz-panel" hidden>
+<div class="step">01 / 自分について</div>
+<div id="quiz-progress" class="progress" aria-hidden="true"></div>
+<div id="question-meta" class="question-meta"></div>
+<div id="question-text" class="question" aria-live="polite"></div>
+<div id="quiz-choices" class="choices"></div>
+<div class="question-nav"><button id="prev-question" class="secondary" type="button">← 前の質問</button><span class="muted">あと少しで自分のヒントが見つかる</span></div>
+</div>
+<div id="self-result" class="card" hidden>
+<div class="step">YOUR STYLE / ふり返り</div><h2>今の自分に合いそうな進め方</h2>
+<div class="result-hero"><strong>決めつけず、使えそうなヒントを持ち帰ろう。</strong><p>下の4つは「今の回答」の傾向。経験や環境で変わるので、自分に当てはまる部分だけ使ってね。</p></div>
+<div class="axis-grid" id="self-axes"></div>
+<div class="practice"><strong>🎯 次の勤務で、ひとつ試そう</strong><p id="self-action"></p></div>
+<div class="actions"><button class="primary" type="button" id="use-in-team">この結果を連携に使う →</button><button class="secondary" type="button" id="restart-quiz">もう一度回答する</button></div>
+</div>
+</section>
+<section id="panel-team" aria-labelledby="team-title" hidden>
+<div class="card">
+<div class="step">02 / 相性・連携</div><h2 id="team-title">違いを「苦手」ではなく「補い合う力」に。</h2>
+<p class="desc">自分と相手、それぞれの仕事の進め方を選ぶと、声のかけ方・役割分担・イベント準備のヒントが出ます。相性に点数は付けません。</p>
+<div class="pair-intro"><strong>🤝 2人で使うのがおすすめ。</strong> 相手の傾向は本人と一緒に確認してね。名前の登録も、相手のタイプを勝手に推測することも不要です。</div>
+<div class="person-grid"><div class="person"><h3>🌱 自分の進め方</h3><p>自己理解の回答があれば自動で反映。ここから変更もできます。</p><div id="own-fields"></div></div><div class="person"><h3>🤝 一緒に働く相手</h3><p>本人が選んだ進め方を聞いて、一緒に入力してください。</p><div id="peer-fields"></div></div></div>
+<div class="actions"><button class="primary" id="show-team" type="button">連携のヒントを見つける →</button><button class="secondary" id="reset-team" type="button">選択をクリア</button></div>
+<p class="muted" id="pair-validation" role="status" aria-live="polite"></p>
+</div>
+<div id="pair-result" class="card pair-result" hidden>
+<div class="step">COLLABORATION / 実践のヒント</div><h2>2人なら、こんな動き方ができそう。</h2>
+<p class="desc">合う・合わないの判定ではありません。現場で役立つ具体的な関わり方を見つけましょう。</p>
+<div id="pair-points" class="pair-points"></div>
+<div class="scenario-grid">
+<div class="scenario"><strong>👀 普段の連携</strong><p>まず現場で見た事実を1つ共有。次に「何が必要か」「誰ができるか」を確認する。</p></div>
+<div class="scenario"><strong>🎨 イベント準備</strong><p>子どもが自分で選べる体験を中心に、安全・必要人数・準備時間・役割を決める。</p></div>
+<div class="scenario"><strong>💬 意見が分かれたら</strong><p>相手の意図を聞き、必ず守る条件と自由に工夫できる部分を分けて話す。</p></div>
+</div>
+<div class="example"><strong>💡 話し始めのひと言</strong><p id="pair-script"></p></div>
+<div class="actions"><button class="secondary" type="button" id="edit-pair">選択を見直す ↑</button></div>
+</div>
+</section>
+<aside class="privacy"><strong>このガイドの約束</strong>　回答内容・名前・組み合わせはサーバーに送信せず、ページを閉じると消えます。仕事の優劣や人事評価には使いません。本人が共有したくない内容は聞かないでください。性格タイプの診断や科学的な相性判定ではなく、現場で会話を始めるための補助ツールです。</aside>
+<p class="footer">ASOBooN STAFF HOME — こどもの体験と、チームの安心のために</p>
+</main>
+<script>
+'use strict';
+const axes=[
+ {id:'talk',title:'考えをまとめる方法',options:['話しながら整理','考えてから共有'],left:'対話からアイデアを育てる',right:'一度整理して伝える',middle:'状況に合わせて使い分ける',leftHint:'話す前に相手の時間も確認すると、伝わりやすい。',rightHint:'考えがまとまるまでに必要な時間を一言伝えると、連携がスムーズ。',middleHint:'場面に応じて口頭とメモを選ぶのが強み。'},
+ {id:'focus',title:'最初に見るところ',options:['全体の目的から','目の前の事実から'],left:'全体の目的をつかむ',right:'目の前の変化に気づく',middle:'目的と現場を往復する',leftHint:'目的を共有したら、実際に起きたことも1件確かめよう。',rightHint:'現場の気づきに「何のためか」を一言添えよう。',middleHint:'子どもの反応と企画の目的をつなげられる。'},
+ {id:'plan',title:'仕事の進め方',options:['段取りを決めてから','小さく試してから'],left:'先に段取りを整える',right:'小さく試して学ぶ',middle:'準備と試行を使い分ける',leftHint:'安全条件を満たしたら、現場の小さな工夫も残しておこう。',rightHint:'試す前に安全・人員・時間の条件を確認しよう。',middleHint:'やる前の準備と、途中の修正のバランスを取れる。'},
+ {id:'value',title:'相談で大切にすること',options:['条件や公平さ','気持ちや体験'],left:'条件と公平さを整理する',right:'本人の気持ちや体験を確かめる',middle:'条件と体験を両方見る',leftHint:'判断理由を伝えたあと、相手が大切にしている点も聞こう。',rightHint:'子どもの体験を守るため、必要な安全条件も言葉にしよう。',middleHint:'安全のルールと子どもの気持ちを同じテーブルに置ける。'}
+];
+const questions=[
+ {axis:0,text:'新しいアイデアを思いついたときは？',choices:['誰かと話しながら広げたい','一度メモしてから共有したい']},
+ {axis:1,text:'子どもの遊びを改善するときは？',choices:['まずどんな体験にしたいか考える','まず現場で起きた場面を確かめる']},
+ {axis:2,text:'イベントを準備するときは？',choices:['先に役割と手順を決めておきたい','条件を確認して小さく試しながら進めたい']},
+ {axis:3,text:'意見をまとめる場面では？',choices:['ルールや公平さを整理したい','本人の気持ちや体験を聞きたい']},
+ {axis:0,text:'急ぎではない相談を持ちかけるときは？',choices:['短く話して方向を合わせたい','要点を整理してから伝えたい']},
+ {axis:1,text:'新しい企画の説明を受けるなら？',choices:['まず目的や全体像を知りたい','まず具体的な例を見てみたい']},
+ {axis:2,text:'予定どおりに進まないときは？',choices:['段取りを組み直して立て直す','安全を見ながら別の方法を試す']},
+ {axis:3,text:'現場の相談を受けたら？',choices:['何が必要条件か整理する','相手がどう感じたかを聞く']}
+];
+const $=id=>document.getElementById(id);
+let answers=Array(questions.length).fill(null),step=0,selfStyles=null;
+function showView(view){
+ const team=view==='team';$('panel-self').hidden=team;$('panel-team').hidden=!team;
+ $('tab-self').setAttribute('aria-selected',String(!team));$('tab-team').setAttribute('aria-selected',String(team));
+ if(team){const first=$('own-fields').querySelector('select');if(first&&!selfStyles)first.focus({preventScroll:true});}
+}
+function syncHash(){showView(location.hash==='#team'?'team':'self')}
+window.addEventListener('hashchange',syncHash);syncHash();
+function answerStyles(){
+ return axes.map((axis,i)=>{
+  const a=questions.map((q,j)=>q.axis===i?answers[j]:null).filter(v=>v!==null);
+  const left=a.filter(v=>v===0).length;
+  return left===2?'l':left===0?'r':'m';
+ });
+}
+function textNode(tag,text,cls){
+ const el=document.createElement(tag);el.textContent=text;if(cls)el.className=cls;return el;
+}
+function renderQuiz(){
+ $('self-intro').hidden=true;$('self-result').hidden=true;$('quiz-panel').hidden=false;
+ $('question-meta').textContent='質問 '+(step+1)+' / '+questions.length;
+ $('question-text').textContent=questions[step].text;
+ $('quiz-progress').replaceChildren();
+ for(let i=0;i<questions.length;i++){
+  const b=document.createElement('span');if(i<=step)b.className='done';$('quiz-progress').append(b);
+ }
+ $('quiz-choices').replaceChildren();
+ questions[step].choices.forEach((v,i)=>{
+  const b=textNode('button',v,'choice');b.type='button';
+  b.setAttribute('aria-label','選択肢'+(i+1)+' '+v);
+  b.addEventListener('click',()=>{
+   answers[step]=i;
+   if(step<questions.length-1){step++;renderQuiz();}else{showSelfResult();}
+  });
+  $('quiz-choices').append(b);
+ });
+ $('prev-question').disabled=step===0;
+}
+function labelFor(axis,style){
+ return style==='l'?axis.left:style==='r'?axis.right:axis.middle;
+}
+function tipFor(axis,style){
+ return style==='l'?axis.leftHint:style==='r'?axis.rightHint:axis.middleHint;
+}
+function showSelfResult(){
+ selfStyles=answerStyles();$('quiz-panel').hidden=true;$('self-result').hidden=false;$('self-axes').replaceChildren();
+ axes.forEach((axis,i)=>{
+  const card=document.createElement('article');card.className='axis-result';
+  card.append(textNode('span',axis.title,'axis-label'),textNode('h3',labelFor(axis,selfStyles[i])),textNode('p',tipFor(axis,selfStyles[i])));
+  $('self-axes').append(card);
+ });
+ const action=selfStyles[2]==='r'?'小さく試す前に、安全・人員・時間の確認をひとつ入れる。':selfStyles[0]==='r'?'考えたことを短い一文にして、次の勤務で仲間と共有してみる。':'現場で見た子どもの反応をひとつ持ち寄り、次の工夫を一緒に考える。';
+ $('self-action').textContent=action;
+ $('self-result').scrollIntoView({behavior:'smooth',block:'start'});
+}
+$('start-quiz').addEventListener('click',()=>{answers=Array(8).fill(null);step=0;renderQuiz();});
+$('restart-quiz').addEventListener('click',()=>{answers=Array(8).fill(null);step=0;renderQuiz();});
+$('prev-question').addEventListener('click',()=>{if(step>0){step--;renderQuiz();}});
+function buildFields(target,prefix){
+ axes.forEach((axis,i)=>{
+  const lab=document.createElement('label');lab.className='field';
+  lab.append(textNode('span',axis.title));
+  const sel=document.createElement('select');sel.id=prefix+'-'+i;sel.setAttribute('aria-label',(prefix==='own'?'自分':'相手')+'：'+axis.title);
+  [['','選んでください'],['l',axis.options[0]],['m','どちらも使う'],['r',axis.options[1]]].forEach(([value,title])=>{
+   const opt=document.createElement('option');opt.value=value;opt.textContent=title;sel.append(opt);
+  });
+  sel.addEventListener('change',()=>{$('pair-result').hidden=true;$('pair-validation').textContent='';});
+  lab.append(sel);target.append(lab);
+ });
+}
+buildFields($('own-fields'),'own');buildFields($('peer-fields'),'peer');
+$('use-in-team').addEventListener('click',()=>{
+ if(selfStyles)selfStyles.forEach((v,i)=>{$('own-'+i).value=v;});
+ location.hash='#team';$('pair-result').hidden=true;$('pair-validation').textContent='';
+ window.scrollTo({top:0,behavior:'smooth'});
+});
+$('reset-team').addEventListener('click',()=>{
+ for(const s of document.querySelectorAll('#own-fields select,#peer-fields select'))s.value='';
+ $('pair-result').hidden=true;$('pair-validation').textContent='';
+});
+$('show-team').addEventListener('click',()=>{
+ const own=axes.map((_,i)=>$('own-'+i).value),peer=axes.map((_,i)=>$('peer-'+i).value);
+ const blank=[...document.querySelectorAll('#own-fields select,#peer-fields select')].find(s=>!s.value);
+ if(blank){$('pair-validation').textContent='自分と相手の4項目を選んでください。';blank.focus();return;}
+ $('pair-validation').textContent='';$('pair-result').hidden=false;$('pair-points').replaceChildren();
+ axes.forEach((axis,i)=>{
+  const same=own[i]===peer[i],neutral=own[i]==='m'||peer[i]==='m';
+  const headline=same?'大切にするところが近い':neutral?'幅を持って相談しやすい':'違う視点を持ち寄れる';
+  const line=same?'進めやすい分、別の視点をひとつ意識してみよう。':neutral?'まず今回はどちらで進めるか、短く合意を。':'最初に互いの良さを認め、安全と体験を共通の目的にしよう。';
+  const card=document.createElement('div');card.className='pair-point';
+  card.append(textNode('small',axis.title),textNode('h3',headline),textNode('p',line+' 自分：'+labelFor(axis,own[i])+'／相手：'+labelFor(axis,peer[i])+'。'));
+  $('pair-points').append(card);
+ });
+ const diff=own.findIndex((v,i)=>v!==peer[i]);
+ const example=diff===0?'「私はこういう順番が話しやすいんだけど、そちらはどう？ 先に短く話すか、メモにまとめるか選ぼう」':
+ diff===1?'「目的と、実際に見た子どもの様子をそれぞれ一つ出してから決めよう」':
+ diff===2?'「安全と人数の条件だけ先に決めて、まず小さく試せるところを選ぼう」':
+ diff===3?'「守るべき条件と、子どもやスタッフが大切にしたい体験を両方聞かせて」':
+ '「今日は同じ見方が多いね。見落としている点がないか、現場の事実をもう一度確認しよう」';
+ $('pair-script').textContent=example;
+ $('pair-result').scrollIntoView({behavior:'smooth',block:'start'});
+});
+</script>
+</body></html>
