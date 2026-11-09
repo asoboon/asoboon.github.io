@@ -37,6 +37,35 @@ main{max-width:980px;margin:auto;padding:25px 20px 75px}.hero{padding:30px 32px 
 .role-grid strong{display:block;color:#235945;font-size:13px}
 .three-roles .role-status{margin:13px 0 0;font-size:12px;font-weight:800;color:#296248}
 @media(max-width:700px){.role-grid{grid-template-columns:1fr}}
+
+/* 正本に沿った認知機能／2人・3人連携。個人データをページに埋め込まない */
+.type-guide{border:1px solid #cde3d3;background:#f7fbf6;border-radius:18px;padding:19px;margin:19px 0;box-shadow:0 5px 15px #174c3d09}
+.type-guide-head h3{font-size:20px;line-height:1.5;margin:7px 0 9px;color:#21563e}
+.type-guide .desc{margin:8px 0 15px}
+.type-guide .primary{margin:7px 0 8px;min-height:48px}
+.type-label{display:block;font-size:12px;font-weight:900;line-height:1.9;color:#385f4b}
+.type-label select{width:100%;display:block;min-height:48px;border:1px solid #a9ccb9;border-radius:11px;padding:9px 11px;background:#fff;color:#254e3e;font-weight:800}
+.type-select-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin:13px 0}
+.type-select-grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.mini-note{font-size:11px;line-height:1.8;color:#677e6e;margin:9px 0 4px}
+.type-output{margin-top:16px;padding-top:14px;border-top:1px solid #d5e7d8}
+.type-output h4{font-size:17px;color:#235b46;margin:8px 0}
+.type-output .type-line{font-weight:850;color:#3e6f53;font-size:12px;margin:10px 0}
+.type-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.type-summary.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.type-mini{border:1px solid #d8e8db;border-radius:12px;background:white;padding:12px;font-size:12px;line-height:1.75}
+.type-mini strong{display:block;font-size:13px;color:#285e46;margin-bottom:4px}
+.type-mini p{margin:4px 0;color:#506b58}
+.type-practice{background:#fff9ed;border:1px solid #ecdcbf;border-radius:13px;padding:15px;margin:12px 0;font-size:12px;line-height:1.9}
+.type-practice strong{color:#6f562f;display:block;font-size:13px;margin-bottom:4px}
+.type-practice p{margin:4px 0 7px}
+.type-practice ul{margin:5px 0 0;padding-left:19px}
+.type-practice li{margin:4px 0}
+.type-readout{border-left:4px solid #73aa8b;margin:10px 0;padding:8px 12px;background:#fff;border-radius:6px;font-size:12px;line-height:1.9}
+.type-readout strong{display:block;color:#275842;font-size:13px}
+.type-details{margin-top:16px;border:1px dashed #b8d3c0;border-radius:14px;padding:12px;background:#fff}
+.type-details summary{cursor:pointer;color:#286349;font-size:13px;font-weight:900;padding:7px}
+@media(max-width:650px){.type-guide{padding:16px 12px}.type-guide-head h3{font-size:18px}.type-summary,.type-summary.two,.type-select-grid,.type-select-grid.three{grid-template-columns:1fr}.type-guide .primary{width:100%}}
 </style>
 </head>
 <body>
@@ -57,6 +86,13 @@ main{max-width:980px;margin:auto;padding:25px 20px 75px}.hero{padding:30px 32px 
 <p class="desc">8つの場面から、考え方・進め方の「今の傾向」を整理します。「どちらも使う」も選べます。答えは状況で変わって大丈夫。</p>
 <button class="primary" type="button" id="start-quiz">8つの質問を始める <span aria-hidden="true">→</span></button>
 <div class="hint"><strong>使い方：</strong>考えすぎず、今の自分に近い方を選んでね。能力や性格を判定するテストではありません。</div>
+<div class="type-guide" id="self-type-guide">
+<div class="type-guide-head"><span class="step">資料をもとに深掘り</span><h3>🧠 主機能・補助機能・劣等機能を知る</h3></div>
+<p class="desc">元資料の「11名｜主・補・劣等」と「8機能の読み方」をもとに、考え方を3つの視点で読み解けます。タイプが分からなくても、上の8問だけで使えます。</p>
+<label class="type-label" for="self-type">自分で選ぶ4文字タイプ <select id="self-type"><option value="">タイプを選ぶ（任意）</option><option value="ENTJ">ENTJ</option><option value="INFJ">INFJ</option><option value="ESFP">ESFP</option><option value="ISFP">ISFP</option><option value="ISFJ">ISFJ</option><option value="INTJ">INTJ</option><option value="ENFJ">ENFJ</option><option value="INFP">INFP</option></select></label>
+<p class="mini-note">資料掲載の8タイプから選べます。スタッフ名・個人の診断結果は表示しません。A/Tは認知機能と別の追加指標なので省略しています。</p>
+<div id="self-type-result" class="type-output" hidden aria-live="polite"></div>
+</div>
 </div>
 <div class="card" id="quiz-panel" hidden>
 <div class="step">01 / 自分について</div>
@@ -79,7 +115,32 @@ main{max-width:980px;margin:auto;padding:25px 20px 75px}.hero{padding:30px 32px 
 <div class="step">02 / 相性・連携</div><h2 id="team-title">違いを「苦手」ではなく「補い合う力」に。</h2>
 <p class="desc">自分と相手、それぞれの仕事の進め方を選ぶと、声のかけ方・役割分担・イベント準備のヒントが出ます。相性に点数は付けません。</p>
 <div class="pair-intro"><strong>🤝 2人で使うのがおすすめ。</strong> 相手の傾向は本人と一緒に確認してね。名前の登録も、相手のタイプを勝手に推測することも不要です。</div>
-<div class="person-grid"><div class="person"><h3>🌱 自分の進め方</h3><p>自己理解の回答があれば自動で反映。ここから変更もできます。</p><div id="own-fields"></div></div><div class="person"><h3>🤝 一緒に働く相手</h3><p>本人が選んだ進め方を聞いて、一緒に入力してください。</p><div id="peer-fields"></div></div></div>
+
+<div class="type-guide" id="cognitive-team">
+<div class="type-guide-head"><span class="step">① 2人を選ぶ｜元資料の進め方</span><h3>🤝 2人の考え方を並べてみる</h3></div>
+<p class="desc">主・補助・劣等機能から「共通点・違い・補い方」「仮の役割」「30秒確認」を表示します。本人が任意に選んだタイプで一緒に確認してください。</p>
+<div class="type-select-grid">
+<label class="type-label" for="pair-type-a">1人目のタイプ<select id="pair-type-a"><option value="">タイプを選ぶ（任意）</option><option value="ENTJ">ENTJ</option><option value="INFJ">INFJ</option><option value="ESFP">ESFP</option><option value="ISFP">ISFP</option><option value="ISFJ">ISFJ</option><option value="INTJ">INTJ</option><option value="ENFJ">ENFJ</option><option value="INFP">INFP</option></select></label>
+<label class="type-label" for="pair-type-b">2人目のタイプ<select id="pair-type-b"><option value="">タイプを選ぶ（任意）</option><option value="ENTJ">ENTJ</option><option value="INFJ">INFJ</option><option value="ESFP">ESFP</option><option value="ISFP">ISFP</option><option value="ISFJ">ISFJ</option><option value="INTJ">INTJ</option><option value="ENFJ">ENFJ</option><option value="INFP">INFP</option></select></label>
+</div>
+<button type="button" class="primary" id="show-type-pair">2人の連携ヒントを読む →</button>
+<p class="mini-note">氏名の記録・送信はありません。これは相性の◎○△×や人物の評価ではなく、会話の準備資料です。</p>
+<div id="type-pair-result" class="type-output" hidden aria-live="polite"></div>
+</div>
+<div class="type-guide" id="trio">
+<div class="type-guide-head"><span class="step">② 3人を選ぶ｜元資料の進め方</span><h3>👥 進行・現場・案内を分けて考える</h3></div>
+<p class="desc">3人の考え方を並べ、共通点と補完視点を確認します。役割を性格で決めず、資格・経験・希望・その日の負荷で話し合いましょう。</p>
+<div class="type-select-grid three">
+<label class="type-label" for="trio-type-a">1人目<select id="trio-type-a"><option value="">タイプを選ぶ（任意）</option><option value="ENTJ">ENTJ</option><option value="INFJ">INFJ</option><option value="ESFP">ESFP</option><option value="ISFP">ISFP</option><option value="ISFJ">ISFJ</option><option value="INTJ">INTJ</option><option value="ENFJ">ENFJ</option><option value="INFP">INFP</option></select></label>
+<label class="type-label" for="trio-type-b">2人目<select id="trio-type-b"><option value="">タイプを選ぶ（任意）</option><option value="ENTJ">ENTJ</option><option value="INFJ">INFJ</option><option value="ESFP">ESFP</option><option value="ISFP">ISFP</option><option value="ISFJ">ISFJ</option><option value="INTJ">INTJ</option><option value="ENFJ">ENFJ</option><option value="INFP">INFP</option></select></label>
+<label class="type-label" for="trio-type-c">3人目<select id="trio-type-c"><option value="">タイプを選ぶ（任意）</option><option value="ENTJ">ENTJ</option><option value="INFJ">INFJ</option><option value="ESFP">ESFP</option><option value="ISFP">ISFP</option><option value="ISFJ">ISFJ</option><option value="INTJ">INTJ</option><option value="ENFJ">ENFJ</option><option value="INFP">INFP</option></select></label>
+</div>
+<button type="button" class="primary" id="show-type-trio">3人の連携ヒントを読む →</button>
+<p class="mini-note">同じタイプでも別人のことがあります。各人の実際の希望と技能を確認してください。</p>
+<div id="type-trio-result" class="type-output" hidden aria-live="polite"></div>
+</div>
+<details class="type-details"><summary>タイプが分からないときは、仕事の進め方から比べる</summary>
+<p class="desc">タイプに頼らず、普段の考え方や連絡方法について本人同士で話したいときはこちら。</p><div class="person-grid"><div class="person"><h3>🌱 自分の進め方</h3><p>自己理解の回答があれば自動で反映。ここから変更もできます。</p><div id="own-fields"></div></div><div class="person"><h3>🤝 一緒に働く相手</h3><p>本人が選んだ進め方を聞いて、一緒に入力してください。</p><div id="peer-fields"></div></div></div>
 <div class="scene-picker"><label for="team-scene">いま一緒に考えたい場面</label>
 <select id="team-scene" aria-label="連携の場面を選ぶ">
 <option value="daily">👀 普段の声かけ・引き継ぎ</option>
@@ -90,6 +151,7 @@ main{max-width:980px;margin:auto;padding:25px 20px 75px}.hero{padding:30px 32px 
 <div class="actions"><button class="primary" id="show-team" type="button">連携のヒントを見つける →</button><button class="secondary" id="reset-team" type="button">選択をクリア</button></div>
 <p class="muted" id="pair-validation" role="status" aria-live="polite"></p>
 </div>
+</details>
 <div id="pair-result" class="card pair-result" hidden>
 <div class="step">COLLABORATION / 実践のヒント</div><h2>2人なら、こんな動き方ができそう。</h2>
 <p class="desc">合う・合わないの判定ではありません。現場で役立つ具体的な関わり方を見つけましょう。</p>
@@ -140,7 +202,7 @@ function showView(view){
  $('tab-self').setAttribute('aria-selected',String(!team));$('tab-team').setAttribute('aria-selected',String(team));
  if(team){const first=$('own-fields').querySelector('select');if(first&&!selfStyles)first.focus({preventScroll:true});}
 }
-function syncHash(){showView(location.hash==='#team'?'team':'self')}
+function syncHash(){showView(['#team','#trio'].includes(location.hash)?'team':'self')}
 window.addEventListener('hashchange',syncHash);syncHash();
 function answerStyles(){
  return axes.map((axis,i)=>{
@@ -267,5 +329,115 @@ document.querySelectorAll('.role-check').forEach(check=>check.addEventListener('
  const total=document.querySelectorAll('.role-check:checked').length;
  $('role-status').textContent=total===3?'3項目を確認できたね。実際の担当・安全判断は当日の責任者と共有してね。':total+' / 3 項目を確認。安全と子どもの体験を最優先に。';
 }));
+
+/* 認知機能の名称・説明・現場例は、龍介専用の原本「8機能の読み方」「11名｜主・補・劣等」の一般化版。
+   実名／個別ストレス推測／記録MBTIの名寄せは公開しない。*/
+const typeMeta={
+ Te:{name:'外向的思考',meaning:'目的・優先順位・段取りを外の基準で整理する',example:'イベントの準備順や安全条件を決める',ask:'先に何を決めると動きやすい？'},
+ Ni:{name:'内向的直観',meaning:'出来事のつながりや、この先の意味を見通す',example:'子どもの遊びが今後どう広がるか考える',ask:'その先にどんなことが起こりそう？'},
+ Fe:{name:'外向的感情',meaning:'周囲の人の受け止め方や安心を考える',example:'保護者・子ども・スタッフの気持ちに配慮する',ask:'参加しづらい人はいないかな？'},
+ Se:{name:'外向的感覚',meaning:'今の音・表情・動き・変化をつかむ',example:'ボールプールで子どもの動きと混み方を見守る',ask:'今この場で何が起きてる？'},
+ Fi:{name:'内向的感情',meaning:'一人ひとりが大切にしたいことや価値観を確かめる',example:'子ども自身の「やりたい」を優先する',ask:'本人はどうしたい？'},
+ Si:{name:'内向的感覚',meaning:'経験・具体的な記憶・慣れた手順を参照する',example:'過去の案内方法と今日の混雑を比べる',ask:'以前の例で役立つものは？'},
+ Ne:{name:'外向的直観',meaning:'別の可能性や新しい組み合わせを見つける',example:'遊具を新しい使い方で楽しむ案を考える',ask:'ほかに安全な方法はある？'},
+ Ti:{name:'内向的思考',meaning:'考えの前提や仕組みの筋道を確かめる',example:'ルールがなぜ必要か説明の整合性を見る',ask:'その判断の理由は何？'}
+};
+const typeStack={
+ ENTJ:['Te','Ni','Fi'], INFJ:['Ni','Fe','Se'], ESFP:['Se','Fi','Ni'],
+ ISFP:['Fi','Se','Te'], ISFJ:['Si','Fe','Ne'], INTJ:['Ni','Te','Se'],
+ ENFJ:['Fe','Ni','Ti'], INFP:['Fi','Ne','Te']
+};
+const typeCheck={
+ Fi:'成果だけでなく、本人や子どもが大切にしたい気持ちも確かめる。',
+ Se:'予想だけでなく、いまの音・動き・混雑といった事実を確かめる。',
+ Te:'目的・手順・判断者・期限を見える形にしてみる。',
+ Ni:'いまの楽しさだけでなく、この後の展開と安全上の見通しも確認する。',
+ Ne:'以前の方法以外にも安全な選択肢がないか確かめる。',
+ Ti:'なぜその対応が必要か、前提と理由も確かめる。'
+};
+const makeText=(tag,text,cls)=>{const el=document.createElement(tag);el.textContent=text;if(cls)el.className=cls;return el};
+function makeCard(target,title,body,cls='type-readout'){
+ const box=document.createElement('div');box.className=cls;
+ box.append(makeText('strong',title),makeText('p',body));target.append(box);return box;
+}
+function typeName(fn){return fn+'｜'+typeMeta[fn].name}
+function mkRole(fn,heading){return heading+' '+typeName(fn)+'：'+typeMeta[fn].meaning}
+function profileSelected(){
+ const v=$('self-type').value,box=$('self-type-result');
+ box.replaceChildren();box.hidden=!typeStack[v];if(!typeStack[v])return;
+ const [dom,aux,inf]=typeStack[v];
+ box.append(makeText('h4',v+'の3つの視点（タイプ理論上）'));
+ const summary=makeText('div','','type-summary');box.append(summary);
+ [ ['主機能｜ふだんの軸',dom],['補助機能｜軸を支える',aux],['劣等機能｜意識するヒント',inf] ].forEach(([label,code])=>{
+  makeCard(summary,label+' '+typeName(code),
+   (label.startsWith('劣等')?typeCheck[code]:typeMeta[code].meaning),'type-mini');
+ });
+ makeCard(box,'ASOBooNで試せること',typeMeta[dom].example+'。一方で '+typeCheck[inf],'type-practice');
+ makeCard(box,'仲間に聞いてみるひと言','「'+typeMeta[aux].ask+'」 そして「'+typeMeta[inf].ask+'」','type-readout');
+ box.append(makeText('p','※これは性格・能力・ストレス反応の診断ではありません。どの視点も練習・経験で使えます。','mini-note'));
+ if(!$('pair-type-a').value)$('pair-type-a').value=v;
+}
+$('self-type').addEventListener('change',profileSelected);
+function overlap(a,b){
+ const first=[a[0],a[1]],second=[b[0],b[1]];
+ return first.filter(x=>second.includes(x));
+}
+function lowFunctionCheck(infA,infB){
+ const pair=[infA,infB].sort().join('+');
+ if(infA===infB){
+  return infA==='Se'?'同じSe：現場の変化を誰が直接確認し、誰に伝えるか決める。':
+   infA==='Te'?'同じTe：誰がいつ最終決定し、次の担当に引き継ぐか決める。':
+   '共通する確認視点があるため、担当の抜けを防ぐように事実確認を分ける。';
+ }
+ if(pair==='Fi+Te')return 'Fi×Te：本人の希望・納得と、必要な期限・手順を両方言葉にする。';
+ if(pair==='Ni+Se')return 'Se×Ni：今の現場事実と、その先の見通しを分けて共有する。';
+ if(pair==='Ne+Te')return 'Ne×Te：別案を考える時間と決定を終える時刻を先に合意する。';
+ return '本人が大切にしていること・いま確認できた事実・次の判断を分けて共有する。';
+}
+function renderTypePair(){
+ const a=$('pair-type-a').value,b=$('pair-type-b').value,box=$('type-pair-result');
+ box.replaceChildren();box.hidden=false;
+ if(!typeStack[a]||!typeStack[b]){box.append(makeText('p','2人のタイプを選んでください。','mini-note'));return;}
+ const ta=typeStack[a],tb=typeStack[b],common=overlap(ta,tb);
+ box.append(makeText('h4',a+' × '+b+'｜2人の連携'));
+ const summary=makeText('div','','type-summary two');box.append(summary);
+ makeCard(summary,'1人目｜'+a,'主 '+typeName(ta[0])+' ／ 補 '+typeName(ta[1])+' ／ 劣等 '+typeName(ta[2]),'type-mini');
+ makeCard(summary,'2人目｜'+b,'主 '+typeName(tb[0])+' ／ 補 '+typeName(tb[1])+' ／ 劣等 '+typeName(tb[2]),'type-mini');
+ makeCard(box,'共通する見方',common.length?common.map(typeName).join('、')+'。同じ入口でも受け止め方は本人それぞれ。':'主・補助機能に共通する入口はありません。違いを会話で確かめる材料に。');
+ makeCard(box,'補い合える視点',a+'：'+typeMeta[ta[0]].meaning+'。'+b+'：'+typeMeta[tb[0]].meaning+'。二つを持ち寄って考えよう。');
+ makeCard(box,'⚠ 意識すると役立つ確認',lowFunctionCheck(ta[2],tb[2]));
+ makeCard(box,'🧭 仮の役割を決める','①進行・段取り ②現場事実・情報共有 ③困ったときの相談先。タイプだけで割り振らず、本人の希望・経験・当日の負荷で調整。','type-practice');
+ makeCard(box,'30秒の確認','「今確認できた現場の事実は？」「本人は何を大切にしたい？」「誰がいつ判断して共有する？」正式な安全責任者も確認。','type-practice');
+ makeCard(box,'話し始めのひと言','「'+typeMeta[ta[0]].ask+'」 → 「'+typeMeta[tb[0]].ask+'」');
+ box.append(makeText('p','※相性の良し悪しや仕事の効率を予測するものではありません。','mini-note'));
+}
+$('show-type-pair').addEventListener('click',renderTypePair);
+['pair-type-a','pair-type-b'].forEach(id=>$(id).addEventListener('change',()=>{$('type-pair-result').hidden=true;}));
+function renderTypeTrio(){
+ const ids=['trio-type-a','trio-type-b','trio-type-c'];
+ const selected=ids.map(id=>$(id).value),box=$('type-trio-result');box.replaceChildren();box.hidden=false;
+ if(!selected.every(v=>typeStack[v])){box.append(makeText('p','3人のタイプを選んでください。','mini-note'));return;}
+ box.append(makeText('h4',selected.join(' × ')+'｜3人の連携'));
+ const cards=makeText('div','','type-summary');box.append(cards);
+ selected.forEach((t,i)=>{const [d,a,f]=typeStack[t];
+  makeCard(cards,(i+1)+'人目｜'+t,'主 '+typeName(d)+' ／ 補 '+typeName(a)+' ／ 劣等 '+typeName(f),'type-mini');
+ });
+ const shared=[];
+ for(let i=0;i<3;i++)for(let j=i+1;j<3;j++){
+  const common=overlap(typeStack[selected[i]],typeStack[selected[j]]);
+  if(common.length)shared.push((i+1)+'人目×'+(j+1)+'人目：'+common.join('・'));
+ }
+ makeCard(box,'共通する視点',shared.length?shared.join(' ／ ')+'。共通点があっても、本人の考えを聞いて確認。':'主・補助機能の共通点は少なめ。異なる視点を持ち寄るきっかけに。');
+ const core=[...new Set(selected.flatMap(t=>typeStack[t].slice(0,2)))];
+ makeCard(box,'補い合う視点',core.map(f=>f+'＝'+typeMeta[f].meaning).join(' ／ '));
+ makeCard(box,'🧭 3つの役割を仮置き','①進行・記録：開始条件・段取り・判断者を整理。②現場の事実：子ども・設備・混雑の状況を短く報告。③親子・仲間への案内：説明を統一し、困りごとを拾う。希望・経験・権限・負荷を見て役割を決め直す。','type-practice');
+ const checks=[...new Set(selected.map(t=>typeStack[t][2]))];
+ makeCard(box,'劣等機能の重なり（理論上）',selected.map((t,i)=>(i+1)+'人目 '+t+'：'+typeStack[t][2]).join(' ／ ')+(checks.length<3?'。同じ確認視点が抜けていないか担当を定めよう。':'。それぞれ異なる視点を補おう。'));
+ makeCard(box,'30秒の対策','「本人は何を大切にしたい？」「今確認できた現場の事実は？」「次にどう変わりそう？」→正式な安全判断者と引き継ぎ先を確認。','type-practice');
+ makeCard(box,'3人が消耗・混乱したら','0–1分：開始判断をいったん保留、案内を統一し準備進度・待機人数・見込み時刻を確認。1–2分：余裕がなければ別スタッフや責任者に見守り・安全判断を引き継ぐ。2–3分：最終判断者を明確にし、保護者には確認済みの事実だけ伝える。','type-practice');
+ box.append(makeText('p','※仮想場面を使った危険防止の手順です。特定スタッフの言動・ストレス反応を予測したものではありません。','mini-note'));
+}
+$('show-type-trio').addEventListener('click',renderTypeTrio);
+['trio-type-a','trio-type-b','trio-type-c'].forEach(id=>$(id).addEventListener('change',()=>{$('type-trio-result').hidden=true;}));
 </script>
 </body></html>
