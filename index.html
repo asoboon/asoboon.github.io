@@ -25,6 +25,13 @@
 .learnicon{display:grid;place-items:center;width:43px;height:43px;flex:0 0 43px;border-radius:12px;background:#fff;color:#555b89}
 .learncard:last-child .learnicon{color:#9a734e}
 .learncard h3{font-size:17px;font-weight:950;margin:1px 0 5px;color:#263e35;line-height:1.45}
+.learnintro{font-size:12px;color:#688073;margin:-3px 0 13px;line-height:1.65}
+.learncard-link{text-decoration:none;color:inherit;cursor:pointer;position:relative;transition:transform .15s ease,border-color .15s ease,box-shadow .15s ease;min-height:162px}
+.learncard-link:hover{transform:translateY(-2px);border-color:#85b8a0;box-shadow:0 7px 20px #184f3016}
+.learncard-link:active{transform:translateY(0)}
+.learncta{display:inline-flex;align-items:center;gap:6px;margin-top:3px;font-size:12px;font-weight:950;color:#21694f;background:#fff;border:1px solid #cbe0d1;padding:6px 11px;border-radius:100px}
+.learncard-link:last-child .learncta{color:#8b6131;border-color:#eedaca}
+@media(prefers-reduced-motion:reduce){.learncard-link{transition:none}}
 .learncard p{font-size:12px;color:#617267;margin:0 0 12px;line-height:1.55}
 .learnflag{display:inline-flex;font-size:11px;font-weight:800;color:#6d8273;border:1px solid #dce4dd;background:#ffffffa6;border-radius:100px;padding:3px 9px}
 @media(max-width:700px){.boardhead{padding:16px 15px}.boardhead h2,.learnsection h2{font-size:18px}.boardblank{margin:0 15px 16px;min-height:85px}.learncards{gap:9px}.learncard{padding:15px 12px;gap:9px;flex-direction:column;min-height:155px}.learncard h3{font-size:15px}.learncard p{font-size:11px}.learnicon{width:39px;height:39px;flex-basis:39px}}
@@ -103,9 +110,10 @@
 <div class="actionwrap"><a class="actionlink" href="https://docs.google.com/forms/d/e/1FAIpQLSewoLk8Pcr8KC1hmIs2enEcnG1HOHOnhgCp7WF_VD5g6tWBPA/viewform?usp=dialog" target="_blank" rel="noopener noreferrer">✎　シフト希望を入力する　↗</a></div>
 <section class="learnsection" id="learning" aria-labelledby="learningtitle">
 <h2 id="learningtitle">自分と仲間を知る</h2>
+<p class="learnintro">得意な関わり方を見つけ、毎日の連携に活かそう。回答は保存・送信されません。</p>
 <div class="learncards">
-<article class="learncard" aria-label="自分について、準備中"><span class="learnicon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4.5 21v-2.5c0-3.3 3.3-5.5 7.5-5.5s7.5 2.2 7.5 5.5V21"/></svg></span><div><h3>自分について</h3><p>自分の特徴や得意なことを知る</p><span class="learnflag">準備中</span></div></article>
-<article class="learncard" aria-label="相性と連携、準備中"><span class="learnicon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="3"/><circle cx="17" cy="8" r="3"/><path d="M2.5 19c0-3 2-5 5.5-5 2 0 3.5.7 4.4 2M21.5 19c0-3-2-5-5.5-5-2.2 0-3.8.8-4.7 2.3"/></svg></span><div><h3>相性・連携</h3><p>仲間との関わり方を知る</p><span class="learnflag">準備中</span></div></article>
+<a class="learncard learncard-link" href="./team-guide.html#self" aria-label="自分について・自己理解ガイドを開く"><span class="learnicon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4.5 21v-2.5c0-3.3 3.3-5.5 7.5-5.5s7.5 2.2 7.5 5.5V21"/></svg></span><div><h3>自分について</h3><p>8つの質問で、自分らしい進め方と明日からのヒントを見つける。</p><span class="learncta">自分のガイドを開く ↗</span></div></a>
+<a class="learncard learncard-link" href="./team-guide.html#team" aria-label="相性・連携ガイドを開く"><span class="learnicon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="3"/><circle cx="17" cy="8" r="3"/><path d="M2.5 19c0-3 2-5 5.5-5 2 0 3.5.7 4.4 2M21.5 19c0-3-2-5-5.5-5-2.2 0-3.8.8-4.7 2.3"/></svg></span><div><h3>相性・連携</h3><p>お互いの違いを知って、声かけ・役割分担・イベント準備に活かす。</p><span class="learncta">連携のヒントを開く ↗</span></div></a>
 </div></section>
 <p class="footer">ASOBooN STAFF HOME</p></main>
 <script>
