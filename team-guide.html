@@ -66,6 +66,20 @@ main{max-width:980px;margin:auto;padding:25px 20px 75px}.hero{padding:30px 32px 
 .type-details{margin-top:16px;border:1px dashed #b8d3c0;border-radius:14px;padding:12px;background:#fff}
 .type-details summary{cursor:pointer;color:#286349;font-size:13px;font-weight:900;padding:7px}
 @media(max-width:650px){.type-guide{padding:16px 12px}.type-guide-head h3{font-size:18px}.type-summary,.type-summary.two,.type-select-grid,.type-select-grid.three{grid-template-columns:1fr}.type-guide .primary{width:100%}}
+
+/* 管理アカウント限定・個人名版への導線 */
+.named-entry{background:linear-gradient(135deg,#f3f9f2,#fdfbf4);border:1px solid #b6dac1;border-radius:20px;padding:24px;margin:19px 0 23px}
+.named-entry-tag{display:inline-block;color:#30664d;font-size:11px;letter-spacing:.06em;font-weight:900}
+.named-entry h2{color:#235c43;font-size:22px;line-height:1.4;margin:7px 0}
+.named-entry p{font-size:12px;color:#536f5d;line-height:1.8;margin:7px 0 13px}
+.named-entry-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.named-entry-links a{display:block;text-decoration:none;background:#fff;border:1px solid #bed9c5;color:#245b43;padding:16px 13px;min-height:90px;border-radius:13px;transition:border-color .15s,transform .15s}
+.named-entry-links a:hover{border-color:#3b8660;transform:translateY(-2px)}
+.named-entry-links span{font-weight:900;font-size:13px;display:block;line-height:1.5}
+.named-entry-links small{display:block;color:#627b69;font-size:11px;line-height:1.6;margin-top:6px}
+.named-entry .named-entry-notice{font-size:10px;color:#61766a;margin:12px 0 0}
+@media(max-width:650px){.named-entry{padding:19px 14px}.named-entry h2{font-size:20px}.named-entry-links{grid-template-columns:1fr;gap:9px}.named-entry-links a{min-height:0;padding:12px 14px}}
+
 </style>
 </head>
 <body>
@@ -77,6 +91,19 @@ main{max-width:980px;margin:auto;padding:25px 20px 75px}.hero{padding:30px 32px 
 <p>自分の働き方の傾向を整理し、仲間との相談やイベント準備に役立てるための小さなガイド。正解も、相性の順位もありません。</p>
 <div class="features"><span class="feature">⏱ 約3分</span><span class="feature">🔒 回答は保存・送信しません</span><span class="feature">🌱 自分の言葉で選べる</span></div>
 </section>
+
+<section class="named-entry" aria-labelledby="named-entry-title">
+<div class="named-entry-tag">🔐 アカウント限定・個人名版</div>
+<h2 id="named-entry-title">11名から名前で選ぶ</h2>
+<p>個人名を使った自己理解・2人・3人の連携は、元の専用シートで確認できます。個人別MBTIやストレス仮説を、公開ページへ転載しないための分離です。</p>
+<div class="named-entry-links">
+<a href="https://docs.google.com/spreadsheets/d/1f5CcUM5HlNy6w6nlKVsCYtTK8e0CKZaHQ9pJvVV32fo/edit?gid=786696454#gid=786696454" target="_blank" rel="noopener noreferrer"><span>🌱 11名の個別ガイド</span><small>名前を選んで主・補・劣等を確認</small></a>
+<a href="https://docs.google.com/spreadsheets/d/1f5CcUM5HlNy6w6nlKVsCYtTK8e0CKZaHQ9pJvVV32fo/edit?gid=786696456#gid=786696456" target="_blank" rel="noopener noreferrer"><span>🤝 名前で2人を選ぶ</span><small>2人の共通点・役割・相談例</small></a>
+<a href="https://docs.google.com/spreadsheets/d/1f5CcUM5HlNy6w6nlKVsCYtTK8e0CKZaHQ9pJvVV32fo/edit?gid=786696457#gid=786696457" target="_blank" rel="noopener noreferrer"><span>👥 名前で3人を選ぶ</span><small>3人の視点・分担・立て直し</small></a>
+</div>
+<p class="named-entry-notice">閲覧にはGoogleアカウントのアクセス権が必要です。開けない場合は管理者に権限を確認してください。診断で人物を評価せず、本人の意思と現場の事実を優先します。</p>
+</section>
+
 <nav class="tabs" aria-label="ガイドの切り替え">
 <a id="tab-self" class="tab" href="#self" aria-selected="true" aria-controls="panel-self">🌱 自分について</a>
 <a id="tab-team" class="tab" href="#team" aria-selected="false" aria-controls="panel-team">🤝 相性・連携</a>
@@ -202,7 +229,7 @@ function showView(view){
  $('tab-self').setAttribute('aria-selected',String(!team));$('tab-team').setAttribute('aria-selected',String(team));
  if(team){const first=$('own-fields').querySelector('select');if(first&&!selfStyles)first.focus({preventScroll:true});}
 }
-function syncHash(){showView(['#team','#trio'].includes(location.hash)?'team':'self')}
+function syncHash(){showView(['#team','#trio'].includes(location.hash)?'team':'self');if(location.hash==='#named')document.querySelector('.named-entry')?.scrollIntoView()}
 window.addEventListener('hashchange',syncHash);syncHash();
 function answerStyles(){
  return axes.map((axis,i)=>{
