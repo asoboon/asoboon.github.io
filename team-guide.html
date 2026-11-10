@@ -1,470 +1,219 @@
 <!doctype html>
-<html lang="ja">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#164a3d">
-<meta name="robots" content="noindex,nofollow">
-<title>自分と仲間を知る｜ASOBooN STAFF HOME</title>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>自分について・相性連携 | ASOBooN STAFF</title>
+<meta name="robots" content="noindex,nofollow,noarchive"><meta name="referrer" content="no-referrer">
 <style>
-:root{--ink:#193e34;--sub:#63776e;--forest:#174c3d;--green:#21694f;--mint:#dff3e8;--cream:#fff9ee;--bg:#f5f8f4;--paper:#fff;--stroke:#dce8de;--shadow:0 10px 34px #1c493111;--ring:#a36930}
-*,*::before,*::after{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",Meiryo,sans-serif;line-height:1.6}
-[hidden]{display:none!important}button,select{font:inherit}button{cursor:pointer}a{color:inherit}a:focus-visible,button:focus-visible,select:focus-visible{outline:3px solid #bc8b54;outline-offset:3px}
-header{background:var(--forest);color:#fff}.top{max-width:980px;min-height:68px;margin:auto;padding:12px 21px;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{display:flex;align-items:center;gap:11px;text-decoration:none;font-weight:950;line-height:1.25;letter-spacing:.02em}.brand-mark{display:grid;place-items:center;width:39px;height:39px;border-radius:13px;background:#f5d59b;color:var(--forest);font-weight:950}.brand small{display:block;color:#c3e4d3;font-size:10px;letter-spacing:.09em}.back{color:#ebf7f0;text-decoration:none;font-weight:800;font-size:12px;padding:8px 0}
-main{max-width:980px;margin:auto;padding:25px 20px 75px}.hero{padding:30px 32px 27px;border-radius:23px;background:linear-gradient(115deg,#e2f5e9 0%,#f4f9ec 63%,#fff5e3 100%);border:1px solid #d4e8d9;box-shadow:var(--shadow)}.eyebrow{font-size:11px;color:#33735a;font-weight:950;letter-spacing:.12em}.hero h1{font-size:clamp(27px,4.5vw,43px);line-height:1.28;letter-spacing:-.055em;margin:10px 0 10px}.hero p{color:#527065;font-size:14px;max-width:620px;margin:0}.features{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.feature{background:#ffffffbd;border:1px solid #dbe9db;border-radius:50px;color:#416b54;font-size:11px;font-weight:850;padding:5px 11px}
-.tabs{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:19px 0}.tab{display:flex;align-items:center;justify-content:center;gap:8px;text-align:center;background:#fff;color:#50695c;border:1px solid var(--stroke);border-radius:14px;min-height:59px;padding:10px 14px;font-weight:900;font-size:15px;text-decoration:none;box-shadow:0 3px 12px #194d3910}.tab[aria-selected=true]{background:var(--forest);border-color:var(--forest);color:#fff;box-shadow:0 5px 16px #15463223}
-.card{padding:25px 26px;background:var(--paper);border:1px solid var(--stroke);border-radius:20px;box-shadow:var(--shadow);margin-bottom:14px}.step{display:inline-flex;align-items:center;gap:7px;color:#2b7853;font-size:12px;font-weight:900}.card h2{font-size:clamp(20px,3.5vw,27px);line-height:1.35;letter-spacing:-.035em;margin:9px 0}.desc{font-size:13px;color:var(--sub);margin:0 0 18px}.primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;border-radius:12px;padding:12px 22px;border:0;background:var(--forest);color:#fff;font-size:15px;font-weight:950;box-shadow:0 4px 0 #10392c}.primary:hover{background:#20624c}.primary:active{transform:translateY(2px);box-shadow:0 2px 0 #10392c}.primary:disabled{opacity:.45;cursor:not-allowed}.secondary{background:#fff;border:1px solid #c8dcd0;border-radius:11px;padding:10px 15px;min-height:45px;font-weight:800;color:#2d6048}.secondary:hover{background:#eff8f1}
-.hint{background:#f5f9f3;border:1px solid #e0eae1;border-radius:12px;padding:11px 13px;font-size:12px;color:#4e695a;margin-top:17px}.hint strong{color:#235642}.actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:16px}
-.progress{display:flex;gap:4px;margin:0 0 18px}.progress span{height:7px;border-radius:10px;background:#e4eee5;flex:1}.progress .done{background:#4eae7e}.question-meta{font-size:12px;font-weight:900;color:#38805d}.question{font-size:clamp(19px,3vw,25px);font-weight:950;line-height:1.4;margin:8px 0 18px}.choices{display:grid;grid-template-columns:1fr 1fr;gap:11px}.choice{text-align:left;background:#fafdfa;color:#224e3b;border:2px solid #dbe9de;border-radius:15px;padding:18px 16px;min-height:116px;font-weight:850;line-height:1.5}.choice::before{display:block;content:'選ぶ';font-size:10px;color:#688776;font-weight:800;margin-bottom:9px}.choice:hover,.choice:focus-visible{background:#eef7ef;border-color:#69a988}.question-nav{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:15px}.muted{font-size:11px;color:#82958a}
-.result-hero{background:linear-gradient(110deg,#e6f6e7,#fff7e8);border:1px solid #dae9d8;border-radius:16px;padding:19px 19px;margin:15px 0}.result-hero strong{font-size:18px}.result-hero p{margin:6px 0 0;font-size:13px;color:#4c6759}.axis-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.axis-result{border:1px solid #dce9dd;border-radius:14px;padding:16px;background:#f9fcf9;min-height:132px}.axis-result .axis-label{font-weight:800;font-size:11px;color:#6a8874}.axis-result h3{font-size:17px;margin:5px 0}.axis-result p{font-size:12px;color:#61756b;margin:0}.practice{background:#fff9ef;border:1px solid #f2e3c9;border-radius:13px;padding:16px;margin-top:16px}.practice strong{font-size:14px}.practice p{font-size:13px;margin:6px 0 0}
-.pair-intro{background:#f3faf5;border:1px solid #d7eadc;border-radius:13px;padding:15px;font-size:12px;color:#4d6a59;margin:12px 0 19px}.person-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.person{min-width:0;background:#f9fcfa;border:1px solid #dfebe2;border-radius:15px;padding:16px}.person h3{font-size:16px;margin:0 0 4px}.person p{font-size:11px;color:var(--sub);margin:0 0 15px}.field{display:block;margin-bottom:13px}.field span{display:block;color:#466454;font-size:11px;font-weight:900;margin-bottom:5px}.field select{width:100%;min-height:45px;border:1px solid #bdd6c6;border-radius:9px;background:white;padding:10px 7px;color:#204936;font-size:12px;font-weight:750}
-.pair-result{margin-top:15px}.pair-points{display:grid;grid-template-columns:1fr 1fr;gap:11px}.pair-point{border:1px solid #dce9e0;background:#fafcf9;border-radius:13px;padding:15px}.pair-point small{font-size:11px;color:#60806a;font-weight:850}.pair-point h3{font-size:15px;margin:6px 0}.pair-point p{font-size:12px;margin:0;color:#566c60}.scenario-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}.scenario{background:#edf7f1;border-radius:12px;padding:14px;border:1px solid #d7e8db}.scenario strong{font-size:13px}.scenario p{font-size:12px;margin:7px 0 0;color:#526d60}.example{padding:15px;border-radius:13px;background:#fff8ed;border:1px solid #f0e3cd;margin-top:14px}.example strong{font-size:13px}.example p{font-size:13px;color:#5b5947;margin:8px 0 0}
-.privacy{padding:17px 21px;border-radius:15px;background:#f0f4f0;color:#5d7365;font-size:12px;line-height:1.75}.privacy strong{color:#2f5b42}.footer{text-align:center;color:#94a399;font-size:11px;margin-top:22px;font-weight:800;letter-spacing:.08em}
-@media(max-width:650px){.top{padding:10px 14px;min-height:61px}.back{font-size:11px}main{padding:15px 12px 40px}.hero{border-radius:17px;padding:23px 18px}.hero p{font-size:12px}.tabs{gap:8px;margin:13px 0}.tab{font-size:13px;min-height:56px}.card{padding:19px 15px;border-radius:17px}.choices,.axis-grid,.pair-points{grid-template-columns:1fr}.choice{min-height:85px;padding:14px 15px}.person-grid{grid-template-columns:1fr;gap:10px}.person{padding:14px}.scenario-grid{grid-template-columns:1fr}.primary{width:100%}.actions .primary{width:auto;flex:1}.question-nav .secondary{min-width:100px}.axis-result{min-height:0}.privacy{padding:15px}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
-
-/* 自己理解・連携のブラッシュアップ */
-.scene-picker{border:1px solid #cde4d5;border-radius:15px;padding:16px;background:#f0f9f2;margin:15px 0}
-.scene-picker label{display:block;font-size:13px;font-weight:900;margin-bottom:7px;color:#275f48}
-.scene-picker select{display:block;width:100%;min-height:48px;border:1px solid #aacbb8;border-radius:10px;background:#fff;color:#214f3e;padding:9px 12px;font:inherit;font-weight:800}
-.scene-picker p{font-size:11px;color:#607869;margin:8px 0 0}
-.three-roles{margin-top:18px;padding:20px;border:1px solid #cde5d5;background:#eff8f1;border-radius:15px}
-.three-roles h3{font-size:17px;margin:0 0 8px;color:#245b45}
-.three-roles>p{font-size:12px;color:#557262;line-height:1.75;margin:0 0 12px}
-.role-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
-.role-grid label{display:flex;align-items:flex-start;gap:10px;cursor:pointer;border:1px solid #d7e9dc;background:white;border-radius:11px;padding:13px;font-size:12px;line-height:1.65}
-.role-grid input{flex:0 0 auto;width:20px;height:20px;accent-color:#21694f;margin:1px 0 0}
-.role-grid strong{display:block;color:#235945;font-size:13px}
-.three-roles .role-status{margin:13px 0 0;font-size:12px;font-weight:800;color:#296248}
-@media(max-width:700px){.role-grid{grid-template-columns:1fr}}
-
-/* 正本に沿った認知機能／2人・3人連携。個人データをページに埋め込まない */
-.type-guide{border:1px solid #cde3d3;background:#f7fbf6;border-radius:18px;padding:19px;margin:19px 0;box-shadow:0 5px 15px #174c3d09}
-.type-guide-head h3{font-size:20px;line-height:1.5;margin:7px 0 9px;color:#21563e}
-.type-guide .desc{margin:8px 0 15px}
-.type-guide .primary{margin:7px 0 8px;min-height:48px}
-.type-label{display:block;font-size:12px;font-weight:900;line-height:1.9;color:#385f4b}
-.type-label select{width:100%;display:block;min-height:48px;border:1px solid #a9ccb9;border-radius:11px;padding:9px 11px;background:#fff;color:#254e3e;font-weight:800}
-.type-select-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin:13px 0}
-.type-select-grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
-.mini-note{font-size:11px;line-height:1.8;color:#677e6e;margin:9px 0 4px}
-.type-output{margin-top:16px;padding-top:14px;border-top:1px solid #d5e7d8}
-.type-output h4{font-size:17px;color:#235b46;margin:8px 0}
-.type-output .type-line{font-weight:850;color:#3e6f53;font-size:12px;margin:10px 0}
-.type-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-.type-summary.two{grid-template-columns:repeat(2,minmax(0,1fr))}
-.type-mini{border:1px solid #d8e8db;border-radius:12px;background:white;padding:12px;font-size:12px;line-height:1.75}
-.type-mini strong{display:block;font-size:13px;color:#285e46;margin-bottom:4px}
-.type-mini p{margin:4px 0;color:#506b58}
-.type-practice{background:#fff9ed;border:1px solid #ecdcbf;border-radius:13px;padding:15px;margin:12px 0;font-size:12px;line-height:1.9}
-.type-practice strong{color:#6f562f;display:block;font-size:13px;margin-bottom:4px}
-.type-practice p{margin:4px 0 7px}
-.type-practice ul{margin:5px 0 0;padding-left:19px}
-.type-practice li{margin:4px 0}
-.type-readout{border-left:4px solid #73aa8b;margin:10px 0;padding:8px 12px;background:#fff;border-radius:6px;font-size:12px;line-height:1.9}
-.type-readout strong{display:block;color:#275842;font-size:13px}
-.type-details{margin-top:16px;border:1px dashed #b8d3c0;border-radius:14px;padding:12px;background:#fff}
-.type-details summary{cursor:pointer;color:#286349;font-size:13px;font-weight:900;padding:7px}
-@media(max-width:650px){.type-guide{padding:16px 12px}.type-guide-head h3{font-size:18px}.type-summary,.type-summary.two,.type-select-grid,.type-select-grid.three{grid-template-columns:1fr}.type-guide .primary{width:100%}}
-
-/* 管理アカウント限定・個人名版への導線 */
-.named-entry{background:linear-gradient(135deg,#f3f9f2,#fdfbf4);border:1px solid #b6dac1;border-radius:20px;padding:24px;margin:19px 0 23px}
-.named-entry-tag{display:inline-block;color:#30664d;font-size:11px;letter-spacing:.06em;font-weight:900}
-.named-entry h2{color:#235c43;font-size:22px;line-height:1.4;margin:7px 0}
-.named-entry p{font-size:12px;color:#536f5d;line-height:1.8;margin:7px 0 13px}
-.named-entry-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-.named-entry-links a{display:block;text-decoration:none;background:#fff;border:1px solid #bed9c5;color:#245b43;padding:16px 13px;min-height:90px;border-radius:13px;transition:border-color .15s,transform .15s}
-.named-entry-links a:hover{border-color:#3b8660;transform:translateY(-2px)}
-.named-entry-links span{font-weight:900;font-size:13px;display:block;line-height:1.5}
-.named-entry-links small{display:block;color:#627b69;font-size:11px;line-height:1.6;margin-top:6px}
-.named-entry .named-entry-notice{font-size:10px;color:#61766a;margin:12px 0 0}
-@media(max-width:650px){.named-entry{padding:19px 14px}.named-entry h2{font-size:20px}.named-entry-links{grid-template-columns:1fr;gap:9px}.named-entry-links a{min-height:0;padding:12px 14px}}
-
-</style>
-</head>
-<body>
-<header><div class="top"><a class="brand" href="./#learning"><span class="brand-mark">✳</span><span>ASOBooN<small>STAFF HOME / SELF & TEAM</small></span></a><a class="back" href="./#learning">← スタッフホームへ戻る</a></div></header>
+:root{--ink:#273e37;--muted:#627a6d;--mint:#e9f6eb;--green:#227458;--line:#d4e7da;--cocoa:#5b453f;--gold:#f5ecd9}
+*{box-sizing:border-box}body{margin:0;background:#f5f9f5;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",Meiryo,sans-serif;line-height:1.65}
+button,input,select{font:inherit}button,a,select{touch-action:manipulation}
+.topbar{background:#fff;border-bottom:1px solid var(--line)}.topinner{max-width:1020px;margin:auto;min-height:68px;display:flex;align-items:center;justify-content:space-between;padding:12px 19px;gap:12px}
+.brand{font-weight:950;letter-spacing:.08em;color:#235940;font-size:19px;text-decoration:none}.brand span{font-size:10px;font-weight:700;letter-spacing:.14em;display:block;color:#789486}
+.back{font-size:12px;font-weight:800;color:#316a4e;text-decoration:none}
+main{max-width:1020px;margin:auto;padding:19px 17px 65px}
+.hero{background:linear-gradient(120deg,#1d6853,#397b62 75%,#69554c);border-radius:24px;color:white;padding:32px 32px 28px;box-shadow:0 14px 32px #1b674a1c}
+.eyebrow{font-size:10px;letter-spacing:.17em;font-weight:850;color:#d4f2da}.hero h1{font-size:clamp(25px,4vw,38px);line-height:1.45;letter-spacing:-.04em;margin:7px 0 12px}
+.hero p{margin:0;color:#e4f3e9;font-size:13px}.hero .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}.hero .chips span{padding:6px 11px;background:#ffffff1f;border:1px solid #ffffff30;border-radius:100px;font-size:11px;font-weight:750}
+.surface{background:#fff;border:1px solid var(--line);border-radius:19px;padding:25px;box-shadow:0 8px 22px #3a6e4810;margin-top:16px}
+.lock-panel{max-width:720px;margin:25px auto}.lock-head{display:flex;align-items:center;gap:12px}.lock-icon{display:grid;place-items:center;width:48px;height:48px;border-radius:15px;background:var(--mint);font-size:23px}
+h2{font-size:21px;letter-spacing:-.025em;margin:0 0 9px}h3{font-size:17px;margin:0 0 11px}.muted{color:var(--muted);font-size:12px;line-height:1.9}.formlabel{display:block;font-weight:900;font-size:12px;color:#3c6550;margin:11px 0 7px}
+input[type=password],select{width:100%;min-height:50px;border:1px solid #b5d1bf;border-radius:12px;padding:10px 12px;color:#244b37;background:#fff;outline-offset:3px}
+input[type=password]:focus,select:focus{border-color:#36916d;outline:2px solid #b0e1c7}
+.unlock-row{display:flex;gap:10px;align-items:end}.unlock-row input{flex:1;min-width:0}.btn{border:0;border-radius:12px;padding:13px 19px;min-height:49px;background:var(--green);color:#fff;font-weight:900;cursor:pointer}
+.btn:hover{background:#125a43}.ghost{background:#ecf5ef;color:#265b42}.ghost:hover{background:#dbece1}.status{min-height:21px;color:#a1493d;font-size:12px;font-weight:800}
+.appbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:16px 0 10px}
+.appbar span{font-size:12px;font-weight:900;color:#327259}.appbar .btn{min-height:38px;padding:7px 12px;font-size:12px}
+.tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:15px 0}
+.tab{display:block;text-decoration:none;text-align:center;padding:15px 8px;border:1px solid #c9e0d0;border-radius:14px;background:#fff;color:#52705f;font-size:13px;font-weight:950}
+.tab[aria-current=page]{border:2px solid #2d8260;color:#1b6a4c;background:#e4f4e9}
+.guide{border:0;border-radius:13px;padding:13px 16px;background:#eff7f0;color:#527461;font-size:12px;margin:14px 0 0}
+.pickgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.pickgrid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.panehead{display:flex;align-items:flex-start;gap:11px;margin-bottom:17px}.pane-icon{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:var(--mint);font-size:22px;flex:none}
+.panehead p{font-size:12px;color:var(--muted);margin:2px 0}.subtitle{color:#668577;font-size:12px;margin:2px 0 18px}
+.result{margin-top:20px}.result h3{margin:0 0 12px;color:#235e43}.result-header{padding:18px;border-radius:14px;background:linear-gradient(110deg,#edf7ee,#fcf7ee);border:1px solid #d9e7d9;margin-bottom:12px}
+.result-header strong{display:block;color:#245d44;font-size:21px;line-height:1.4}.result-header span{font-size:12px;color:#617b69}
+.cardgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.cardgrid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.info-card{background:#fff;border:1px solid #d7e6d9;border-radius:14px;padding:15px;min-width:0}
+.info-card h4{color:#347253;font-size:12px;margin:0 0 8px}.info-card p{font-size:13px;color:#394f43;margin:0;white-space:pre-line;line-height:1.75}
+.info-card strong{display:block;font-size:17px;color:#214b38;margin-bottom:6px}
+.explain{background:#f6faf6;border:1px solid #d5e7da;border-radius:13px;padding:17px;margin-top:12px}
+.explain h4{font-size:13px;color:#245e45;margin:0 0 6px}.explain p{margin:0;font-size:13px;color:#496552;white-space:pre-line;line-height:1.8}
+.explain.warn{background:#fffbf0;border-color:#e9dfc3}.explain.warn h4{color:#7c6037}
+.tip{background:#eaf7ed;border-left:4px solid #4b9a69;border-radius:11px;padding:16px;margin-top:13px}
+.tip b{display:block;font-size:13px;color:#286448}.tip p{font-size:14px;margin:6px 0 0;white-space:pre-line}
+.pill{display:inline-block;padding:3px 9px;border-radius:100px;color:#36664f;background:#e5f3e8;font-size:11px;font-weight:850;margin:0 4px 6px 0}
+details{margin-top:16px;background:#f8fbf8;border:1px dashed #bddac5;border-radius:13px;padding:13px 15px}
+summary{font-size:13px;font-weight:850;color:#30664c;cursor:pointer}
+.note{font-size:11px;color:#789083;line-height:1.8;margin:17px 0 0}.error{color:#aa4f42;font-weight:850;font-size:13px;margin:14px 0}
+.footer{text-align:center;font-size:11px;font-weight:800;letter-spacing:.11em;color:#8caa98;margin-top:25px}
+[hidden]{display:none!important}
+@media(max-width:660px){.topinner{padding:10px 13px}.brand{font-size:16px}.back{font-size:11px}main{padding:12px 11px 44px}.hero{padding:24px 20px;border-radius:17px}.hero h1{font-size:26px}.surface{padding:18px 14px;border-radius:15px}.unlock-row{display:block}.unlock-row .btn{width:100%;margin-top:10px}.tabs{gap:6px}.tab{font-size:12px;padding:13px 3px}.cardgrid,.cardgrid.three,.pickgrid,.pickgrid.three{grid-template-columns:1fr}.panehead h2{font-size:20px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style></head><body>
+<header class="topbar"><div class="topinner"><a class="brand" href="./#learning">✳ ASOBooN <span>STAFF HOME</span></a><a class="back" href="./#learning">← スタッフホームに戻る</a></div></header>
 <main>
-<section class="hero" aria-labelledby="hero-title">
-<div class="eyebrow">ASOBooN / PLAY LEADER GUIDE</div>
-<h1 id="hero-title">自分の得意を知って、<br>連携をもっと心地よく。</h1>
-<p>自分の働き方の傾向を整理し、仲間との相談やイベント準備に役立てるための小さなガイド。正解も、相性の順位もありません。</p>
-<div class="features"><span class="feature">⏱ 約3分</span><span class="feature">🔒 回答は保存・送信しません</span><span class="feature">🌱 自分の言葉で選べる</span></div>
+<section class="hero"><div class="eyebrow">SELF UNDERSTANDING & TEAMWORK</div><h1>自分を知る。<br>仲間と、もっと動きやすく。</h1>
+<p>11名のスタッフから選ぶだけ。自分の理解も、2人・3人の連携も、このページ内で完結。</p>
+<div class="chips"><span>🌱 自分について</span><span>🤝 2人の連携</span><span>👥 3人の連携</span></div></section>
+<section id="lock-panel" class="surface lock-panel" aria-labelledby="lock-title">
+<div class="lock-head"><span class="lock-icon">🔐</span><div><h2 id="lock-title">スタッフ専用ガイド</h2><span class="muted">個人ごとの参考情報を保護しています。</span></div></div>
+<p class="muted">共有された閲覧コードを1回入力すると、11名の名前から選べます。Googleスプレッドシートへの移動は不要です。</p>
+<form id="unlock-form"><label class="formlabel" for="passphrase">閲覧コード</label>
+<div class="unlock-row"><input id="passphrase" type="password" autocomplete="off" spellcheck="false" placeholder="XXXX-XXXX-XXXX-XXXX-XXXX-XXXX" required><button class="btn" type="submit" id="unlock-btn">ガイドを開く →</button></div></form>
+<p class="status" id="unlock-status" role="status" aria-live="polite"></p><p class="note">入力コードや回答は送信・保存しません。閲覧中のみブラウザ内で復号します。共有は関係者だけにお願いします。</p>
 </section>
-
-<section class="named-entry" aria-labelledby="named-entry-title">
-<div class="named-entry-tag">🔐 アカウント限定・個人名版</div>
-<h2 id="named-entry-title">11名から名前で選ぶ</h2>
-<p>個人名を使った自己理解・2人・3人の連携は、元の専用シートで確認できます。個人別MBTIやストレス仮説を、公開ページへ転載しないための分離です。</p>
-<div class="named-entry-links">
-<a href="https://docs.google.com/spreadsheets/d/1f5CcUM5HlNy6w6nlKVsCYtTK8e0CKZaHQ9pJvVV32fo/edit?gid=786696454#gid=786696454" target="_blank" rel="noopener noreferrer"><span>🌱 11名の個別ガイド</span><small>名前を選んで主・補・劣等を確認</small></a>
-<a href="https://docs.google.com/spreadsheets/d/1f5CcUM5HlNy6w6nlKVsCYtTK8e0CKZaHQ9pJvVV32fo/edit?gid=786696456#gid=786696456" target="_blank" rel="noopener noreferrer"><span>🤝 名前で2人を選ぶ</span><small>2人の共通点・役割・相談例</small></a>
-<a href="https://docs.google.com/spreadsheets/d/1f5CcUM5HlNy6w6nlKVsCYtTK8e0CKZaHQ9pJvVV32fo/edit?gid=786696457#gid=786696457" target="_blank" rel="noopener noreferrer"><span>👥 名前で3人を選ぶ</span><small>3人の視点・分担・立て直し</small></a>
-</div>
-<p class="named-entry-notice">閲覧にはGoogleアカウントのアクセス権が必要です。開けない場合は管理者に権限を確認してください。診断で人物を評価せず、本人の意思と現場の事実を優先します。</p>
+<div id="app" hidden>
+<div class="appbar"><span>🔓 社内ガイド｜全11名</span><button type="button" id="lock-btn" class="btn ghost">ロックする</button></div>
+<nav class="tabs" aria-label="ガイドのページ"><a id="tab-self" class="tab" href="#self">🌱 自分について</a><a id="tab-team" class="tab" href="#team">🤝 2人の連携</a><a id="tab-trio" class="tab" href="#trio">👥 3人の連携</a></nav>
+<section class="surface" id="panel-self">
+<div class="panehead"><span class="pane-icon">🌱</span><div><h2>自分について</h2><p>名前を選ぶと、考え方の軸・具体例・相談のコツが見られます。</p></div></div>
+<label class="formlabel" for="self-name">スタッフを選ぶ</label><select id="self-name"></select><div class="result" id="self-result" aria-live="polite"></div>
 </section>
-
-<nav class="tabs" aria-label="ガイドの切り替え">
-<a id="tab-self" class="tab" href="#self" aria-selected="true" aria-controls="panel-self">🌱 自分について</a>
-<a id="tab-team" class="tab" href="#team" aria-selected="false" aria-controls="panel-team">🤝 相性・連携</a>
-</nav>
-<section id="panel-self" aria-labelledby="self-title">
-<div class="card" id="self-intro"><div class="step">01 / 自分について</div><h2 id="self-title">いつもの仕事で、どんな進め方がしっくりくる？</h2>
-<p class="desc">8つの場面から、考え方・進め方の「今の傾向」を整理します。「どちらも使う」も選べます。答えは状況で変わって大丈夫。</p>
-<button class="primary" type="button" id="start-quiz">8つの質問を始める <span aria-hidden="true">→</span></button>
-<div class="hint"><strong>使い方：</strong>考えすぎず、今の自分に近い方を選んでね。能力や性格を判定するテストではありません。</div>
-</div>
-<div class="type-guide" id="self-type-guide">
-<div class="type-guide-head"><span class="step">資料をもとに深掘り</span><h3>🧠 主機能・補助機能・劣等機能を知る</h3></div>
-<p class="desc">元資料の「11名｜主・補・劣等」と「8機能の読み方」をもとに、考え方を3つの視点で読み解けます。タイプが分からなくても、上の8問だけで使えます。</p>
-<label class="type-label" for="self-type">自分で選ぶ4文字タイプ <select id="self-type"><option value="">タイプを選ぶ（任意）</option><option value="ENTJ">ENTJ</option><option value="INFJ">INFJ</option><option value="ESFP">ESFP</option><option value="ISFP">ISFP</option><option value="ISFJ">ISFJ</option><option value="INTJ">INTJ</option><option value="ENFJ">ENFJ</option><option value="INFP">INFP</option></select></label>
-<p class="mini-note">資料掲載の8タイプから選べます。スタッフ名・個人の診断結果は表示しません。A/Tは認知機能と別の追加指標なので省略しています。</p>
-<div id="self-type-result" class="type-output" hidden aria-live="polite"></div>
-</div>
-<div class="card" id="quiz-panel" hidden>
-<div class="step">01 / 自分について</div>
-<div id="quiz-progress" class="progress" aria-hidden="true"></div>
-<div id="question-meta" class="question-meta"></div>
-<div id="question-text" class="question" aria-live="polite"></div>
-<div id="quiz-choices" class="choices"></div>
-<div class="question-nav"><button id="prev-question" class="secondary" type="button">← 前の質問</button><span class="muted">あと少しで自分のヒントが見つかる</span></div>
-</div>
-<div id="self-result" class="card" hidden>
-<div class="step">YOUR STYLE / ふり返り</div><h2>今の自分に合いそうな進め方</h2>
-<div class="result-hero"><strong>決めつけず、使えそうなヒントを持ち帰ろう。</strong><p>下の4つは「今の回答」の傾向。経験や環境で変わるので、自分に当てはまる部分だけ使ってね。</p></div>
-<div class="axis-grid" id="self-axes"></div>
-<div class="practice"><strong>🎯 次の勤務で、ひとつ試そう</strong><p id="self-action"></p></div>
-<div class="actions"><button class="primary" type="button" id="use-in-team">この結果を連携に使う →</button><button class="secondary" type="button" id="restart-quiz">もう一度回答する</button></div>
-</div>
-</section>
-<section id="panel-team" aria-labelledby="team-title" hidden>
-<div class="card">
-<div class="step">02 / 相性・連携</div><h2 id="team-title">違いを「苦手」ではなく「補い合う力」に。</h2>
-<p class="desc">自分と相手、それぞれの仕事の進め方を選ぶと、声のかけ方・役割分担・イベント準備のヒントが出ます。相性に点数は付けません。</p>
-<div class="pair-intro"><strong>🤝 2人で使うのがおすすめ。</strong> 相手の傾向は本人と一緒に確認してね。名前の登録も、相手のタイプを勝手に推測することも不要です。</div>
-
-<div class="type-guide" id="cognitive-team">
-<div class="type-guide-head"><span class="step">① 2人を選ぶ｜元資料の進め方</span><h3>🤝 2人の考え方を並べてみる</h3></div>
-<p class="desc">主・補助・劣等機能から「共通点・違い・補い方」「仮の役割」「30秒確認」を表示します。本人が任意に選んだタイプで一緒に確認してください。</p>
-<div class="type-select-grid">
-<label class="type-label" for="pair-type-a">1人目のタイプ<select id="pair-type-a"><option value="">タイプを選ぶ（任意）</option><option value="ENTJ">ENTJ</option><option value="INFJ">INFJ</option><option value="ESFP">ESFP</option><option value="ISFP">ISFP</option><option value="ISFJ">ISFJ</option><option value="INTJ">INTJ</option><option value="ENFJ">ENFJ</option><option value="INFP">INFP</option></select></label>
-<label class="type-label" for="pair-type-b">2人目のタイプ<select id="pair-type-b"><option value="">タイプを選ぶ（任意）</option><option value="ENTJ">ENTJ</option><option value="INFJ">INFJ</option><option value="ESFP">ESFP</option><option value="ISFP">ISFP</option><option value="ISFJ">ISFJ</option><option value="INTJ">INTJ</option><option value="ENFJ">ENFJ</option><option value="INFP">INFP</option></select></label>
-</div>
-<button type="button" class="primary" id="show-type-pair">2人の連携ヒントを読む →</button>
-<p class="mini-note">氏名の記録・送信はありません。これは相性の◎○△×や人物の評価ではなく、会話の準備資料です。</p>
-<div id="type-pair-result" class="type-output" hidden aria-live="polite"></div>
-</div>
-<div class="type-guide" id="trio">
-<div class="type-guide-head"><span class="step">② 3人を選ぶ｜元資料の進め方</span><h3>👥 進行・現場・案内を分けて考える</h3></div>
-<p class="desc">3人の考え方を並べ、共通点と補完視点を確認します。役割を性格で決めず、資格・経験・希望・その日の負荷で話し合いましょう。</p>
-<div class="type-select-grid three">
-<label class="type-label" for="trio-type-a">1人目<select id="trio-type-a"><option value="">タイプを選ぶ（任意）</option><option value="ENTJ">ENTJ</option><option value="INFJ">INFJ</option><option value="ESFP">ESFP</option><option value="ISFP">ISFP</option><option value="ISFJ">ISFJ</option><option value="INTJ">INTJ</option><option value="ENFJ">ENFJ</option><option value="INFP">INFP</option></select></label>
-<label class="type-label" for="trio-type-b">2人目<select id="trio-type-b"><option value="">タイプを選ぶ（任意）</option><option value="ENTJ">ENTJ</option><option value="INFJ">INFJ</option><option value="ESFP">ESFP</option><option value="ISFP">ISFP</option><option value="ISFJ">ISFJ</option><option value="INTJ">INTJ</option><option value="ENFJ">ENFJ</option><option value="INFP">INFP</option></select></label>
-<label class="type-label" for="trio-type-c">3人目<select id="trio-type-c"><option value="">タイプを選ぶ（任意）</option><option value="ENTJ">ENTJ</option><option value="INFJ">INFJ</option><option value="ESFP">ESFP</option><option value="ISFP">ISFP</option><option value="ISFJ">ISFJ</option><option value="INTJ">INTJ</option><option value="ENFJ">ENFJ</option><option value="INFP">INFP</option></select></label>
-</div>
-<button type="button" class="primary" id="show-type-trio">3人の連携ヒントを読む →</button>
-<p class="mini-note">同じタイプでも別人のことがあります。各人の実際の希望と技能を確認してください。</p>
-<div id="type-trio-result" class="type-output" hidden aria-live="polite"></div>
-</div>
-<details class="type-details"><summary>タイプが分からないときは、仕事の進め方から比べる</summary>
-<p class="desc">タイプに頼らず、普段の考え方や連絡方法について本人同士で話したいときはこちら。</p><div class="person-grid"><div class="person"><h3>🌱 自分の進め方</h3><p>自己理解の回答があれば自動で反映。ここから変更もできます。</p><div id="own-fields"></div></div><div class="person"><h3>🤝 一緒に働く相手</h3><p>本人が選んだ進め方を聞いて、一緒に入力してください。</p><div id="peer-fields"></div></div></div>
-<div class="scene-picker"><label for="team-scene">いま一緒に考えたい場面</label>
-<select id="team-scene" aria-label="連携の場面を選ぶ">
-<option value="daily">👀 普段の声かけ・引き継ぎ</option>
-<option value="event">🎨 イベント準備・企画</option>
-<option value="crowd">🛡️ 混雑・人手不足・安全</option>
-<option value="conflict">💬 意見が分かれたとき</option>
-</select><p>場面に合わせて、行動・役割・相談の言葉を具体化します。</p></div>
-<div class="actions"><button class="primary" id="show-team" type="button">連携のヒントを見つける →</button><button class="secondary" id="reset-team" type="button">選択をクリア</button></div>
-<p class="muted" id="pair-validation" role="status" aria-live="polite"></p>
-</div>
-</details>
-<div id="pair-result" class="card pair-result" hidden>
-<div class="step">COLLABORATION / 実践のヒント</div><h2>2人なら、こんな動き方ができそう。</h2>
-<p class="desc">合う・合わないの判定ではありません。現場で役立つ具体的な関わり方を見つけましょう。</p>
-<div id="pair-points" class="pair-points"></div>
-<div class="scenario-grid">
-<div class="scenario"><strong>👀 普段の連携</strong><p>まず現場で見た事実を1つ共有。次に「何が必要か」「誰ができるか」を確認する。</p></div>
-<div class="scenario"><strong>🎨 イベント準備</strong><p>子どもが自分で選べる体験を中心に、安全・必要人数・準備時間・役割を決める。</p></div>
-<div class="scenario"><strong>💬 意見が分かれたら</strong><p>相手の意図を聞き、必ず守る条件と自由に工夫できる部分を分けて話す。</p></div>
-</div>
-<div class="example"><strong>💡 話し始めのひと言</strong><p id="pair-script"></p></div>
-<section class="three-roles" aria-labelledby="three-roles-title">
-<h3 id="three-roles-title">👥 3人で動くときの「30秒確認」</h3>
-<p>2人で考えた内容を3人で実行するなら、タイプではなく、その日の担当・経験・負荷を見て役割を決めよう。</p>
-<div class="role-grid">
-<label><input type="checkbox" class="role-check"> <span><strong>現場の事実</strong> だれが子どもの動き・混雑・遊具の状況を確認する？</span></label>
-<label><input type="checkbox" class="role-check"> <span><strong>安全と判断</strong> だれが人員・定員・危険箇所を確認し、最終判断する？</span></label>
-<label><input type="checkbox" class="role-check"> <span><strong>伝達と引き継ぎ</strong> だれが保護者・スタッフに伝え、いつ共有する？</span></label>
-</div><p class="role-status" id="role-status" aria-live="polite">3項目を役割とセットで確認してみよう。</p>
-</section>
-<div class="actions"><button class="secondary" type="button" id="edit-pair">選択を見直す ↑</button></div>
-</div>
-</section>
-<aside class="privacy"><strong>このガイドの約束</strong>　回答内容・名前・組み合わせはサーバーに送信せず、ページを閉じると消えます。仕事の優劣や人事評価には使いません。本人が共有したくない内容は聞かないでください。性格タイプの診断や科学的な相性判定ではなく、現場で会話を始めるための補助ツールです。</aside>
-<p class="footer">ASOBooN STAFF HOME — こどもの体験と、チームの安心のために</p>
-</main>
-<script>
-'use strict';
-const axes=[
- {id:'talk',title:'考えをまとめる方法',options:['話しながら整理','考えてから共有'],left:'対話からアイデアを育てる',right:'一度整理して伝える',middle:'状況に合わせて使い分ける',leftHint:'話す前に相手の時間も確認すると、伝わりやすい。',rightHint:'考えがまとまるまでに必要な時間を一言伝えると、連携がスムーズ。',middleHint:'場面に応じて口頭とメモを選ぶのが強み。'},
- {id:'focus',title:'最初に見るところ',options:['全体の目的から','目の前の事実から'],left:'全体の目的をつかむ',right:'目の前の変化に気づく',middle:'目的と現場を往復する',leftHint:'目的を共有したら、実際に起きたことも1件確かめよう。',rightHint:'現場の気づきに「何のためか」を一言添えよう。',middleHint:'子どもの反応と企画の目的をつなげられる。'},
- {id:'plan',title:'仕事の進め方',options:['段取りを決めてから','小さく試してから'],left:'先に段取りを整える',right:'小さく試して学ぶ',middle:'準備と試行を使い分ける',leftHint:'安全条件を満たしたら、現場の小さな工夫も残しておこう。',rightHint:'試す前に安全・人員・時間の条件を確認しよう。',middleHint:'やる前の準備と、途中の修正のバランスを取れる。'},
- {id:'value',title:'相談で大切にすること',options:['条件や公平さ','気持ちや体験'],left:'条件と公平さを整理する',right:'本人の気持ちや体験を確かめる',middle:'条件と体験を両方見る',leftHint:'判断理由を伝えたあと、相手が大切にしている点も聞こう。',rightHint:'子どもの体験を守るため、必要な安全条件も言葉にしよう。',middleHint:'安全のルールと子どもの気持ちを同じテーブルに置ける。'}
-];
-const questions=[
- {axis:0,text:'新しいアイデアを思いついたときは？',choices:['誰かと話しながら広げたい','一度メモしてから共有したい']},
- {axis:1,text:'子どもの遊びを改善するときは？',choices:['まずどんな体験にしたいか考える','まず現場で起きた場面を確かめる']},
- {axis:2,text:'イベントを準備するときは？',choices:['先に役割と手順を決めておきたい','条件を確認して小さく試しながら進めたい']},
- {axis:3,text:'意見をまとめる場面では？',choices:['ルールや公平さを整理したい','本人の気持ちや体験を聞きたい']},
- {axis:0,text:'急ぎではない相談を持ちかけるときは？',choices:['短く話して方向を合わせたい','要点を整理してから伝えたい']},
- {axis:1,text:'新しい企画の説明を受けるなら？',choices:['まず目的や全体像を知りたい','まず具体的な例を見てみたい']},
- {axis:2,text:'予定どおりに進まないときは？',choices:['段取りを組み直して立て直す','安全を見ながら別の方法を試す']},
- {axis:3,text:'現場の相談を受けたら？',choices:['何が必要条件か整理する','相手がどう感じたかを聞く']}
-];
+<section class="surface" id="panel-team" hidden>
+<div class="panehead"><span class="pane-icon">🤝</span><div><h2>2人の相性・連携</h2><p>2人の名前を選ぶと、共通点・違い・声かけ・分担のヒントが分かります。</p></div></div>
+<div class="pickgrid"><label class="formlabel" for="pair-a">自分<select id="pair-a"></select></label><label class="formlabel" for="pair-b">相手<select id="pair-b"></select></label></div>
+<div class="result" id="pair-result" aria-live="polite"></div></section>
+<section class="surface" id="panel-trio" hidden>
+<div class="panehead"><span class="pane-icon">👥</span><div><h2>3人の連携</h2><p>3人を選んで、持ち寄る視点と仮の役割、開始前の確認を整理します。</p></div></div>
+<div class="pickgrid three"><label class="formlabel" for="trio-a">1人目<select id="trio-a"></select></label><label class="formlabel" for="trio-b">2人目<select id="trio-b"></select></label><label class="formlabel" for="trio-c">3人目<select id="trio-c"></select></label></div>
+<div class="result" id="trio-result" aria-live="polite"></div></section>
+<p class="note">このガイドは元資料の「11名｜主・補・劣等」「2人を選ぶ」「3人を選ぶ」をもとに編集した会話のヒントです。MBTIや連携目安は理論上の仮説であり、実際の能力・性格・ストレス反応を判定しません。現場の安全判断は正式な責任者と当日の状況を優先します。</p>
+</div><p class="footer">ASOBooN STAFF HOME · SELF & TEAM</p>
+</main><script>
+"use strict";
+const pack={"s":"nUtkMzEFWX1uz8nxGNY6sg","n":"7K_vnjFgoIxpXLRP","i":300000,"c":"SISzj4ko4EjYOpjPpICDbk29vB2WPFqyF_75JLkQfkRri_05G051_w2bJogNVOeVA5Z6OdchWQTQvJJ_8hrJTyQo3d9LQODJSLcNEkf-fX5fqsuDm8rxtTaMH-KXHrJM8RvK_iZuPuUN_KPnXMIQ_kPkeaf5Ub5n8tOp0v97SxW7UVYtedUpHmit31LrEdjUupnUTBLl-0sVmcaUn6PXHG7hdoytJpJ5apSX56bA8hh8SHiioGxcCP_Wgc8Vu70eyC0fHOVxqsSsjYK_IdXpBaHXs1pzj39t_98eIq1eYwYsgfTt5R6pmZe1Iw7YKga7hYb2malt-kHkyEDNiV-a7600mgw9sYcrHoWQDhk5XByPq6Dv77W_VHPNSn1mgC_WTlc4p0sBtoCbshPec1-kntWV7ffYHh6cfGZK7661AlOa9-g-Q98GBF_5d8sBCqyZT20Z533LYdga0Eb_EazSO8wsvafdbGpMO8ABspwiyXIO6_cz28AIBNrsNtw0G203rk0Crcpyn_ssSgQg-utAg0W9_CONbM1lbY626533V6HopLaBArfTv1i1F51Q0atFxfGSA-cpi7GRswPi1o--zmyX3Ox_7Wb1Q4L1oenjp3tq5IdiBD6sdMsKrLuuNzdH0mhk8UoBrWpoLR-ETKxhci8cYywRuBSG2yiv1p87EMX0p4f9wjcqle8bGt7GL0cGCEzYQEPclIA5gBE5R7s0V2fe9hcMNGncua21gEFaLUlB5iKOxXNkxtD9fTwIs86A1s7-seTaZ6yj3qydY_vJPt0w927e9Ol4aODij4Exunx_ue5kz_KhUIXn1-DpUQBYgUxS3Pup8yRs35gWOklvyLQCZiX-GQoEOl_-q7Jl35OM277Pqr8Q5ZvNHCAabbPRN2gyc-6TyyXrLk3KVGMFTvlBcCAAtVrezs36uOLSrUriCKv6PbY3FRoERfmGHtEEM-wPfS3U9r59TObbCs1fq9X-pUnB3T_CnkaaB7sFFptIUDQ4gIORtBc7VaK6nusqcB1GhHxbBfkRN9pHdmP9rVZShi6iBdABZPlSGuDlbjTEgpgSiJkJrDhr_DrEJNW3hPpfWJ9XnEWmdOfGlpBBo36bk90pqN2GwUGi10OB5T-2bWIwshtSkqZIWgF7DGLus6JWF5Ecx8tyYFk_AHBN9lU7EMyr540u8SZvKoid_sJhR5zUmmhfXLX1UX1KazCcgyaz9Jq5dEmZom69oDFZAaulYTwtiB336kWmWAg-BXDBU8bd5pBZ_XHE4JfFfaQgcFDlX2g6GZhYnRX7u3ilg8_GCYsbJV6PyrYvM7XdVC1SP16lpWo0QtvpAMndNRqBYToEFjyO-UrjaCL1nGqs34KItpPRdsg2U84a2UdwCgK5so5kvYUULA_oOG7SmiwG0h_Ey8e7YUoEtlwKDfkXw1ISZl_PRYP8AyB0USpzEpyR8vL2NEVDMgvrXUOep4n_eTN0CRP-wESnSfaxJdysKnK1ldTm7_5LNqpEEymP5am7jUzVZ-v-HJceaNm6HCNtjkP4D8jkm2DKmOTIq2VMCupTXvBYPOsAXzzvDEz10xReCT_kdCVYQ5-FvfE_WNnZ6jL1x5jhY3GpGpuu2etnwZCaHf71oUVUfh7JZmsLpyQyGY4ibN1nxoVwdXw0fAgjNHtp99kHWkLs-5rnbn-Jtm-LNmTNcD9YotPWaA94d6vWa_YHfJafYwavRVHOronYWJw_xNd1JGpmkou2EnOHBVq9zbdljiesDORBCY5fcCM5rjV05UDnC0tvBSvWvRFGjSOrCpV0vcdBGVLbbrYdojEqJxBf8MF2lojm8Bsz00wgxdJSpj31Ma1OLAajpq8qD0898I4ClcvjI_ksnQzI0-vtazonLyi4KdXJt-KIkUq4Zxc0wdfEDKv5L03YR4fGaUZnDf3rsOVIcHZM62RoqEqJCyNy0EAuQQj1LjqoSPYI5zTjt8JHNBiohIoP-XiBzjqZbMCprD1ieXaEGcqq-9QTcnu5NRMdnRgd9VSGXtZuLEN7jDVlTFhfzxUF-rl-UELJAZlmOXeFsHwLmsOyyljRZZu76rFkpvgC-1m9S88BUSg4X6vPRKorkCbW-zz06lwbYuWBXn3GCL1sAmx58MmgMeQyJ-X47MRizIJ2VVrxefsCCBDVXytMtpsY-LhySC9aDIUZsipxpvkdVNTwPmq74iWyYZjmfzSXHAZZ3MeK1KIIU4Rrz-MISk7wNHJN72vYRWInBvMja03j8OLwMhS97fbmcmGr-I04uK6vU4uvk0fF2hrjeZf23uvcwKI17XUSh-SATGkvKvLnpZMJ758irG_5AV0ycc8Wm49hy7zVxKDDema_tvkv-MZSRG5Zf3giQHpgr6Rkiqy9Axy00NtfkvLm6J91LepPzDn8c8Qw0IqY6I_UIucVSvlng_-XmwgueCYjSKgqXOHx-wBoTONFd7ulmHMgsHVcUJuce3L6EVWrC8p6zCEC1VVsa3Mu863ZizVLHIaTF7r-k9zEvRawHKYeZvGhyouXPOKZT7phVPlAzxj0fDKNdWuqEizR9ufJ9Ol3P27B38c8Rmddrs6sXz1TfPBv8PFRbx_0LddKM0X5DoxmiOG7gDvZi6okZnUqX5IjFDgKj0yu8G8hSJjsZHGWbT7Xc1IFwjiMeb7DvRxqlYTmen6DaSwHPE5dCXlsZ1c6mWYclkIkGzFdsK-n5R-OdcrpWprto_VknKLEzXIE4EHQwZHbrWAl0S0KQi2MPDtuJkmVMtkxe01kSfpyZThc7RPeq1J5ctP8GCkHLnS2Sp1jjbyTruAg6aKaMKEu09ZMkSoqBZfJJ86XMuYcMYQsCXFF9wbVKkglYgu5AnieTz254r1cqf_-l9On_1PA2WW9MfkZIw4Qd4bq47u4yvXwvMr5WeBOW1AP_0a1krdxt95Zo11siz_2zrZF1gkTIkECpcvsNBpvDkRqhNDKPQxdX9X3njjvwdY3Mvu8zKL2PTSKgKklyTBcVFhTA3CKUHNYI8WI2ohBfLGDmUq33t7bXEDSHzgt0Lb8Y-7jw_OT3ZFFTcmfzppm-Ti8HpweNzgRNdt66Xfyw-hgdXW3ZLE8bXgPP-mKIjKqpldOYnq_1vtjhVIDv7l02pa7i5IptSQWUu9m0muoKMy-fR-szNHn5jcqv7W8cDxSWL29K3tlU_XX3BS-mGEbYX7ei1NNRNrgdJtLIhrIxo7p3yFNJlxv3Hhm4rssOhZuHkIyc24ipGe31dgmEpiflxBG44cZRrQxvR_kXhKsn4hKB6sZMgS8MbFpj0VAv1X5VSFardlPokQFhNBriohmrJXI_Lvw1AVFi6rzt_SQ7eJ19ew6H4cCxpxp9NQDTI8319nGbIRff7xe0HxaDHBCcw1DCh7Vj1-s0RlInxaNkn_j-JCpRJ8IESkUViNP-1y0bQsXkSVFwU1QfCqURA6q4ISTuDcmnc872pjnqFqj3-jupaBy9sWDLH5oXe0ObFGaZhzWdDzDmgnyZRkDkFV-r9QarVAaUWMazVMiAR4w2H4Ho27JvzNpZllytr59hVWzuig_yQGIZBpY50DHXdOyz56KHipMhQm3Ho-eghvSWJtnOBKmSFQFhfpPs9CSDAQF-0TuNQHOPsPwOmAAQk67jQTv1cjenCubkAhJUVRKFjb8AG4FiHqFvonMqawhZiMSZATsM-yr3vhj9OA87qH_hEA82uR0ZidpQ3Oovxz0GPvFBt6xQ6w5lwhUm54n_L7NoEpSlOQGlMU81O_38ISxGduWidpE64bmTXi4FnMnCtCOz_clDmSD1fKprHNrKFQjrklvIuy-sSbbgy4YQAX39VTNQzKhX0a5wvAzt_EbE9_QC0UaPgjmcThnr8l32GxzEn7z16WJfr4UakSwEIH26Bz6l1PYaZ497FOF-KS4jk9bwsmgfyLAcM2iYJY2LOQrMuHFkjIBb2eimvDKOT_qg7TXfN0B1O5nm8ZpRb0rkTkwkK4TDWT3pd7Ba1UT8RtWq2YlJ0x3AXYvQzooPzNGxTGxGIJhvIv3oyAcrEnbaWmbRcgk6V_BB8exvTBZY2wtLWsSuF30fugZ1_2UXFK3B4hLe40EbBXNs54wlBdVtfGVpTfI4BJXs1KaXAkwL5T9ZL1RT9od5WtTwyDpxmlpUKtPRkioIIPgDf9s2ZPKuwhBHHw1Vhhsn2SC3rMg_GQVWHhH-XPyhVJnT2vIcrDpbbqBLG8elkYXlhVWCGK1RWgHi43xJ-4jQku19NIuLBMcDYFllflECTPwhRyfHAafWYsY1mCZCqbwApjrD3_uhUSCMbq9Pg7HzTTEnqbSF_nnj8tHVkdSfZxVs_WnNim4cjEq8bZm6lqdN1vkL8HoYSjHZvNazOUuJjQr9FmWTe_B3XNwHvaH2r7Lehqv9xmAOb8uvDs_XqhXPq5MjX9BN0d5Y-b2wttubAlypc8"};
 const $=id=>document.getElementById(id);
-let answers=Array(questions.length).fill(null),step=0,selfStyles=null;
-function showView(view){
- const team=view==='team';$('panel-self').hidden=team;$('panel-team').hidden=!team;
- $('tab-self').setAttribute('aria-selected',String(!team));$('tab-team').setAttribute('aria-selected',String(team));
- if(team){const first=$('own-fields').querySelector('select');if(first&&!selfStyles)first.focus({preventScroll:true});}
-}
-function syncHash(){showView(['#team','#trio'].includes(location.hash)?'team':'self');if(location.hash==='#named')document.querySelector('.named-entry')?.scrollIntoView()}
-window.addEventListener('hashchange',syncHash);syncHash();
-function answerStyles(){
- return axes.map((axis,i)=>{
-  const a=questions.map((q,j)=>q.axis===i?answers[j]:null).filter(v=>v!==null);
-  return a.every(v=>v===0)?'l':a.every(v=>v===1)?'r':'m';
- });
-}
-function textNode(tag,text,cls){
- const el=document.createElement(tag);el.textContent=text;if(cls)el.className=cls;return el;
-}
-function renderQuiz(){
- $('self-intro').hidden=true;$('self-result').hidden=true;$('quiz-panel').hidden=false;
- $('question-meta').textContent='質問 '+(step+1)+' / '+questions.length;
- $('question-text').textContent=questions[step].text;
- $('quiz-progress').replaceChildren();
- for(let i=0;i<questions.length;i++){
-  const b=document.createElement('span');if(i<=step)b.className='done';$('quiz-progress').append(b);
- }
- $('quiz-choices').replaceChildren();
- [...questions[step].choices,'どちらも使う・場面で変わる'].forEach((v,i)=>{
-  const b=textNode('button',v,'choice');b.type='button';
-  b.setAttribute('aria-label','選択肢'+(i+1)+' '+v);
-  b.addEventListener('click',()=>{
-   answers[step]=i;
-   if(step<questions.length-1){step++;renderQuiz();}else{showSelfResult();}
-  });
-  $('quiz-choices').append(b);
- });
- $('prev-question').disabled=step===0;
-}
-function labelFor(axis,style){
- return style==='l'?axis.left:style==='r'?axis.right:axis.middle;
-}
-function tipFor(axis,style){
- return style==='l'?axis.leftHint:style==='r'?axis.rightHint:axis.middleHint;
-}
-function showSelfResult(){
- selfStyles=answerStyles();$('quiz-panel').hidden=true;$('self-result').hidden=false;$('self-axes').replaceChildren();
- axes.forEach((axis,i)=>{
-  const card=document.createElement('article');card.className='axis-result';
-  card.append(textNode('span',axis.title,'axis-label'),textNode('h3',labelFor(axis,selfStyles[i])),textNode('p',tipFor(axis,selfStyles[i])));
-  $('self-axes').append(card);
- });
- const action=selfStyles[2]==='r'?'小さく試す前に、安全・人員・時間の確認をひとつ入れる。':selfStyles[0]==='r'?'考えたことを短い一文にして、次の勤務で仲間と共有してみる。':'現場で見た子どもの反応をひとつ持ち寄り、次の工夫を一緒に考える。';
- $('self-action').textContent=action;
- $('self-result').scrollIntoView({behavior:'smooth',block:'start'});
-}
-$('start-quiz').addEventListener('click',()=>{answers=Array(8).fill(null);step=0;renderQuiz();});
-$('restart-quiz').addEventListener('click',()=>{answers=Array(8).fill(null);step=0;renderQuiz();});
-$('prev-question').addEventListener('click',()=>{if(step>0){step--;renderQuiz();}});
-function buildFields(target,prefix){
- axes.forEach((axis,i)=>{
-  const lab=document.createElement('label');lab.className='field';
-  lab.append(textNode('span',axis.title));
-  const sel=document.createElement('select');sel.id=prefix+'-'+i;sel.setAttribute('aria-label',(prefix==='own'?'自分':'相手')+'：'+axis.title);
-  [['','選んでください'],['l',axis.options[0]],['m','どちらも使う'],['r',axis.options[1]]].forEach(([value,title])=>{
-   const opt=document.createElement('option');opt.value=value;opt.textContent=title;sel.append(opt);
-  });
-  sel.addEventListener('change',()=>{$('pair-result').hidden=true;$('pair-validation').textContent='';});
-  lab.append(sel);target.append(lab);
- });
-}
-buildFields($('own-fields'),'own');buildFields($('peer-fields'),'peer');
-$('use-in-team').addEventListener('click',()=>{
- if(selfStyles)selfStyles.forEach((v,i)=>{$('own-'+i).value=v;});
- location.hash='#team';$('pair-result').hidden=true;$('pair-validation').textContent='';
- window.scrollTo({top:0,behavior:'smooth'});
-});
-$('team-scene').addEventListener('change',()=>{$('pair-result').hidden=true;});
-$('reset-team').addEventListener('click',()=>{
- for(const s of document.querySelectorAll('#own-fields select,#peer-fields select'))s.value='';
- $('pair-result').hidden=true;$('pair-validation').textContent='';
-});
-$('show-team').addEventListener('click',()=>{
- const own=axes.map((_,i)=>$('own-'+i).value),peer=axes.map((_,i)=>$('peer-'+i).value);
- const blank=[...document.querySelectorAll('#own-fields select,#peer-fields select')].find(s=>!s.value);
- if(blank){$('pair-validation').textContent='自分と相手の4項目を選んでください。';blank.focus();return;}
- $('pair-validation').textContent='';$('pair-result').hidden=false;$('pair-points').replaceChildren();
- axes.forEach((axis,i)=>{
-  const same=own[i]===peer[i],neutral=own[i]==='m'||peer[i]==='m';
-  const headline=same?'大切にするところが近い':neutral?'幅を持って相談しやすい':'違う視点を持ち寄れる';
-  const line=same?'進めやすい分、別の視点をひとつ意識してみよう。':neutral?'まず今回はどちらで進めるか、短く合意を。':'最初に互いの良さを認め、安全と体験を共通の目的にしよう。';
-  const card=document.createElement('div');card.className='pair-point';
-  card.append(textNode('small',axis.title),textNode('h3',headline),textNode('p',line+' 自分：'+labelFor(axis,own[i])+'／相手：'+labelFor(axis,peer[i])+'。'));
-  $('pair-points').append(card);
- });
- const diff=own.findIndex((v,i)=>v!==peer[i]);
- const example=diff===0?'「私はこういう順番が話しやすいんだけど、そちらはどう？ 先に短く話すか、メモにまとめるか選ぼう」':
- diff===1?'「目的と、実際に見た子どもの様子をそれぞれ一つ出してから決めよう」':
- diff===2?'「安全と人数の条件だけ先に決めて、まず小さく試せるところを選ぼう」':
- diff===3?'「守るべき条件と、子どもやスタッフが大切にしたい体験を両方聞かせて」':
- '「今日は同じ見方が多いね。見落としている点がないか、現場の事実をもう一度確認しよう」';
- $('pair-script').textContent=example;
- const scene=$('team-scene').value;
- const sceneGuides={
-  daily:{items:[
-   '見たことと推測を分けて「今こうなっています」と30秒で共有する。',
-   '次に必要な手助けを一つ具体化し、担当と引き継ぐ時刻を決める。',
-   '相手の話しやすい方法を確かめてから、要点を復唱する。'
-  ],script:'「今の状況はこれ。まず何を優先しよう？ 私ができることと、引き継ぎ先を決めよう」'},
-  event:{items:[
-   '子どもが「自分で選べること」を目的に置き、予定を詰めすぎない。',
-   '必要人数・対象年齢・所要時間・材料・安全条件を3人で確かめる。',
-   '準備担当・当日の進行・現場を見守る担当を分け、見守りを欠かさない。'
-  ],script:'「子どもにどんな体験を届けたい？ 安全と人数は守って、実現方法を一緒に考えよう」'},
-  crowd:{items:[
-   '危険箇所・子どもの密集・実配置をまず事実で報告する。',
-   '責任者が見守り人数と受入上限を再確認し、必要なら受付・イベントを縮小する。',
-   '誰が遊び場を見守り、誰が受付・保護者に案内するか明確にする。'
-  ],script:'「いま安全上のリスクはここ。見守りを優先して、受入人数と役割を責任者と確認しよう」'},
-  conflict:{items:[
-   '相手の意図と心配していることを、一つずつ本人に聞く。',
-   '変えられない安全条件と、試せる工夫を分ける。',
-   '最終判断者・期限・決定の理由を共有し、あとで振り返る。'
-  ],script:'「まず実現したかったことを教えて。安全上ここは守ろう。そのうえで別の方法を探してみない？」'}
- };
- const guide=sceneGuides[scene]||sceneGuides.daily;
- document.querySelectorAll('#pair-result .scenario p').forEach((p,i)=>{if(guide.items[i])p.textContent=guide.items[i];});
- $('pair-script').textContent=guide.script+'　'+(own.every((v,i)=>v===peer[i])?'見落としがないか、現場の事実も確かめよう。':'互いの進め方の違いも一言確認しよう。');
- $('pair-result').scrollIntoView({behavior:'smooth',block:'start'});
-});
-$('edit-pair').addEventListener('click',()=>{ $('pair-result').hidden=true; document.querySelector('#panel-team .person-grid').scrollIntoView({behavior:'smooth',block:'start'}); });
-document.querySelectorAll('.role-check').forEach(check=>check.addEventListener('change',()=>{
- const total=document.querySelectorAll('.role-check:checked').length;
- $('role-status').textContent=total===3?'3項目を確認できたね。実際の担当・安全判断は当日の責任者と共有してね。':total+' / 3 項目を確認。安全と子どもの体験を最優先に。';
-}));
-
-/* 認知機能の名称・説明・現場例は、龍介専用の原本「8機能の読み方」「11名｜主・補・劣等」の一般化版。
-   実名／個別ストレス推測／記録MBTIの名寄せは公開しない。*/
-const typeMeta={
- Te:{name:'外向的思考',meaning:'目的・優先順位・段取りを外の基準で整理する',example:'イベントの準備順や安全条件を決める',ask:'先に何を決めると動きやすい？'},
- Ni:{name:'内向的直観',meaning:'出来事のつながりや、この先の意味を見通す',example:'子どもの遊びが今後どう広がるか考える',ask:'その先にどんなことが起こりそう？'},
- Fe:{name:'外向的感情',meaning:'周囲の人の受け止め方や安心を考える',example:'保護者・子ども・スタッフの気持ちに配慮する',ask:'参加しづらい人はいないかな？'},
- Se:{name:'外向的感覚',meaning:'今の音・表情・動き・変化をつかむ',example:'ボールプールで子どもの動きと混み方を見守る',ask:'今この場で何が起きてる？'},
- Fi:{name:'内向的感情',meaning:'一人ひとりが大切にしたいことや価値観を確かめる',example:'子ども自身の「やりたい」を優先する',ask:'本人はどうしたい？'},
- Si:{name:'内向的感覚',meaning:'経験・具体的な記憶・慣れた手順を参照する',example:'過去の案内方法と今日の混雑を比べる',ask:'以前の例で役立つものは？'},
- Ne:{name:'外向的直観',meaning:'別の可能性や新しい組み合わせを見つける',example:'遊具を新しい使い方で楽しむ案を考える',ask:'ほかに安全な方法はある？'},
- Ti:{name:'内向的思考',meaning:'考えの前提や仕組みの筋道を確かめる',example:'ルールがなぜ必要か説明の整合性を見る',ask:'その判断の理由は何？'}
+const enc=new TextEncoder();
+const func={
+Te:{title:"外向的思考",focus:"目的・優先順位・段取りを見える基準で整理する",ask:"先に何を決めると動きやすい？",brief:"段取り・決定"},
+Ni:{title:"内向的直観",focus:"出来事のつながりや、この先の意味を考える",ask:"この先どんな展開になりそう？",brief:"先の見通し"},
+Fe:{title:"外向的感情",focus:"周囲の人の安心や受け止め方を考える",ask:"参加しづらい人はいないかな？",brief:"みんなの安心"},
+Se:{title:"外向的感覚",focus:"今の音・表情・動き・変化に目を向ける",ask:"今ここで何が起きてる？",brief:"今の様子"},
+Fi:{title:"内向的感情",focus:"本人が大切にしたい価値観や希望を確かめる",ask:"本人はどうしたい？",brief:"本人の気持ち"},
+Si:{title:"内向的感覚",focus:"経験・具体的な記憶・慣れた手順から考える",ask:"以前の例で役立つものは？",brief:"経験・手順"},
+Ne:{title:"外向的直観",focus:"別の可能性や新しい組み合わせを見つける",ask:"他に安全な方法はある？",brief:"別の選択肢"},
+Ti:{title:"内向的思考",focus:"前提・理由・仕組みの筋道を確かめる",ask:"その判断の理由は何？",brief:"理由・筋道"}
 };
-const typeStack={
- ENTJ:['Te','Ni','Fi'], INFJ:['Ni','Fe','Se'], ESFP:['Se','Fi','Ni'],
- ISFP:['Fi','Se','Te'], ISFJ:['Si','Fe','Ne'], INTJ:['Ni','Te','Se'],
- ENFJ:['Fe','Ni','Ti'], INFP:['Fi','Ne','Te']
+const recovery={
+Fi:"自分や相手が大切にしたいことも確かめる。忙しいときは無理に感情を説明させず、少し余裕をつくる。",
+Se:"考えた見通しだけでなく、いま実際に起きた事実を一つ確認する。情報が多いときは整理する。",
+Te:"大切にしたいことに加え、具体的な手順・期限・判断者を一つずつ決める。",
+Ni:"いまの楽しさに加え、この先の展開を予想と事実に分けて確かめる。",
+Ne:"いつもの方法にこだわらず安全な代案を少数試す。予想と確認済みの事実は分ける。",
+Ti:"気遣いに加えて、判断の理由と前提を整理する。答えを急がず事実を確認する。"
 };
-const typeCheck={
- Fi:'成果だけでなく、本人や子どもが大切にしたい気持ちも確かめる。',
- Se:'予想だけでなく、いまの音・動き・混雑といった事実を確かめる。',
- Te:'目的・手順・判断者・期限を見える形にしてみる。',
- Ni:'いまの楽しさだけでなく、この後の展開と安全上の見通しも確認する。',
- Ne:'以前の方法以外にも安全な選択肢がないか確かめる。',
- Ti:'なぜその対応が必要か、前提と理由も確かめる。'
+const sceneTips={
+daily:"直近の事実を30秒で共有し、引き継ぐ人と時刻を決めよう。",
+event:"目的・安全条件・材料・準備時間を確認してから、進行と案内を分担しよう。",
+crowd:"見守り人員と定員を先に確認。安全を優先し、正式な責任者が開始・受け入れを判断しよう。",
+conflict:"共通の目的→確認済みの事実→本人が大切にしたいこと→必要な決定の順で相談しよう。"
 };
-const makeText=(tag,text,cls)=>{const el=document.createElement(tag);el.textContent=text;if(cls)el.className=cls;return el};
-function makeCard(target,title,body,cls='type-readout'){
- const box=document.createElement('div');box.className=cls;
- box.append(makeText('strong',title),makeText('p',body));target.append(box);return box;
+let people=null;
+function b64(str){let v=str.replace(/-/g,"+").replace(/_/g,"/");return Uint8Array.from(atob(v),c=>c.charCodeAt(0))}
+async function decode(pass){
+const base=await crypto.subtle.importKey("raw",enc.encode(pass.trim().toUpperCase()),"PBKDF2",false,["deriveKey"]);
+const key=await crypto.subtle.deriveKey({name:"PBKDF2",salt:b64(pack.s),iterations:pack.i,hash:"SHA-256"},base,{name:"AES-GCM",length:256},false,["decrypt"]);
+const raw=await crypto.subtle.decrypt({name:"AES-GCM",iv:b64(pack.n),additionalData:enc.encode("ASOBooN-TEAM-2026")},key,b64(pack.c));
+return JSON.parse(new TextDecoder().decode(raw)).profiles;
 }
-function typeName(fn){return fn+'｜'+typeMeta[fn].name}
-function mkRole(fn,heading){return heading+' '+typeName(fn)+'：'+typeMeta[fn].meaning}
-function profileSelected(){
- const v=$('self-type').value,box=$('self-type-result');
- box.replaceChildren();box.hidden=!typeStack[v];if(!typeStack[v])return;
- const [dom,aux,inf]=typeStack[v];
- box.append(makeText('h4',v+'の3つの視点（タイプ理論上）'));
- const summary=makeText('div','','type-summary');box.append(summary);
- [ ['主機能｜ふだんの軸',dom],['補助機能｜軸を支える',aux],['劣等機能｜意識するヒント',inf] ].forEach(([label,code])=>{
-  makeCard(summary,label+' '+typeName(code),
-   (label.startsWith('劣等')?typeCheck[code]:typeMeta[code].meaning),'type-mini');
- });
- makeCard(box,'ASOBooNで試せること',typeMeta[dom].example+'。一方で '+typeCheck[inf],'type-practice');
- makeCard(box,'仲間に聞いてみるひと言','「'+typeMeta[aux].ask+'」 そして「'+typeMeta[inf].ask+'」','type-readout');
- box.append(makeText('p','※これは性格・能力・ストレス反応の診断ではありません。どの視点も練習・経験で使えます。','mini-note'));
- if(!$('pair-type-a').value)$('pair-type-a').value=v;
+function mk(tag,content,cls){const el=document.createElement(tag);if(content!==undefined)el.textContent=content;if(cls)el.className=cls;return el}
+function add(parent,tag,content,cls){const e=mk(tag,content,cls);parent.append(e);return e}
+function info(parent,title,text){const e=add(parent,"div",undefined,"info-card");add(e,"h4",title);add(e,"p",text);return e}
+function block(parent,title,text,cls="explain"){const e=add(parent,"div",undefined,cls);add(e,"h4",title);add(e,"p",text);return e}
+function hero(parent,title,sub){const e=add(parent,"div",undefined,"result-header");add(e,"strong",title);add(e,"span",sub);return e}
+function detail(parent,title,text){const e=add(parent,"details");add(e,"summary",title);add(e,"p",text,"muted");return e}
+function clear(root){root.replaceChildren()}
+function find(name){return people.find(x=>x.name===name)}
+function fn(code){return code+"｜"+func[code].title}
+function renderSelf(){
+const p=find($("self-name").value),root=$("self-result");clear(root);if(!p)return;
+hero(root,p.name+" さんのガイド",p.mbti+"　｜　元資料の主・補・劣等");
+const cards=add(root,"div",undefined,"cardgrid three");
+info(cards,"主機能｜ふだんの軸",fn(p.dom)+"\n"+func[p.dom].focus);
+info(cards,"補助機能｜軸を支える",fn(p.aux)+"\n"+func[p.aux].focus);
+info(cards,"劣等機能｜意識して確認",fn(p.inf)+"\n"+func[p.inf].ask);
+block(root,"🎨 ASOBooNでの例",p.example);
+block(root,"🌱 周りが補える声かけ",p.support);
+block(root,"💬 本人から相談するときの言葉","「"+p.script+"」","tip");
+detail(root,"忙しいときの見直し（タイプ理論上の仮説）",recovery[p.inf]+"　『劣等』は能力不足を意味せず、本人固有の反応を予測するものではありません。");
 }
-$('self-type').addEventListener('change',profileSelected);
-function overlap(a,b){
- const first=[a[0],a[1]],second=[b[0],b[1]];
- return first.filter(x=>second.includes(x));
+function comparison(a,b){const common=[a.dom,a.aux].filter(x=>[b.dom,b.aux].includes(x));return common}
+function weak(a,b){if(a.inf===b.inf)return "2人とも"+fn(a.inf)+"が確認視点です。現場でその事実を誰が確かめるか、先に決めよう。";
+const c=[a.inf,b.inf].sort().join("+");
+if(c==="Fi+Te")return "Fi×Te：本人の希望・納得と、期限・手順を両方言葉にしよう。";
+if(c==="Ni+Se")return "Se×Ni：いま見た事実と、この先の予想を分けて伝えよう。";
+if(c==="Ne+Te")return "Ne×Te：別案を考える時間と決定を終える時刻を合意しよう。";
+return a.name+"さんは"+func[a.inf].ask+"／"+b.name+"さんは"+func[b.inf].ask+"を一緒に確かめよう。";
 }
-function lowFunctionCheck(infA,infB){
- const pair=[infA,infB].sort().join('+');
- if(infA===infB){
-  return infA==='Se'?'同じSe：現場の変化を誰が直接確認し、誰に伝えるか決める。':
-   infA==='Te'?'同じTe：誰がいつ最終決定し、次の担当に引き継ぐか決める。':
-   '共通する確認視点があるため、担当の抜けを防ぐように事実確認を分ける。';
- }
- if(pair==='Fi+Te')return 'Fi×Te：本人の希望・納得と、必要な期限・手順を両方言葉にする。';
- if(pair==='Ni+Se')return 'Se×Ni：今の現場事実と、その先の見通しを分けて共有する。';
- if(pair==='Ne+Te')return 'Ne×Te：別案を考える時間と決定を終える時刻を先に合意する。';
- return '本人が大切にしていること・いま確認できた事実・次の判断を分けて共有する。';
+function renderPair(){
+const a=find($("pair-a").value),b=find($("pair-b").value),root=$("pair-result");clear(root);if(!a||!b)return;
+if(a.name===b.name){add(root,"p","同じ人が選択されています。別の2人を選んでください。","error");return;}
+hero(root,a.name+" × "+b.name,"2人の共通点・違い・連携を考える");
+const cards=add(root,"div",undefined,"cardgrid");
+info(cards,a.name+" さん",a.mbti+"\n主："+fn(a.dom)+"\n補："+fn(a.aux)+"\n意識："+fn(a.inf));
+info(cards,b.name+" さん",b.mbti+"\n主："+fn(b.dom)+"\n補："+fn(b.aux)+"\n意識："+fn(b.inf));
+const c=comparison(a,b);
+block(root,"🧭 共通する見方",c.length?c.map(x=>fn(x)).join("、")+"が主・補助機能で共通。本人の考えを直接確認しよう。":"主・補助に共通する機能はありません。異なる見方を持ち寄るヒントに。");
+block(root,"✨ 補い合えるところ",a.name+"さんは「"+func[a.dom].brief+"」、"+b.name+"さんは「"+func[b.dom].brief+"」を話の入口として持ち寄ろう。");
+block(root,"⚠ すれ違いを防ぐ確認",weak(a,b),"explain warn");
+block(root,"🧩 役割分担の仮案","①進行・段取り ②現場事実・情報共有 ③相談先。"+a.name+"さんと"+b.name+"さんが希望・経験・当日の負荷を確かめ、必要なら役割を交換する。");
+block(root,"💬 最初のひと言","「"+a.script+"」\n続けて「"+b.script+"」","tip");
+block(root,"⏱ 30秒の確認","① 今確認できた事実は？　② 本人が大切にしたいことは？　③ 誰がいつ判断・共有する？");
+detail(root,"連携が乱れたときの立て直し","まず安全上の優先事項と現場の事実を確認。担当と連絡方法をそろえ、必要なら正式な責任者へ相談。タイプで能力・危険性を判定しない。");
 }
-function renderTypePair(){
- const a=$('pair-type-a').value,b=$('pair-type-b').value,box=$('type-pair-result');
- box.replaceChildren();box.hidden=false;
- if(!typeStack[a]||!typeStack[b]){box.append(makeText('p','2人のタイプを選んでください。','mini-note'));return;}
- const ta=typeStack[a],tb=typeStack[b],common=overlap(ta,tb);
- box.append(makeText('h4',a+' × '+b+'｜2人の連携'));
- const summary=makeText('div','','type-summary two');box.append(summary);
- makeCard(summary,'1人目｜'+a,'主 '+typeName(ta[0])+' ／ 補 '+typeName(ta[1])+' ／ 劣等 '+typeName(ta[2]),'type-mini');
- makeCard(summary,'2人目｜'+b,'主 '+typeName(tb[0])+' ／ 補 '+typeName(tb[1])+' ／ 劣等 '+typeName(tb[2]),'type-mini');
- makeCard(box,'共通する見方',common.length?common.map(typeName).join('、')+'。同じ入口でも受け止め方は本人それぞれ。':'主・補助機能に共通する入口はありません。違いを会話で確かめる材料に。');
- makeCard(box,'補い合える視点',a+'：'+typeMeta[ta[0]].meaning+'。'+b+'：'+typeMeta[tb[0]].meaning+'。二つを持ち寄って考えよう。');
- makeCard(box,'⚠ 意識すると役立つ確認',lowFunctionCheck(ta[2],tb[2]));
- makeCard(box,'🧭 仮の役割を決める','①進行・段取り ②現場事実・情報共有 ③困ったときの相談先。タイプだけで割り振らず、本人の希望・経験・当日の負荷で調整。','type-practice');
- makeCard(box,'30秒の確認','「今確認できた現場の事実は？」「本人は何を大切にしたい？」「誰がいつ判断して共有する？」正式な安全責任者も確認。','type-practice');
- makeCard(box,'話し始めのひと言','「'+typeMeta[ta[0]].ask+'」 → 「'+typeMeta[tb[0]].ask+'」');
- box.append(makeText('p','※相性の良し悪しや仕事の効率を予測するものではありません。','mini-note'));
+const weights={
+progress:{Te:4,Ni:3,Si:2,Ti:2,Fe:1,Se:1,Fi:1,Ne:1},
+watch:{Se:4,Si:3,Ne:2,Fi:2,Ti:2,Te:1,Ni:1,Fe:1},
+communicate:{Fe:4,Fi:3,Ne:2,Ni:2,Se:2,Si:2,Te:1,Ti:1}
+};
+function roleScore(p,role){const w=weights[role];return 2*(w[p.dom]||0)+(w[p.aux]||0)}
+function distribute(a){
+const p=[[0,1,2],[0,2,1],[1,0,2],[1,2,0],[2,0,1],[2,1,0]];
+let best=p[0],top=-1;
+for(const z of p){const score=roleScore(a[z[0]],"progress")+roleScore(a[z[1]],"watch")+roleScore(a[z[2]],"communicate");if(score>top){top=score;best=z;}}
+return best;
 }
-$('show-type-pair').addEventListener('click',renderTypePair);
-['pair-type-a','pair-type-b'].forEach(id=>$(id).addEventListener('change',()=>{$('type-pair-result').hidden=true;}));
-function renderTypeTrio(){
- const ids=['trio-type-a','trio-type-b','trio-type-c'];
- const selected=ids.map(id=>$(id).value),box=$('type-trio-result');box.replaceChildren();box.hidden=false;
- if(!selected.every(v=>typeStack[v])){box.append(makeText('p','3人のタイプを選んでください。','mini-note'));return;}
- box.append(makeText('h4',selected.join(' × ')+'｜3人の連携'));
- const cards=makeText('div','','type-summary');box.append(cards);
- selected.forEach((t,i)=>{const [d,a,f]=typeStack[t];
-  makeCard(cards,(i+1)+'人目｜'+t,'主 '+typeName(d)+' ／ 補 '+typeName(a)+' ／ 劣等 '+typeName(f),'type-mini');
- });
- const shared=[];
- for(let i=0;i<3;i++)for(let j=i+1;j<3;j++){
-  const common=overlap(typeStack[selected[i]],typeStack[selected[j]]);
-  if(common.length)shared.push((i+1)+'人目×'+(j+1)+'人目：'+common.join('・'));
- }
- makeCard(box,'共通する視点',shared.length?shared.join(' ／ ')+'。共通点があっても、本人の考えを聞いて確認。':'主・補助機能の共通点は少なめ。異なる視点を持ち寄るきっかけに。');
- const core=[...new Set(selected.flatMap(t=>typeStack[t].slice(0,2)))];
- makeCard(box,'補い合う視点',core.map(f=>f+'＝'+typeMeta[f].meaning).join(' ／ '));
- makeCard(box,'🧭 3つの役割を仮置き','①進行・記録：開始条件・段取り・判断者を整理。②現場の事実：子ども・設備・混雑の状況を短く報告。③親子・仲間への案内：説明を統一し、困りごとを拾う。希望・経験・権限・負荷を見て役割を決め直す。','type-practice');
- const checks=[...new Set(selected.map(t=>typeStack[t][2]))];
- makeCard(box,'劣等機能の重なり（理論上）',selected.map((t,i)=>(i+1)+'人目 '+t+'：'+typeStack[t][2]).join(' ／ ')+(checks.length<3?'。同じ確認視点が抜けていないか担当を定めよう。':'。それぞれ異なる視点を補おう。'));
- makeCard(box,'30秒の対策','「本人は何を大切にしたい？」「今確認できた現場の事実は？」「次にどう変わりそう？」→正式な安全判断者と引き継ぎ先を確認。','type-practice');
- makeCard(box,'3人が消耗・混乱したら','0–1分：開始判断をいったん保留、案内を統一し準備進度・待機人数・見込み時刻を確認。1–2分：余裕がなければ別スタッフや責任者に見守り・安全判断を引き継ぐ。2–3分：最終判断者を明確にし、保護者には確認済みの事実だけ伝える。','type-practice');
- box.append(makeText('p','※仮想場面を使った危険防止の手順です。特定スタッフの言動・ストレス反応を予測したものではありません。','mini-note'));
+function renderTrio(){
+const a=["trio-a","trio-b","trio-c"].map(id=>find($(id).value)),root=$("trio-result");clear(root);if(a.some(x=>!x))return;
+if(new Set(a.map(x=>x.name)).size<3){add(root,"p","同じ人が含まれています。異なる3人を選んでください。","error");return;}
+hero(root,a.map(x=>x.name).join(" × "),"3人の強みを持ち寄るための相談資料");
+const cards=add(root,"div",undefined,"cardgrid three");
+for(const person of a)info(cards,person.name+" さん",person.mbti+"\n主："+fn(person.dom)+"\n補："+fn(person.aux)+"\n意識："+fn(person.inf));
+const shared=[];
+for(let i=0;i<3;i++)for(let j=i+1;j<3;j++){
+const overlap=comparison(a[i],a[j]);if(overlap.length)shared.push(a[i].name+"×"+a[j].name+"："+overlap.map(x=>func[x].brief).join("・"));
 }
-$('show-type-trio').addEventListener('click',renderTypeTrio);
-['trio-type-a','trio-type-b','trio-type-c'].forEach(id=>$(id).addEventListener('change',()=>{$('type-trio-result').hidden=true;}));
-</script>
-</body></html>
+block(root,"🔗 共通点・橋渡し",shared.length?shared.join("\n"):"主・補助の入口が分かれています。異なる視点を組み合わせて確かめよう。");
+block(root,"✨ 3人の相乗効果（提案）",a.map(x=>x.name+"の「"+func[x.dom].brief+"」").join(" ＋ ")+"を持ち寄る。開始前に安全条件と担当を決め、当日は子どもの様子で調整しよう。");
+const order=distribute(a);
+block(root,"🧩 3役の仮分担（タイプ理論による提案）","①進行・記録："+a[order[0]].name+"さん（段取り・進み具合・優先順位の整理）\n②現場の事実："+a[order[1]].name+"さん（子ども・設備・混雑を短く報告）\n③案内・橋渡し："+a[order[2]].name+"さん（保護者・仲間への説明を一本化）\n※本人の経験・資格・希望・負荷で必ず決め直し、安全判断は正式な責任者が担当。","explain warn");
+block(root,"🧠 意識して確かめる視点",a.map(x=>x.name+"：劣等"+x.inf+"（"+func[x.inf].ask+"）").join("\n"));
+block(root,"⏱ 開始前の30秒","「何を大切にしたい？」「現場で確認できた事実は？」「次にどう変わりそう？」→最終判断者と引き継ぎ先を確認。","tip");
+detail(root,"もし3人とも余裕がなくなったら｜3分で立て直す","0〜1分：開始判断を一度保留し、保護者への案内を統一。準備進度・待機人数・見込み時刻を確認。\n1〜2分：別スタッフ・責任者に見守りと安全判断を引き継ぐ。\n2〜3分：正式な判断者が開始可否を決め、保護者には事実だけを説明。タイプから個人の行動を予測しない。");
+const duo=a.flatMap((x,i)=>a.slice(i+1).map(y=>x.name+"×"+y.name+"："+(comparison(x,y).map(k=>func[k].brief).join("・")||"視点が異なる")));
+block(root,"🤝 3つの2人組も確認",duo.join("\n"));
+}
+function renderTab(){
+let name=location.hash==="#trio"?"trio":location.hash==="#team"?"team":"self";
+for(const key of ["self","team","trio"]){$("panel-"+key).hidden=key!==name;$("tab-"+key).setAttribute("aria-current",key===name?"page":"false");}
+}
+function populate(){
+const ids=["self-name","pair-a","pair-b","trio-a","trio-b","trio-c"];
+for(const id of ids){const e=$(id);e.replaceChildren();for(const person of people){const opt=mk("option",person.name);opt.value=person.name;e.append(opt);}}
+$("pair-b").selectedIndex=1;$("trio-b").selectedIndex=1;$("trio-c").selectedIndex=2;
+renderSelf();renderPair();renderTrio();renderTab();
+}
+$("unlock-form").addEventListener("submit",async ev=>{
+ev.preventDefault();
+const btn=$("unlock-btn");btn.disabled=true;btn.textContent="確認中…";$("unlock-status").textContent="";
+try{if(!crypto||!crypto.subtle)throw Error("このブラウザでは暗号化機能を使えません。");
+const result=await decode($("passphrase").value);if(result.length!==11||new Set(result.map(x=>x.name)).size!==11)throw Error("不正なデータ");
+people=result;$("passphrase").value="";$("lock-panel").hidden=true;$("app").hidden=false;populate();
+}catch(e){$("unlock-status").textContent="閲覧コードを確認してください。正しい場合は最新版のブラウザで開き直してください。";}
+finally{btn.disabled=false;btn.textContent="ガイドを開く →";}
+});
+$("lock-btn").addEventListener("click",()=>{people=null;for(const id of ["self-result","pair-result","trio-result"])clear($(id));$("app").hidden=true;$("lock-panel").hidden=false;$("unlock-status").textContent="";$("passphrase").focus();});
+$("self-name").addEventListener("change",renderSelf);
+["pair-a","pair-b"].forEach(id=>$(id).addEventListener("change",renderPair));
+["trio-a","trio-b","trio-c"].forEach(id=>$(id).addEventListener("change",renderTrio));
+window.addEventListener("hashchange",renderTab);
+</script></body></html>
