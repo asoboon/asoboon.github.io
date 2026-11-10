@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-09",
+  "updatedAt": "2026-11-10",
   "notices": [
+    {
+      "id": "2026-11-10-yearend-tax-originals",
+      "status": "published",
+      "scope": "public-safe",
+      "priority": "schedule",
+      "title": "年末調整の控除証明書原本は11/16までに百さんへ",
+      "summary": "生命保険料控除証明書などの原本は、百さんがASOBooN分をまとめて郵送します。施設内の提出期限は11月16日（月）、会社の郵送期限は11月20日（金）消印有効です。",
+      "action": "原本は誰の書類か分かるように個人ごとに封筒へ入れ、11月16日（月）までに百さんへ提出してください。各自で松林事務所へ個別郵送する必要はありません。",
+      "startsOn": "2026-11-10",
+      "expiresOn": "2026-11-20",
+      "verifiedOn": "2026-11-10"
+    },
     {
       "id": "2026-11-09-annual-roster-update",
       "status": "published",
