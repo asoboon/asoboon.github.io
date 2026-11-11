@@ -16,6 +16,18 @@
       "deadlineOn": "2026-11-16"
     },
     {
+      "id": "2026-12-18-event-preparation",
+      "status": "published",
+      "scope": "public-safe",
+      "priority": "schedule",
+      "title": "12月18日 イベント開催予定と準備状況",
+      "summary": "12月18日（金）にイベントを2回開催予定です。開始予定は11:15と14:15。ポスターは現在制作中で、来週中の完成予定です。内容・参加条件などは確定次第お知らせします。",
+      "action": "スタッフは担当者からの最新案内を確認してください。ポスターが完成したら、掲示の案内に沿って対応をお願いします。",
+      "startsOn": "2026-11-11",
+      "expiresOn": "2026-12-18",
+      "verifiedOn": "2026-11-11"
+    },
+    {
       "id": "2026-11-09-annual-roster-update",
       "status": "published",
       "scope": "public-safe",
