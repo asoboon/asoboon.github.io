@@ -1,0 +1,119 @@
+name: LINE webhook independent health watch
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+    inputs:
+      test_alert:
+        description: '外部Issue作成と自動終了の通知経路テスト'
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: line-webhook-independent-monitor
+  cancel-in-progress: false
+
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    env:
+      HEALTH_URL: ${{ vars.LINE_HEALTHCHECK_URL }}
+      GH_TOKEN: ${{ github.token }}
+      REPOSITORY: ${{ github.repository }}
+      TEST_ALERT: ${{ inputs.test_alert || 'false' }}
+    steps:
+      - name: Independently verify receiver and reconcile one incident
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json, os, sys, datetime, urllib.request, urllib.error, urllib.parse
+
+          repo = os.environ["REPOSITORY"]
+          token = os.environ["GH_TOKEN"]
+          url = os.environ.get("HEALTH_URL", "").strip()
+          testing = os.environ.get("TEST_ALERT", "false").lower() == "true"
+          title = "[LINE監視] 外部Webhookの受信サービスが応答していません"
+          test_title = "[試験] LINE外部監視のIssue通知経路"
+          headers = {
+              "Authorization": "Bearer " + token,
+              "Accept": "application/vnd.github+json",
+              "X-GitHub-Api-Version": "2022-11-28",
+              "User-Agent": "asoboon-line-health-monitor"
+          }
+          api = "https://api.github.com/repos/" + repo
+
+          def github(method, endpoint, payload=None):
+              raw = None if payload is None else json.dumps(payload, ensure_ascii=False).encode("utf-8")
+              req = urllib.request.Request(api + endpoint, data=raw, headers=headers, method=method)
+              if raw is not None:
+                  req.add_header("Content-Type", "application/json")
+              with urllib.request.urlopen(req, timeout=12) as response:
+                  buf = response.read()
+                  return json.loads(buf.decode("utf-8")) if buf else {}
+
+          def open_issue(subject, body):
+              return github("POST", "/issues", {"title": subject, "body": body, "assignees": ["asoboon"]})
+
+          if testing:
+              test = open_issue(test_title, "GitHub ActionsがMacとは独立して稼働し、Issue作成権限があることを確認する一度きりの試験です。送受信本文・個人情報は含みません。")
+              github("PATCH", "/issues/" + str(test["number"]), {"state": "closed", "state_reason": "completed"})
+              print("EXTERNAL_ALERT_PATH_TEST_OK (test issue opened and closed)")
+              sys.exit(0)
+
+          urlparts = urllib.parse.urlsplit(url)
+          if urlparts.scheme != "https" or urlparts.path != "/health" or not (
+              urlparts.hostname or ""
+          ).endswith((".ngrok-free.dev", ".ngrok.app")):
+              error = "monitor_destination_unconfigured_or_invalid"
+              healthy = False
+          else:
+              try:
+                  req = urllib.request.Request(url, headers={"User-Agent": "asoboon-external-health-monitor"})
+                  with urllib.request.urlopen(req, timeout=8) as response:
+                      state = json.load(response)
+                      healthy = (response.status == 200 and state.get("status") == "ok"
+                                 and state.get("ready") == "configured_live"
+                                 and state.get("kozo") is True)
+                      error = "" if healthy else "health_content_not_live"
+              except (urllib.error.URLError, TimeoutError, ValueError, OSError) as exc:
+                  healthy = False
+                  error = type(exc).__name__
+
+          # One persistent issue per incident: no per-interval duplication.
+          issues = github("GET", "/issues?state=open&per_page=100")
+          current = next((x for x in issues if x.get("title") == title and "pull_request" not in x), None)
+          checked = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+          if healthy:
+              if current:
+                  github("POST", "/issues/" + str(current["number"]) + "/comments",
+                         {"body": "復旧確認: " + checked + "。外部ヘルスチェックが再び正常になりました。"})
+                  github("PATCH", "/issues/" + str(current["number"]),
+                         {"state": "closed", "state_reason": "completed"})
+                  print("EXTERNAL_MONITOR_RECOVERED_AND_CLOSED")
+              else:
+                  print("EXTERNAL_MONITOR_HEALTHY " + checked)
+              sys.exit(0)
+
+          body = (
+              "LINE受信サーバーの外部ヘルスチェックで異常を検知しました。\n\n"
+              "- 検出時刻: " + checked + "\n"
+              "- 検出理由: `" + error + "`\n"
+              "- 対応: Mac ProのLINE受信サービス、ngrokトンネル、LINE Webhook設定、"
+              "Google Sheets同期監視を確認してください。\n"
+              "- このIssueは外部監視用であり、LINEでの実際のメッセージ欠損を証明するものではありません。\n\n"
+              "※LINE本文、送信者情報、認証情報は保存しません。復旧するとIssueは自動的に閉じます。"
+          )
+          if current:
+              print("EXTERNAL_MONITOR_STILL_DOWN issue=" + str(current["number"]))
+          else:
+              incident = open_issue(title, body)
+              print("EXTERNAL_MONITOR_OPENED_INCIDENT issue=" + str(incident["number"]))
+          sys.exit(1)
+          PY
