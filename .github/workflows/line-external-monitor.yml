@@ -80,7 +80,8 @@ jobs:
                       state = json.load(response)
                       healthy = (response.status == 200 and state.get("status") == "ok"
                                  and state.get("ready") == "configured_live"
-                                 and state.get("kozo") is True)
+                                 and state.get("kozo") is True
+                                 and state.get("projectionHealth") == "HEALTHY")
                       error = "" if healthy else "health_content_not_live"
               except (urllib.error.URLError, TimeoutError, ValueError, OSError) as exc:
                   healthy = False
