@@ -1,7 +1,19 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-11",
+  "updatedAt": "2026-11-13",
   "notices": [
+    {
+      "id": "2026-11-21-gunma-mascot-storage",
+      "status": "published",
+      "scope": "public-safe",
+      "priority": "schedule",
+      "title": "11/21（土）群馬の着ぐるみ来訪・倉庫を更衣場所として使用",
+      "summary": "11月21日（土）、川口ハイウェイオアシスのイベントに群馬から着ぐるみが来訪予定です。着替え場所としてASOBooNの倉庫を使用するとの連絡がありました。",
+      "action": "当日勤務スタッフは倉庫の使用予定を共有し、関係者の出入りとお客様の動線・安全に配慮してください。来訪時刻と使用時間は未確認です。",
+      "startsOn": "2026-11-13",
+      "expiresOn": "2026-11-21",
+      "verifiedOn": "2026-11-13"
+    },
     {
       "id": "2026-11-10-yearend-tax-originals",
       "status": "published",
